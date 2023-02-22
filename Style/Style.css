@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Almoni-Regular';
+    src: url('../fonts/Almoni-Regular.otf');
+    font-weight: normal;
+
+}
+@font-face {
+    font-family: 'Rubik-Light';
+    src: url(../fonts/Rubik-VariableFont_wght.ttf);
+    font-weight: normal;
+}
+.Title{
+    margin-left: 60px;
+    font: normal 40px/60px 'Almoni-Regular',Arial,sans-serif;
+    font-size: 60px;
+}
+.SubTitle{
+    margin-top: 60px;
+    margin-right: 18px;
+    font-family:'Rubik-Light',Arial,sans-serif;
+    font-size: 30px;
+
+}
