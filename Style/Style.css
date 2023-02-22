@@ -2,6 +2,7 @@
     font-family: 'Almoni-Regular';
     src: url('../fonts/Almoni-Regular.otf');
     font-weight: normal;
+    margin-top: 30px;
 
 }
 @font-face {
@@ -9,14 +10,19 @@
     src: url(../fonts/Rubik-VariableFont_wght.ttf);
     font-weight: normal;
 }
+.topBanner{
+    width: 100vw;
+    position: static;
+    /* absolute, fixed, relative, static, sticky, -ms-page,webkit, inherit, initial,unset */
+    text-align: center;
+    overflow:hidden;
+}
 .Title{
-    margin-left: 60px;
-    font: normal 40px/60px 'Almoni-Regular',Arial,sans-serif;
+    font-family: 'Almoni-Regular',Arial,sans-serif;
     font-size: 60px;
 }
 .SubTitle{
     margin-top: 60px;
-    margin-right: 18px;
     font-family:'Rubik-Light',Arial,sans-serif;
     font-size: 30px;
 
