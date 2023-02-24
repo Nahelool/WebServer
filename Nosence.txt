@@ -1,0 +1,69 @@
+HTML:
+<body data-culture="he" class="mouse-focus">  
+<main class="main lobiHayalot" role="main">
+    <div class="mainWrap mouse-focus" id="wrapper" tabindex="-1">
+        <section class="topBanner fixedHeight" style="height: 1732px;">
+
+            
+                <!-- img background -->
+                <div class="bannerImgWrapper haylot_mainBanner">
+                    <img src="/media/23173/24108255449_69a4a661e9_o-1.jpg" alt="הכי בסיסי">
+                </div>
+            <div class="pageHeader verticalAlign">
+                <h2 class=" title">
+                    הכי בסיסי
+                </h2>
+                <p class="font-narkis-thin font-md color-white">לדעת איפה אתם הולכים להיות בתחילת השירות שלכם זה #הכי_בסיסי</p>
+                <ul>
+                </ul>
+
+
+                <a href="#" class="scrollNextBtn" aria-label="גלילה בדף">
+                    <span class="mouseScrollIcon"></span>
+                </a>
+            </div>
+        </section>
+                    </div>
+</main>
+</body>
+
+CSS:
+.topBanner {
+    position: relative;
+    text-align: center;
+    overflow: hidden
+}
+
+.fixedHeight.topBanner .bannerImgWrapper {
+    height: 100%
+}
+
+haylot_mainBanner:before {
+    content: "";
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    background: -moz-linear-gradient(top,rgba(0,0,0,.46) 0,rgba(0,0,0,0) 100%),url('../img/dottedPattern.png');
+    background: -webkit-linear-gradient(top,rgba(0,0,0,.46) 0,rgba(0,0,0,0) 100%),url('../img/dottedPattern.png');
+    background: linear-gradient(to bottom,rgba(0,0,0,.46) 0,rgba(0,0,0,0) 100%),url('../img/dottedPattern.png')
+}
+.lobiHayalot .pageHeader {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 20px
+
+.verticalAlign {
+    position: absolute;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%)
+}
