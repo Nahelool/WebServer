@@ -161,9 +161,9 @@ body{
     vertical-align: middle;
     color:white;
     font-family: 'Almoni-Regular',Arial,sans-serif;
-    font-size: 15vw;
+    font-size: 10vw;
     text-align: center;
-    padding: 3vw 0 1vw;
+    padding: 1vw 0;
 
 }
 
@@ -171,22 +171,5 @@ body{
     box-sizing: border-box;
     font-family: 'Rubik-Light',Arial,sans-serif;
     color: white;
-    font-size: 6.1vw;
+    font-size: 4.07vw;
 }
-
-@media (min-width:390px){
-}
-
-@media (min-width:580px){
-
-}
-
-@media (min-width:870px){
-
-}
-
-@media (min-heohg: 1400px ){
-
-}
-
-
