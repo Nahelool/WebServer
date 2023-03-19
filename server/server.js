@@ -1,4 +1,3 @@
-
 var express = require('express')
 var app = express()
 var http = require('http')
@@ -24,6 +23,7 @@ app.get('/', (req, res) => {
   res.write(index)
   res.end()
 })
+
 
 app.get('/*', (req, res) => {
   fs.readFile('../Public/HTML'+req.url+'.html', function(error,data){
