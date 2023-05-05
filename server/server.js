@@ -42,4 +42,5 @@ var serverPort = process.env.YOUR_PORT || process.env.PORT || 3000
 
 app.listen(serverPort, () => {
   console.log(`Example app listening on port ${serverPort}`)
+  console.log(`Adress is : http://localhost:${serverPort}`)
 })

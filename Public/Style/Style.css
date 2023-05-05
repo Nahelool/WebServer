@@ -1,175 +1,257 @@
-html{
-    direction: rtl;
+html {
+  direction: rtl;
+}
+@font-face {
+  font-family: "Ploni";
+  src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+}
+@font-face {
+  font-family: "Almoni-Regular";
+  src: url("../fonts/Almoni-Regular.otf");
+  font-weight: normal;
+  margin-top: 30px;
 }
 
 @font-face {
-    font-family: 'Almoni-Regular';
-    src: url('../fonts/Almoni-Regular.otf');
-    font-weight: normal;
-    margin-top: 30px;
-
+  font-family: "Rubik-Light";
+  src: url(../fonts/Rubik-VariableFont_wght.ttf);
+  font-weight: normal;
 }
-
 @font-face {
-    font-family: 'Rubik-Light';
-    src: url(../fonts/Rubik-VariableFont_wght.ttf);
-    font-weight: normal;
+  font-family: "Ploni";
+  src: url(../Fonts/ploni-bold-aaa.a5b40e4.ttf);
+  font-weight: bold;
 }
 
-html{
-    box-sizing: border-box;
-    direction: rtl;
-    display: block;
-    font-family: sans-serif;
-    font-size: 10px;
-    text-size-adjust: 100% ;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-
+html {
+  box-sizing: border-box;
+  direction: rtl;
+  display: block;
+  font-family: sans-serif;
+  font-size: 10px;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-head{
-    box-sizing: border-box;
-    direction: rtl;
-    display: none;
-    font-family: sans-serif;
-    font-size: 10px;
-    text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+head {
+  box-sizing: border-box;
+  direction: rtl;
+  display: none;
+  font-family: sans-serif;
+  font-size: 10px;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-body{
-    background-color: white;
-    box-sizing: border-box;
-    color: rgb(51, 50, 50);
-    direction: rtl;
-    display: block;
-    font-family: 'Rubik-Light', Arial, sans-serif;
-    font-stretch: 100%;
-    font-size: 10px;
-    font-style: normal;
-    font-variant-caps: normal;
-    font-variant-east-asian: normal;
-    font-variant-ligatures: normal;
-    font-variant-numeric: normal;
-    font-weight: 400;
-    height: 200vh;
-    line-height: 1;
-    margin: 0px;
-    overflow-x: hidden;
-    padding: 0px;
-    text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-}
+body {
+  background-color: aqua;
 
-.Lobi{
-    box-sizing: border-box;
-    background-size: contain ;
+  box-sizing: border-box;
+  color: rgb(51, 50, 50);
+  direction: rtl;
+  display: block;
+  font-family: "Rubik-Light", Arial, sans-serif;
+  font-stretch: 100%;
+  font-size: 10px;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 400;
+  height: 200vh;
+  line-height: 1;
+  margin: 0px;
+  overflow-x: hidden;
+  padding: 0px;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-.mainWrap{
-    box-sizing: border-box;
-    outline-color: rgb(197,196,196);
-}
-
-.banner{
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative;
-    text-align: center;
-    height: 100vh;
-}
-.bannerImgWrapper{
-    box-sizing: border-box;
-    color: rgb(51, 50, 50);
-    direction: rtl;
-    box-sizing: border-box;
-    height: 100vh;
-    line-height: 14px;
-    text-align: center;
-    outline-color: rgb(197,196,196) ;
-
-
-}
-.bannerImgWrapper:before{
-    box-sizing: border-box;
-    background-attachment: initial,initial;
-    background-clip: border-box,border-box;
-    background-color: rgba(0,0,0,0);
-    background-origin: padding-box,padding-box;
-    background-position-x: 0%,0%;
-    background-position-y: 0%,0%;
-    background-repeat: initial;
-    background-size: auto,auto;
-    color: rgb(51, 50, 50);
-    content:"";
-    direction: rtl;
-    box-sizing: border-box;
-    height: 100%;
-    left: 0px;
-    position: absolute;
-    right:0px;
-    line-height: 14px;
-    text-align: center;
-    top: 0px;
-    z-index: 0;
-    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6), rgba(0,0,0,0.8));
-}
-.bannerImgWrapper img{
-    border-bottom-color: rgb(51, 50, 50);
-    border-bottom-style: none;
-    border-image-width: 0px;
-    border-image-outset: 0;
-    border-image-repeat: stretch ;
-    border-image-slice: 100%;
-    border-image-source: none;
-    border-image-width: 1;
-    border-left-color: rgb(51, 50, 50);
-    border-left-style: none;
-    border-right-width: 0px;
-    border-top-color: rgb(51, 50, 50);
-    border-top-style: none;
-    border-top-width: 0px;
-    box-sizing: border-box;
-    color: rgb(51, 50, 50);
-    min-height: 100%;
-    min-width: 100%;
-
-    text-align: center;
-    text-size-adjust: 100%;
-    vertical-align: middle;
-    width:max-content;
-    
+header {
+  display: block;
+  box-sizing: border-box;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  height: 10vh;
+  background: linear-gradient(#00000092, #00000000);
 }
 
-.bannerHeader{
-    position:absolute ;
-    top:calc(60vh - 11.55vw);
-    
-    color: rgb(51, 50, 50);
-    outline-color: rgb(197,196,196);
-    padding-bottom: 0px;
-    right: 0;
-    left:0;
-    text-align: center;
-    text-size-adjust: 100%;
-    transform: matrix(1,0,0,1,0,-75);
-    height: fit-content;
-
-}
-.Title{
-    box-sizing: border-box;
-    vertical-align: middle;
-    color:white;
-    font-family: 'Almoni-Regular',Arial,sans-serif;
-    font-size: 10vw;
-    text-align: center;
-    padding: 1vw 0;
-
+.barLogo {
+  padding: 10% 1vw;
+  height: 80%;
 }
 
-.SubTitle{
-    box-sizing: border-box;
-    font-family: 'Rubik-Light',Arial,sans-serif;
-    color: white;
-    font-size: 4.07vw;
+.hl {
+  border-bottom: 2px solid #ffffff85;
+  margin: 0 1vw;
+}
+.logoLink {
+  height: 100%;
+  display: inline-block;
+  line-height: 67px;
+}
+header ul {
+  width: auto;
+  float: left;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  height: 100%;
+  position: relative;
+  padding: 0 0 0 0;
+  list-style-position: outside;
+  list-style: none;
+  list-style-image: none;
+  list-style-type: none;
+}
+header li {
+  width: fit-content;
+  padding: 0 3vw;
+  float: left;
+  margin: 0;
+  height: 100%;
+  direction: rtl;
+  display: table;
+  vertical-align: middle;
+  list-style: none;
+}
+.menuButton {
+  color: white;
+  font-family: "Ploni", Arial, sans-serif;
+  font-size: 30px;
+  display: table-cell;
+  height: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 0.2s ease-out;
+  -webkit-transition: color 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out;
+  -o-transition: color 0.2s ease-out;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.menuButton:hover {
+  font-size: 40px;
+  color: #cccccc;
+}
+
+.Lobi {
+  box-sizing: border-box;
+  background-size: contain;
+}
+
+.mainWrap {
+  box-sizing: border-box;
+  outline-color: rgb(197, 196, 196);
+}
+
+.banner {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  text-align: center;
+  height: 100vh;
+}
+.bannerImgWrapper {
+  box-sizing: border-box;
+  color: rgb(51, 50, 50);
+  direction: rtl;
+  box-sizing: border-box;
+  height: 100vh;
+  line-height: 14px;
+  text-align: center;
+  outline-color: rgb(197, 196, 196);
+}
+.bannerImgWrapper::before {
+  display: inline;
+  box-sizing: border-box;
+  background-attachment: initial, initial;
+  background-clip: border-box, border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-origin: padding-box, padding-box;
+  background-position-x: 0%, 0%;
+  background-position-y: 0%, 0%;
+  background-repeat: initial;
+  background-size: auto, auto;
+  color: rgb(51, 50, 50);
+  content: "";
+  direction: rtl;
+  box-sizing: border-box;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  line-height: 14px;
+  text-align: center;
+  top: 0px;
+  z-index: 0;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.6)
+  );
+}
+.bannerImgWrapper img {
+  border-bottom-color: rgb(51, 50, 50);
+  border-bottom-style: none;
+  border-image-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(51, 50, 50);
+  border-left-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(51, 50, 50);
+  border-top-style: none;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(51, 50, 50);
+  min-height: 100%;
+  min-width: 100%;
+  vertical-align: middle;
+}
+
+.bannerHeader {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: rgb(51, 50, 50);
+  outline-color: rgb(197, 196, 196);
+  padding-bottom: 0px;
+  right: 0;
+  left: 0;
+  text-align: center;
+  text-size-adjust: 100%;
+  height: fit-content;
+}
+.Title {
+  transform: translate(0, -20%);
+  vertical-align: text-top;
+  box-sizing: border-box;
+  vertical-align: middle;
+  color: white;
+  font-family: "Ploni", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12vw;
+  text-align: center;
+}
+
+.SubTitle {
+  display: block;
+  box-sizing: border-box;
+  font-family: "Ploni", Arial, sans-serif;
+  color: white;
+  font-size: 4.07vw;
+}
+
+.vl {
+  display: table-cell;
+  border-right: 2px solid white;
 }
