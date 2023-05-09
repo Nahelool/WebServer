@@ -9,15 +9,16 @@
     <title>שבב הב - האתר הכי מטורף</title>
   </head>
 
-  <body class>
+  <body class id="body">
     <main class="Lobi" role="main">
+      <img class="footer" src="../Images/BG-Footer.jpg" />
       <header>
-        <a class="logoLink">
+        <a class="logoLink" href="../HTML/404.html">
           <img src="../Icons/WebsiteIcon.svg" class="barLogo" />
         </a>
         <ul>
           <li>
-            <a class="menuButton">התחברות משתמש</a>
+            <a class="menuButton" id="loginButton" >התחברות משתמש</a>
           </li>
           <li>
             <div class="vl"></div>
@@ -25,16 +26,27 @@
           <li>
             <a class="menuButton">כלבים לאימוץ</a>
           </li>
+          <li>
+            <div class="vl"></div>
+          </li>
+          <li>
+            <a class="menuButton">הסיפור שלנו</a>
+          </li>
+          <li>
+            <div class="vl"></div>
+          </li>
+          <li>
+            <a class="menuButton">הכלבייה</a>
+          </li>
+          <li>
+            <div class="vl"></div>
+          </li>
         </ul>
         <div class="hl"></div>
       </header>
       <div class="mainWrap" id="wrapper" tabindex="-1">
-        <!-- Centers Text To The Middle -->
         <section class="banner">
-          <!-- Makes Sure The Dog Image Stays Wrapped All Over The Screen -->
-          <div class="bannerImgWrapper">
-            <img src="../Images/BG-Footer.jpg" />
-          </div>
+          <div class="bannerImgWrapper"></div>
           <div class="bannerHeader">
             <div class="SubTitle">ברוכים הבאים למערכת</div>
             <div class="Title">שבב הב</div>
@@ -42,5 +54,68 @@
         </section>
       </div>
     </main>
+    <div class="loginWrapper" id="loginWrapper" style="opacity: 0;">
+      <div class="loginBox" id="loginBox">
+        <h>התחברות</h>
+        <button class="closeButton"onclick=closeLoginBox()>סגור</button>
+        <form>
+          <div class="userType">
+            <input type="text" id="user" autocomplete="off" required />
+            <label id="userLabel">שם משתמש</label>
+            <p style="visibility: hidden">שם משתמש לא תקין / לא מזוהה</p>
+          </div>
+          <div class="passwordType">
+            <input type="password" autocomplete="off" required />
+            <label>סיסמה</label>
+            <p style="visibility: hidden">סיסמה שגויה</p>
+          </div>
+          <button class="submit">תכניס אותי!</button>
+        </form>
+      </div>
+    </div>
+    <main class="info"></main>
   </body>
+  <script>
+    const user = document.getElementById("user");
+    const loginBox = document.getElementById("loginBox")
+    const userLabel = document.getElementById("userLabel");
+    const loginButton = document.getElementById("loginButton")
+    const loginWrapper = document.getElementById("loginWrapper")
+    const body = document.getElementById("body")
+    
+    users = ["Yahel", "Yonatan", "Omer", "David"];
+
+    user.addEventListener("blur", function () {
+      var username = user.value;
+      if (users.includes(username)) {
+        user.style = "color: #64c714; border-bottom: 2px solid #64c714;";
+        userLabel.style = "color: #64c714;";
+      } else if(username!=="") {
+        user.style = "color: #eb3f3f; border-bottom: 2px solid #eb3f3f;";
+        userLabel.style = "color: #eb3f3f;";
+      }
+    });
+
+    user.addEventListener("focus", function () {
+      user.style = "color: #FFF;";
+      userLabel.style = "color: #FFF;";
+    });
+
+    user.addEventListener('input', function(){
+      if (user.value){
+        
+      }
+    })
+
+    loginButton.addEventListener("click", function(){
+      loginWrapper.style = "opacity: 100;"
+      body.style.overflowY = "hidden"
+    })
+
+    function closeLoginBox(){
+      loginWrapper.style = "opacity: 0;"
+      body.style.overflowY = "visible"   
+    }
+
+  </script>
 </html>
