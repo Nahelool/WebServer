@@ -155,8 +155,8 @@ header li {
 }
 
 .menuButton:hover {
-  font-size: 40px;
-  color: #cccccc;
+  font-size: 4vmin;
+  color: #ccc;
 }
 
 .Lobi {
@@ -323,7 +323,7 @@ header li {
   position: relative;
   font-family: "Ploni";
   font-weight: bold;
-  font-size: 600%;
+  font-size: 400%;
   color: #fff;
 }
 .loginBox form {
@@ -368,7 +368,7 @@ header li {
   background-color: transparent;
   color: #FFF;
   font-family: 'Ploni';
-  font-size: 3em;
+  font-size: 210%;
   border-radius: 2000px;
   top:3%;
   right: 3%;
@@ -425,7 +425,7 @@ header li {
   font-family: 'Ploni';
   font-weight: 500;
   color: #FFF;
-  font-size: 4em;
+  font-size: 2vw;
   bottom: 5%;
   width: 50%;
   height: 20%;
@@ -440,7 +440,7 @@ header li {
   right:20%;
   left: 20%;
   bottom: 2.5%;
-  font-size: 5em;
+  font-size: 3vw;
   background-color: #FFFFFF55;
 
 }
@@ -448,3 +448,4 @@ header li {
 .submit:active{
   background-color: #FFFFFF77;
 }
+
