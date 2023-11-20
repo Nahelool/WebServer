@@ -8,9 +8,60 @@
   <title>הפרופיל שלי</title>
 </head>
 <body>
-    <div class="background">
-      <span class = "circle" style=" height: 120vh; width: 120vh; background-color: #44809c;"></span>
-      <span class = "circle" style=" height: 100vh; width: 100vh; background-color: #9c6f44;"></span>
-    </div>
+  <canvas id="backgroundCanvas" ></canvas>
+  <h>הפרופיל שלי</h>
+  <div class="border"></div>
 </body> 
+<script>
+  const c = document.getElementById("backgroundCanvas")
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+  const bCanvas = c.getContext("2d")
+  var posX = 8*c.width/9
+  var rad1 = 2*c.width/9
+  var rad2 = 2*c.width/7
+  var rad3 = 2*c.width/5
+  var rad4 = 2*c.width/3
+  var rad5 = 2*c.width/1
+  
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad5,0,2*Math.PI,false)
+  bCanvas.fillStyle="#f5a43b"
+  bCanvas.fill()
+  bCanvas.shadowColor = "#612f03";
+  bCanvas.shadowBlur = 80;
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad4,0,2*Math.PI,false)
+  bCanvas.fillStyle="#e79831"
+  bCanvas.fill()
+  bCanvas.shadowColor = "#612f03";
+  bCanvas.shadowBlur = 80;
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad3,0,2*Math.PI,false)
+  bCanvas.fillStyle="#d98c28"
+  bCanvas.fill()
+  bCanvas.shadowColor = "#612f03";
+  bCanvas.shadowBlur = 80;
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad2,0,2*Math.PI,false)
+  bCanvas.fillStyle="#cc7f1c"
+  bCanvas.fill()
+  bCanvas.shadowColor = "#612f03";
+  bCanvas.shadowBlur = 80;
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad2,0,2*Math.PI,false)
+  bCanvas.fillStyle="#be7311"
+  bCanvas.fill()
+  bCanvas.shadowColor = "#612f03";
+  bCanvas.shadowBlur = 80;
+  bCanvas.beginPath()
+  bCanvas.arc(posX,0,rad1,0,2*Math.PI,false)
+  bCanvas.fillStyle="#b06707"
+  bCanvas.fill()
+  bCanvas.globalAlpha=0.3
+  bCanvas.fillStyle="black"
+  bCanvas.fillRect(0,0,c.width,c.height)
+
+
+</script>
 </html>

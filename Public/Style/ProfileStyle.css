@@ -1,3 +1,63 @@
+@font-face {
+  font-family: "Ploni";
+  src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+}
+
+@font-face {
+  font-family: "Almoni-Regular";
+  src: url("../fonts/Almoni-Regular.otf");
+  font-weight: normal;
+  margin-top: 30px;
+}
+
+@font-face {
+  font-family: "Rubik-Light";
+  src: url("../fonts/Rubik-VariableFont_wght.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Ploni";
+  src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Ploni";
+  src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
+  font-weight:500;
+}
+
+html, body {
+  direction: rtl;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 200vh;
+  display: block;
+  overflow-x: hidden;
+  width: 100vw;
+  text-align: center;
+}
+
+canvas{
+  position: fixed;
+  display: block;
+}
+
+h{
+  font-size: 15vh;
+  display: inline;
+  position: relative;
+  color: white;
+  font-family: "Ploni";
+  font-weight: bold;
+}
+.border{
+  border-bottom: 5px dashed rgba(255, 255, 255, 0.384);
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+}
+
 .background{
   overflow: hidden;
   height: 100vh;
