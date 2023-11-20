@@ -31,7 +31,7 @@ html, body {
   direction: rtl;
   margin: 0 !important;
   padding: 0 !important;
-  height: 200vh;
+  height: 201vh;
   display: block;
   overflow-x: hidden;
   width: 100vw;
@@ -44,18 +44,30 @@ canvas{
 }
 
 h{
+  height: 16vh;
   font-size: 15vh;
-  display: inline;
+  display: block;
   position: relative;
   color: white;
   font-family: "Ploni";
   font-weight: bold;
 }
+
+h1{
+  font-size: 5.5vh;
+  margin-bottom: 200px;
+  display:inline;
+  position: relative;
+  color: white;
+  font-family: "Ploni";
+  font-weight: normal;
+}
+
 .border{
-  border-bottom: 5px dashed rgba(255, 255, 255, 0.384);
+  border-bottom: 1vh dashed rgba(255, 255, 255, 0.384);
   position: absolute;
   width: 100vw;
-  bottom: 0;
+  bottom: -1vh;
 }
 
 .background{
