@@ -12,11 +12,31 @@
 <body>
   <canvas id="backgroundCanvas" ></canvas>
   <h>הפרופיל שלי</h>
-  <h1>שלום , </h1>
-  <h1>firstName</h1>
+  <div class = topBar>
+    <div class="nameBar">
+      <h1>שלום , </h1>
+      <h1>firstName</h1>
+      <button class="profileColor" onmouseover="displayInfo()" onmouseout="unDisplayInfo()"></button>
+    </div>
+    <div class="colorInfo" id="colorInfo">
+      <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלביה. היות והצבע שלך הוא אדום, אתה רשאי לקחת כל כלב בכלבייה ללא מגבלה</p>
+    </div>
+  </div>
   <div class="border"></div>
 </body> 
 <script>
+  const colInf = document.getElementById("colorInfo")
+  const colP = document.getElementById("colorInfoParagraph")
+  function displayInfo(){
+    colInf.style.backgroundColor="rgba(255, 255, 255, 0.8)"
+    colInf.style.visibility="visible"
+    colP.style.color = "#666"
+  }
+  function unDisplayInfo(){
+    colInf.style.backgroundColor="rgba(255, 255, 255, 0)"
+    colInf.style.visibility="hidden"
+    colP.style.color = "rgba(0,0,0,0)"
+  }
   const c = document.getElementById("backgroundCanvas")
   c.width = window.innerWidth;
   c.height = window.innerHeight;

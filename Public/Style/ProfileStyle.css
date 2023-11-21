@@ -4,14 +4,14 @@
 }
 
 @font-face {
-  font-family: "Almoni-Regular";
+  font-family: "Almoni";
   src: url("../fonts/Almoni-Regular.otf");
   font-weight: normal;
   margin-top: 30px;
 }
 
 @font-face {
-  font-family: "Rubik-Light";
+  font-family: "Rubik";
   src: url("../fonts/Rubik-VariableFont_wght.ttf");
   font-weight: normal;
 }
@@ -53,6 +53,17 @@ h{
   font-weight: bold;
 }
 
+.nameBar{
+  display: inline-block;
+  height: min-content;
+}
+
+.topBar{
+  display: block;
+  height: 80vh;
+  direction: rtl;
+  vertical-align:baseline;
+}
 h1{
   font-size: 5.5vh;
   margin-bottom: 200px;
@@ -70,18 +81,48 @@ h1{
   bottom: -1vh;
 }
 
+.profileColor{
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background-color: red;
+  display: inline-block;
+  border: none;
+  position: relative;
+  right: 1vw;
+}
+
+.profileColor:hover{
+  background-color: #FF4444;
+  cursor:pointer;
+}
+
+.colorInfo{
+  display: inline-block;
+  transition: 0.5s ease-in-out;
+  position: relative;
+  width: 12vw;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  height: 15vh;
+  right: 1%;
+}
+
+.colorInfo p{
+  transition: 0.5s ease-in-out;
+  font-size: 12px;
+  font-family: "Rubik";
+  margin: 0 auto;
+  text-align: right;
+  color: #666;
+  width: 10vw;
+  position: relative;
+}
+
 .background{
   overflow: hidden;
   height: 100vh;
   width: 100vw;
   position: relative;
   background-color: rgb(228, 148, 28);
-}
-.circle{
-  position: absolute;
-  border-radius: 50%;
-  top: -40vh;
-  right: -10vw;
-  
-
 }
