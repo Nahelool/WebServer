@@ -44,8 +44,8 @@ canvas{
 }
 
 h{
-  height: 16vh;
-  font-size: 15vh;
+  height: 16vmin;
+  font-size: 15vmin;
   display: block;
   position: relative;
   color: white;
@@ -59,13 +59,14 @@ h{
 }
 
 .topBar{
-  display: block;
+  display: flex;
   height: 80vh;
   direction: rtl;
-  vertical-align:baseline;
+  justify-content: center;
 }
+
 h1{
-  font-size: 5.5vh;
+  font-size: 5.5vmin;
   margin-bottom: 200px;
   display:inline;
   position: relative;
@@ -82,14 +83,16 @@ h1{
 }
 
 .profileColor{
-  height: 17px;
-  width: 17px;
+  padding: 0;
+  height: 3vmin;
+  width: 3vmin;
   border-radius: 50%;
   background-color: red;
   display: inline-block;
   border: none;
   position: relative;
   right: 1vw;
+  bottom: 1.3vmin;
 }
 
 .profileColor:hover{
@@ -98,14 +101,17 @@ h1{
 }
 
 .colorInfo{
-  display: inline-block;
+  display: flex;
   transition: 0.5s ease-in-out;
-  position: relative;
-  width: 12vw;
+  position: absolute;
+  width: 10vw;
+  padding: 0 1.5vw;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   height: 15vh;
-  right: 1%;
+  right: 170%;
+  top: 0;
+  align-items: center;
 }
 
 .colorInfo p{
@@ -113,9 +119,8 @@ h1{
   font-size: 12px;
   font-family: "Rubik";
   margin: 0 auto;
-  text-align: right;
+  text-align: justify;
   color: #666;
-  width: 10vw;
   position: relative;
 }
 
