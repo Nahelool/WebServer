@@ -11,25 +11,45 @@
 </head>
 <body>
   <canvas id="backgroundCanvas" ></canvas>
-  <h>הפרופיל שלי</h>
-  <div class = topBar>
-    <div class="nameBar">
-      <h1>שלום , </h1>
-      <h1>firstName</h1>
-      <button class="profileColor" onmouseover="displayInfo()" onmouseout="unDisplayInfo()">
-        <div class="colorInfo" id="colorInfo">
-          <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלבייה. היות והצבע שלך הוא אדום, אתה רשאי לקחת כל כלב בכלבייה ללא מגבלה</p>
+  <div id="mainWrapper" style="height: 201vh;">
+    <div style="height: 100vh;">
+      <h>הפרופיל שלי</h>
+      <div class = topBar>
+        <div class="nameBar">
+          <h1>שלום , </h1>
+          <h1>firstName</h1>
+          <button class="profileColor" onmouseover="displayInfo()" onmouseout="unDisplayInfo()">
+            <div class="colorInfo" id="colorInfo">
+              <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלבייה. היות והצבע שלך הוא אדום, אתה רשאי לקחת כל כלב בכלבייה ללא מגבלה</p>
+            </div>
+          </button>
         </div>
-      </button>
+      </div>
     </div>
-
+    <div class="border"></div>
+      <div id="mainWrapper" style="height: 201vh;">
+    <div style="height: 100vh;">
+      <h>הפרופיל שלי</h>
+      <div class = topBar>
+        <div class="nameBar">
+          <h1>שלום , </h1>
+          <h1>firstName</h1>
+          <button class="profileColor" onmouseover="displayInfo()" onmouseout="unDisplayInfo()">
+            <div class="colorInfo" id="colorInfo">
+              <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלבייה. היות והצבע שלך הוא אדום, אתה רשאי לקחת כל כלב בכלבייה ללא מגבלה</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="border"></div>
 </body> 
 <script>
   const colInf = document.getElementById("colorInfo")
   const colP = document.getElementById("colorInfoParagraph")
+  const wrapper = document.getElementById("mainWrapper")
 
+  //Display user's color information
   function displayInfo(){
     colP.style.transition ="0.5s ease-in-out"
     colInf.style.transition="0.5s ease-in-out"
@@ -37,42 +57,67 @@
     colInf.style.visibility="visible"
     colP.style.color = "#666"
   }
-  
+
+  //Undisplay user's color information
   function unDisplayInfo(){
     colInf.style.backgroundColor="rgba(255, 255, 255, 0)"
     colInf.style.visibility="hidden"
     colP.style.color = "rgba(0,0,0,0)"
   }
 
+  //Background canvas setup
   const c = document.getElementById("backgroundCanvas")
   c.width = window.innerWidth;
-  c.height = window.innerHeight;
+  c.height = 2.01*window.innerHeight;
   const bCanvas = c.getContext("2d")
 
+  //Number of circles in the background
   var n = 6
 
+  //First and last colors of the circles in the background, in RGB format
   const first = [147,73,22]
   const last = [161,117,61]
 
-  window.onscroll = function(e){
-    bCanvas.clearRect(0,0,c.width,c.height)
-    for (let i = 0;i<n;i++){
-      let rm = ((n-1-i)*1+i*9)/(n-1)
-      let r = 2*c.width/rm
+  //Clear Canvas
+  bCanvas.clearRect(0,0,c.width,c.height)
+  for (let i = 0;i<n;i++){
+    //The radius of the given circle
+    let rm = ((n-1-i)*1+i*9)/(n-1)
+    let r = 2*c.width/rm
 
-      var red = ((n-1-i)*last[0]+i*first[0])/(n-1)
-      var green = ((n-1-i)*last[1]+i*first[1])/(n-1)
-      var blue = ((n-1-i)*last[2]+i*first[2])/(n-1)
-      var color = "rgb("+red+","+green+","+blue+")";
+    //The color of the given circle
+    var red = ((n-1-i)*last[0]+i*first[0])/(n-1)
+    var green = ((n-1-i)*last[1]+i*first[1])/(n-1)
+    var blue = ((n-1-i)*last[2]+i*first[2])/(n-1)
+    var color = "rgb("+red+","+green+","+blue+")";
 
-      bCanvas.beginPath()
-      bCanvas.arc(16*c.width/17-(window.scrollY*c.width/c.height),-c.height/8,r,0,2*Math.PI,false)
-      bCanvas.fillStyle=color
-      bCanvas.fill()
-      bCanvas.shadowColor = "#612f03";
-      bCanvas.shadowBlur = 80;
+    //Circle drawing
+    bCanvas.beginPath()
+    bCanvas.arc(16*c.width/17,9*c.height/16,r,0,2*Math.PI,false)
+    bCanvas.fillStyle=color
+    bCanvas.fill()
+    bCanvas.shadowColor = "#612f03";
+    bCanvas.shadowBlur = 80;
+  }
+
+  //Triggers when a scroll occurs
+  document.addEventListener("wheel", scroll);
+
+  function scroll(event){
+    //If down
+    if (event.deltaY>0){
+      //Wrapper goes down
+      wrapper.style ="transform: translate3d(0, -101vh, 0); transition: all 700ms ease"
+      //Background goes up
+      c.style ="transform: translate3d(0, 60vh, 0); transition: all 700ms ease"
     }
-
+    //If up
+    else{
+      //Wrapper goes down
+      wrapper.style ="transform: translate3d(0, 0, 0); transition: all 700ms ease"
+      //Background goes down
+      c.style ="transform: translate3d(0, 0, 0); transition: all 700ms ease"
+    }
   }
 
 

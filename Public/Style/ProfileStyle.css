@@ -33,7 +33,7 @@ html, body {
   padding: 0 !important;
   height: 201vh;
   display: block;
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100vw;
   text-align: center;
 }
@@ -41,6 +41,7 @@ html, body {
 canvas{
   position: fixed;
   display: block;
+  top: -100vh;
 }
 
 h{
@@ -60,7 +61,6 @@ h{
 
 .topBar{
   display: flex;
-  height: 80vh;
   direction: rtl;
   justify-content: center;
 }
@@ -77,9 +77,8 @@ h1{
 
 .border{
   border-bottom: 1vh dashed rgba(255, 255, 255, 0.384);
-  position: absolute;
   width: 100vw;
-  bottom: -1vh;
+  display: block;
 }
 
 .profileColor{
