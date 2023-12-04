@@ -1,0 +1,43 @@
+.header{
+    height: 90px;
+    background-color: pink;
+    display: flex;
+}
+.header-left{
+    display:flex;
+    width: 200px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
+.login-button{
+    width: 120px;
+    height: 50px;
+    background-color: rgb(136, 136, 231);
+    color: white;
+    font-size: 20px;
+    border: none;
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.4);
+    border-radius: 4px;
+    vertical-align: center;
+    transition: 0.2s;
+}
+.login-button:hover{
+
+    width: 150px;
+    height: 62.5px;
+    box-shadow: 10px 10px 2px rgba(0,0,0,0.4);
+    font-size: 25px;
+    vertical-align: center;
+    cursor: pointer;
+}
+.login-button:active{
+    opacity: 0.7;
+}
+.header-center{
+    width: 320px;
+    background-color: lightgreen;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
