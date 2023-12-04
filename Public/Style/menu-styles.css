@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(219,226,118);
+}
+.header{
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex: 1;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+}
+.header-left{
+    display:flex;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+}
+.login-button{
+    width: 120px;
+    height: 50px;
+    background-color: rgb(101, 152, 230);
+    color: white;
+    font-size: 20px;
+    border: none;
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.4);
+    border-radius: 4px;
+    vertical-align: center;
+    transition: 0.2s;
+}
+.login-button:hover{
+
+    width: 150px;
+    height: 62.5px;
+    box-shadow: 10px 10px 2px rgba(0,0,0,0.4);
+    font-size: 25px;
+    vertical-align: center;
+    cursor: pointer;
+}
+.login-button:active{
+    opacity: 0.7;
+}
+.header-center{
+    width: 1050px;
+    display:flex;
+    position: relative;
+    align-items: center;
+}
+
+
+
+.header-center button{
+    height: 50px;
+    font-size: 20px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: none;
+    position: absolute;
+    transition: 0.1s
+}
+.header-center button:hover{
+    color: rgb(255,239,56);
+    cursor: pointer;
+}
+.blog-button{
+    right: 10px;
+}
+.donation-button{
+    right: 60px;
+}
+.adoption-button{
+    right: 200px;
+}
+.contact-button{
+    right: 325px;
+}   
+.button-divider{
+    border-left: 2px solid rgb(0, 0, 0);
+    height: 30px; 
+    position:absolute;
+    z-index: 1000;
+}
+#divider1{
+    right: 56px;
+} 
+#divider2{
+    right: 195px;
+}
+#divider3{
+    right: 319px;
+}
+.header-right{
+    display: flex;   
+    flex: 1;
+    position: relative;
+    align-items: center;
+    min-width: 100px;
+}
+.logo{
+    width: 95%;
+    height: 95%;
+    position:absolute;
+    top: 3px;
+    left:0;
+    
+}
