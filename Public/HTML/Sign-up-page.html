@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>הרשמו - שבב הב</title>
+<link rel="stylesheet" href="../Style/sign-up-page-style.css">
+</head>
+<body>
+<div class="quastionaire">
+    <div id="insert-name">
+    <input type="text" id="name">
+    <p>:שם מלא</p>
+    </div>
+    <div id="insert-id">
+        <input type="text" id="id">
+        <p>:תעודת זהות</p>
+    </div>  
+    <div id="insert-phone">
+        <input type="text" id="phone">
+        <p>:טלפון</p>
+    </div>
+    <div id="insert-gmail">
+        <input type="text" id="gmail">
+        <p>:כתובת מייל</p>
+    </div>
+    <div id="insert-password">
+        <input type="text" id="password">
+        <p>:סיסמה</p>
+    </div>
+</div>
+<div>
+    <button class="sign-up-button" onclick="passValue()">
+        כפתור אדום גדול
+    </button>
+</div>
+</body>
+<script>
+
+ function passValue(){
+        var name =  document.getElementById("name").value;   
+        var id = document.getElementById("id").value;
+    var phone = document.getElementById("phone").value;
+        var gmail = document.getElementById("gmail").value;
+        var password = document.getElementById("password").value;
+      console.log(name)  
+      console.log(gmail)
+ }
+</script>    
+</html>
