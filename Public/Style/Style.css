@@ -364,6 +364,7 @@ header li {
 }
 
 .closeButton{
+  transition: all 300ms ease;
   background-color: transparent;
   color: #FFF;
   font-family: 'Ploni';
@@ -375,6 +376,10 @@ header li {
   border: none;
   height: 5vmin;
   width:  5vmin;
+}
+
+.closeButton:hover{
+  font-size: 350%;
 }
 
 .loginBox input:valid~label{
