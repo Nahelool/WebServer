@@ -66,14 +66,14 @@ body{
 .blog-button{
     right: 10px;
 }
-.donation-button{
+.story-button{
     right: 60px;
 }
 .adoption-button{
-    right: 200px;
+    right: 175px;
 }
 .contact-button{
-    right: 325px;
+    right: 295px;
 }   
 .button-divider{
     border-left: 2px solid rgb(0, 0, 0);
@@ -85,10 +85,10 @@ body{
     right: 56px;
 } 
 #divider2{
-    right: 195px;
+    right: 170px;
 }
 #divider3{
-    right: 319px;
+    right: 290px;
 }
 .header-right{
     display: flex;   
