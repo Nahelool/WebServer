@@ -8,14 +8,18 @@
 }
 p{
     font-size: 30px;
-    position:absolute;
+    position:relative;
+    float: right;
+    display: inline-block;
     right: 20px;
     top: 0;
     margin: 0;
 }
-input{  
+input{ 
+    margin-right: 5%;
+    float: right;
     height: 40px;
-    display:inline;
+    display:inline-block;
     font-size: 30px;
     direction: rtl;
     border: none;
@@ -26,8 +30,7 @@ input:active{
 }
 .question-div{
 display: inline-block;
-position:absolute;
-postion: relative;
+position:relative;
 right: 60px;
 background-color: white;
 border-style: solid;
@@ -35,7 +38,7 @@ border-color:blue;
 padding-left: 20px;
 border-radius: 20px;
 width: 600px;
-display: flex;
+float: right;
 }
 
 #insert-id{
