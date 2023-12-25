@@ -1,43 +1,53 @@
 .quastionaire{
-    background-color: blue;
-    height: 1000px  ;
+    background-color: #80dbc3;
     width: 800px;
     float: right;
     row-gap: 80px;
+    height: 1000px;
     position: relative;
 }
 p{
-    display:inline;
     font-size: 30px;
+    position:absolute;
+    right: 20px;
+    top: 0;
+    margin: 0;
 }
-input{
-    width: 400px;
+input{  
     height: 40px;
     display:inline;
     font-size: 30px;
     direction: rtl;
+    border: none;
+    width: max-content;
 }
-.quastionaire div{
+input:active{
+    border:none;    
+}
+.question-div{
 display: inline-block;
 position:absolute;
+postion: relative;
+right: 60px;
+background-color: white;
+border-style: solid;
+border-color:blue;
+padding-left: 20px;
+border-radius: 20px;
+width: 600px;
+display: flex;
 }
-#insert-name{
-    right:10px;
-}
+
 #insert-id{
-    right:10px;
     top:100px;
 }
 #insert-phone{
-    right:10px;
     top: 200px;
 }
 #insert-gmail{
-    right: 10px;
     top: 300px;
 }
 #insert-password{
-    right:10px;
     top: 400px;
 }
 .sign-up-button{  
@@ -50,4 +60,12 @@ position:absolute;
 }
 .sign-up-button:hover{
     cursor:pointer;
+}
+.file-select-button{
+    background-color: rgb(212, 5, 231);
+    width: 400px; 
+    height: 60px; 
+    border-style: solid;
+    border-color: black;
+    font-size: 30px;  
 }

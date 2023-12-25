@@ -6,23 +6,24 @@
 </head>
 <body>
 <div class="quastionaire">
-    <div id="insert-name">
+<!--need to make a class for all the input divs-->
+    <div class="question-div" id="insert-name">
     <input type="text" id="name">
     <p>:שם מלא</p>
     </div>
-    <div id="insert-id">
+    <div class="question-div" id="insert-id">
         <input type="text" id="id">
         <p>:תעודת זהות</p>
     </div>  
-    <div id="insert-phone">
+    <divv class="question-div" id="insert-phone">
         <input type="text" id="phone">
         <p>:טלפון</p>
     </div>
-    <div id="insert-gmail">
+    <div class="question-div" id="insert-gmail">
         <input type="text" id="gmail">
         <p>:כתובת מייל</p>
     </div>
-    <div id="insert-password">
+    <div class="question-div" id="insert-password">
         <input type="text" id="password">
         <p>:סיסמה</p>
     </div>
@@ -31,6 +32,10 @@
     <button class="sign-up-button" onclick="passValue()">
         כפתור אדום גדול
     </button>
+</div>
+<div>
+    <input type="file" class="file-select-button">
+    <label for="file-select-button">כפתור סגול בלי נצנצים </label>
 </div>
 </body>
 <script>
