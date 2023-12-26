@@ -15,7 +15,7 @@
         <p>:תעודת זהות</p>
         <input type="text" id="id">
     </div>  
-    <divv class="question-div" id="insert-phone">
+    <div class="question-div" id="insert-phone">
         <p>:טלפון</p>
         <input type="text" id="phone">
     </div>
@@ -30,20 +30,21 @@
 </div>
 <div>
     <button class="sign-up-button" onclick="passValue()">
-        כפתור אדום גדול
+        כפתור לא אדום אבל גדול
     </button>
 </div>
 </body>
-<script>
-
- function passValue(){
+<script type="module" src='../Node/database.js'></script>
+<script type="module">
+    function passValue(){
         var name =  document.getElementById("name").value;   
         var id = document.getElementById("id").value;
-    var phone = document.getElementById("phone").value;
+        var phone = document.getElementById("phone").value;
         var gmail = document.getElementById("gmail").value;
         var password = document.getElementById("password").value;
-      console.log(name)  
-      console.log(gmail)
+        console.log(name)  
+        console.log(gmail)
+        Functions.VolSignup(id,name,3,phone,password)
  }
 </script>    
 </html>
