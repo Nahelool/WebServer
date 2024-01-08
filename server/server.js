@@ -1,15 +1,25 @@
 const http = require('http')
-const server = http.createServer( (req,res)=>{
-  const notFound = readFileSync('../../Public/HTML/404.html')
-  const index =  readFileSync('../../Public/HTML/index.html')
-  if (req.url === '/*'){
-    res.setHeader('Content-Type', 'text/html', 200);
+const {readFileSync} = require('fs')
+const express = require('express')
+const app = express();
+
+app.use(express.static('../Public'));
+const index =  readFileSync('../Public/HTML/index.html')
+
+app.get( '/*',(req,res)=>{
+  if (req.url == '/'){
+    res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(index)
   }
 })
 
-const PORT = 3000;
+app.post('/*', (req,res)=>{
+  console.log("Hello")
+  res.end()
+})
 
-server.listen(PORT, () => {
+const PORT = 5000;
+
+app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

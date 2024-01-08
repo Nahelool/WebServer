@@ -58,7 +58,7 @@
       <div class="loginBox" id="loginBox">
         <h>התחברות</h>
         <button class="closeButton"onclick=closeLoginBox()>סגור</button>
-        <form>
+        <form method="post" action="http://10.102.209.137:5000">
           <div class="userType">
             <input type="text" id="user" autocomplete="off" required />
             <label id="userLabel">שם משתמש</label>
@@ -69,7 +69,7 @@
             <label>סיסמה</label>
             <p style="visibility: hidden">סיסמה שגויה</p>
           </div>
-          <button class="submit">תכניסו אותי!</button>
+            <button id="submitUser" class="submit">תכניסו אותי!</button>
         </form>
       </div>
     </div>
@@ -77,6 +77,7 @@
   </body>
   <script>
     const user = document.getElementById("user");
+    const submitUser = document.getElementById("submitUser")
     const loginBox = document.getElementById("loginBox")
     const userLabel = document.getElementById("userLabel");
     const loginButton = document.getElementById("loginButton")
@@ -100,12 +101,6 @@
       user.style = "color: #FFF;";
       userLabel.style = "color: #FFF;";
     });
-
-    user.addEventListener('input', function(){
-      if (user.value){
-        
-      }
-    })
 
     loginButton.addEventListener("click", function(){
       loginWrapper.style = "opacity: 100;"

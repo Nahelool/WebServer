@@ -2,7 +2,6 @@
   "name": "webserver",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "dependencies": {
     "accepts": "^1.3.8",
