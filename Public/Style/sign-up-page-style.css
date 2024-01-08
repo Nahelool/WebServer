@@ -3,7 +3,7 @@
     width: 800px;
     float: right;
     row-gap: 80px;
-    height: 1000px;
+    height: 600px; 
     position: relative;
 }
 p{
@@ -28,39 +28,48 @@ input:active{
     border:none;    
 }
 .question-div{
-position:absolute;
-right: 60px;
-background-color: white;
-border-style: solid;
-border-color:blue;
-padding-left: 20px;
-border-radius: 20px;
-width: 600px;
+    position:absolute;
+    right: 60px;
+    background-color: white;
+    border-style: solid;
+    border-color:blue;
+    padding-left: 20px;
+    border-radius: 20px;
+    width: 600px;
+    
+    }
+    
 
+#insert-name{
+    top: 75px;
 }
-
 #insert-id{
-    top:100px;
+    top: 175px;
 }
 #insert-phone{
-    top: 200px;
+    top: 275px;
 }
 #insert-gmail{
-    top: 300px;
+    top: 375px;
 }
 #insert-password{
-    top: 400px;
+    top: 475px;
 }
 .sign-up-button{  
-    background-color: rgb(196, 30, 30);
+    background-color: red;
     width: 400px; 
     height: 60px; 
     border-style: solid;
     border-color: black;
     font-size: 30px;
+    margin-right: 40px;
+    margin-left: 50px;
 }
 .sign-up-button:hover{
     cursor:pointer;
+}
+.sign-up-button:active{
+    opacity: 0.7;
 }
 .file-select-button{
     background-color: rgb(212, 5, 231);
@@ -69,4 +78,9 @@ width: 600px;
     border-style: solid;
     border-color: black;
     font-size: 30px;  
+}
+body{
+    display: flex;
+    align-items: center;
+    background-color: #80dbc3;
 }
