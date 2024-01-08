@@ -8,29 +8,27 @@
 }
 p{
     font-size: 30px;
-    position:relative;
-    float: right;
-    display: inline-block;
     right: 20px;
-    top: 0;
     margin: 0;
-}
-input{ 
-    margin-right: 5%;
+    display: block;
     float: right;
+    margin-right: 20px;
+}
+input{  
+    margin: 1px;
     height: 40px;
-    display:inline-block;
     font-size: 30px;
     direction: rtl;
+    position: relative;
+    float: right;
+    outline: none;
     border: none;
-    width: max-content;
 }
 input:active{
     border:none;    
 }
 .question-div{
-display: inline-block;
-position:relative;
+position:absolute;
 right: 60px;
 background-color: white;
 border-style: solid;
@@ -38,7 +36,7 @@ border-color:blue;
 padding-left: 20px;
 border-radius: 20px;
 width: 600px;
-float: right;
+
 }
 
 #insert-id{
