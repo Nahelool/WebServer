@@ -1,21 +1,20 @@
-import mysql from 'mysql2'
-import http from 'http'
-const port = 3000
-
-//const server = http.createServer(function(req, res){
-//    res.write('hi')
-//    res.end()
-//})
+import mysql2 from '../../node_modules/mysql2/promise.js'
+import express from '../../node_modules/express'
+const app = express();
 
 
-//server.listen(port, function(error) {
-//    if (error) {
-//        console.log('Something went wrong', error)
-//    } else {
-//        console.log('Server is listening on port ' + port)
-//    }
-//})
-const connection = mysql.createConnection({
+app.get('*.js', (req, res) => {
+  res.type('text/javascript');
+  res.sendFile(path.resolve(__dirname, '../Node/database.js'));
+});
+
+app.use(express.static('Public', { type: "text/html" }));
+
+app.listen(5500, () => {
+  console.log('Server is running on port 5500');
+});
+
+const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
