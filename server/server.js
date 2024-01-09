@@ -15,7 +15,8 @@ app.get( '/*',(req,res)=>{
 
 app.post('/*', (req,res)=>{
   console.log("Hello")
-  res.end()
+  console.log(req.body)
+  res.end("Ended Successfully!")
 })
 
 const PORT = 5000;

@@ -57,19 +57,20 @@
     <div class="loginWrapper" id="loginWrapper" style="opacity: 0;">
       <div class="loginBox" id="loginBox">
         <h>התחברות</h>
-        <button class="closeButton"onclick=closeLoginBox()>סגור</button>
-        <form method="post" action="http://10.102.209.137:5000">
+        <button class="closeButton" onclick=closeLoginBox()>סגור</button>
+        <form id="userLoginForm">
           <div class="userType">
-            <input type="text" id="user" autocomplete="off" required />
+            <input name="user" type="text" id="user" autocomplete="off" required />
             <label id="userLabel">שם משתמש</label>
             <p style="visibility: hidden">שם משתמש לא תקין / לא מזוהה</p>
           </div>
           <div class="passwordType">
-            <input type="password" autocomplete="off" required />
+            <input name="password" type="password" autocomplete="off" required />
             <label>סיסמה</label>
             <p style="visibility: hidden">סיסמה שגויה</p>
           </div>
-            <button id="submitUser" class="submit">תכניסו אותי!</button>
+          
+          <button id="submitUser" class="submit">תכניסו אותי!</button>
         </form>
       </div>
     </div>
@@ -83,7 +84,19 @@
     const loginButton = document.getElementById("loginButton")
     const loginWrapper = document.getElementById("loginWrapper")
     const body = document.getElementById("body")
-    
+    const userLoginForm = document.getElementById("userLoginForm")
+
+    userLoginForm.addEventListener("submit", (e)=>{
+      e.preventDefault()
+      const formData = new FormData(userLoginForm)
+      const encoded = new URLSearchParams(formData).toString()
+      console.log(encoded)
+      fetch("http://localhost:5000", {
+        method: "POST",
+        body: encoded
+      })
+    })
+
     users = ["Yahel", "Yonatan", "Omer", "David", "Nigger"];
 
     user.addEventListener("blur", function () {
@@ -111,6 +124,6 @@
       loginWrapper.style = "opacity: 0;"
       body.style.overflowY = "visible"   
     }
-
+  
   </script>
 </html>
