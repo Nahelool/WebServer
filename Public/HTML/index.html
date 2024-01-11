@@ -57,19 +57,20 @@
     <div class="loginWrapper" id="loginWrapper" style="opacity: 0;">
       <div class="loginBox" id="loginBox">
         <h>התחברות</h>
-        <button class="closeButton"onclick=closeLoginBox()>סגור</button>
-        <form>
+        <button class="closeButton" onclick=closeLoginBox()>סגור</button>
+        <form id="userLoginForm">
           <div class="userType">
-            <input type="text" id="user" autocomplete="off" required />
+            <input name="user" type="text" id="user" autocomplete="off" required />
             <label id="userLabel">שם משתמש</label>
             <p style="visibility: hidden">שם משתמש לא תקין / לא מזוהה</p>
           </div>
           <div class="passwordType">
-            <input type="password" autocomplete="off" required />
+            <input name="password" type="password" autocomplete="off" required />
             <label>סיסמה</label>
             <p style="visibility: hidden">סיסמה שגויה</p>
           </div>
-          <button class="submit">תכניסו אותי!</button>
+          
+          <button id="submitUser" class="submit">תכניסו אותי!</button>
         </form>
       </div>
     </div>
@@ -77,18 +78,31 @@
   </body>
   <script>
     const user = document.getElementById("user");
+    const submitUser = document.getElementById("submitUser")
     const loginBox = document.getElementById("loginBox")
     const userLabel = document.getElementById("userLabel");
     const loginButton = document.getElementById("loginButton")
     const loginWrapper = document.getElementById("loginWrapper")
     const body = document.getElementById("body")
-    
+    const userLoginForm = document.getElementById("userLoginForm")
+
+    userLoginForm.addEventListener("submit", (e)=>{
+      e.preventDefault()
+      const formData = new FormData(userLoginForm)
+      const encoded = new URLSearchParams(formData).toString()
+      console.log(encoded)
+      fetch("http://localhost:5000", {
+        method: "POST",
+        body: encoded
+      })
+    })
+
     users = ["Yahel", "Yonatan", "Omer", "David", "Nigger"];
 
     user.addEventListener("blur", function () {
       var username = user.value;
       if (users.includes(username)) {
-        user.style = "color: #64c714; border-bottom: 2px solid #64c714;";
+           user.style = "color: #64c714; border-bottom: 2px solid #64c714;";
         userLabel.style = "color: #64c714;";
       } else if(username!=="") {
         user.style = "color: #eb3f3f; border-bottom: 2px solid #eb3f3f;";
@@ -101,12 +115,6 @@
       userLabel.style = "color: #FFF;";
     });
 
-    user.addEventListener('input', function(){
-      if (user.value){
-        
-      }
-    })
-
     loginButton.addEventListener("click", function(){
       loginWrapper.style = "opacity: 100;"
       body.style.overflowY = "hidden"
@@ -116,6 +124,6 @@
       loginWrapper.style = "opacity: 0;"
       body.style.overflowY = "visible"   
     }
-
+  
   </script>
 </html>

@@ -3,17 +3,21 @@
 <head>
     <title>שבב הב - עמוד הבית</title>
     <link rel="stylesheet" href="../Style/menu-styles.css">
+
 </head>
 <body>
 <div class="header">
 <div class="header-left">
-<a href="../HTML/profile.html"><button class="login-button">
+<button id="loginButton" class="login-button" onclick=openLoginBox()>
 התחברות
-</button></a>
+</button>
 </div>
 <div class="header-center">
 
-<button class="contact-button">צרו קשר</button>
+<a href="../HTML/Sign-up-page.html">
+    <button class="new-join-button">!חדשים? הירשמו כאן </button>
+</a>
+    <button class="contact-button">צרו קשר</button>
 <div id="divider1" class="button-divider"></div>
 <button class="adoption-button">אימוץ ואומנה</button>
 <div id="divider2" class="button-divider"></div>
@@ -25,5 +29,28 @@
 <img class="logo" src="../Icons/WebsiteIcon.svg">
 </div>
 </div>
+<div id="loginPage" class="loginPage">
+<button class="closeButton" onclick=closeLoginBox()>&times;</button>
+<div>
+<p>שם משתמש:</p>
+<input class="Username-input"> 
+</div>
+<div>
+    <p>סיסמה:</p>
+<input class="password-input">
+</div>
+</div>
 </body>
+<script>
+    loginPage = document.getElementById("loginPage")
+    loginButton = document.getElementById("login-button")
+      
+function closeLoginBox(){
+    loginPage.style = "opacity: 0; transition: 0.2s"  
+    console.log("Pressed") 
+       }
+function openLoginBox(){
+    loginPage.style = "opacity: 100; transition: 0.2s;"
+}    
+   </script>
 </html>

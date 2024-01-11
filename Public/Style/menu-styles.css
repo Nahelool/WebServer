@@ -1,15 +1,14 @@
+
 body{
     background-color: rgb(219,226,118);
+    margin: 0;
+    position: relative;
 }
 .header{
     height: 100px;
     background-color: rgb(255, 255, 255);
     display: flex;
-    flex: 1;
-    position:absolute;
-    left:0;
-    right:0;
-    top:0;
+
 }
 .header-left{
     display:flex;
@@ -41,16 +40,20 @@ body{
 .login-button:active{
     opacity: 0.7;
 }
+
+
+
 .header-center{
-    width: 1050px;
-    display:flex;
+    flex: 1;
+    min-width: 600px;
     position: relative;
+    display: flex;
     align-items: center;
 }
 
 
 
-.header-center button{
+.header-center button:not(.new-join-button){
     height: 50px;
     font-size: 20px;
     background-color: rgb(255, 255, 255);
@@ -59,7 +62,7 @@ body{
     position: absolute;
     transition: 0.1s
 }
-.header-center button:hover{
+.header-center button:not(.new-join-button):hover{
     color: rgb(255,239,56);
     cursor: pointer;
 }
@@ -92,7 +95,7 @@ body{
 }
 .header-right{
     display: flex;   
-    flex: 1;
+    width: 150px;   
     position: relative;
     align-items: center;
     min-width: 100px;
@@ -105,3 +108,76 @@ body{
     left:0;
     
 }
+.new-join-button{
+    font-size: 20px;
+    width: 200px;
+    height: 45px;
+    border: none;
+    color: white;
+    background-color: #fd7c19;
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.4);
+    border-radius: 4px;
+    transition: 0.2s;
+}
+.new-join-button:hover{
+    cursor:pointer;
+    box-shadow: 10px 10px 2px rgba(0,0,0,0.4);
+    width: 250px;
+    font-size: 25px;
+    height: 56.25px;
+    transition: 0.2s;
+}
+.new-join-button:active{
+    opacity:0.7;
+}
+.loginPage{
+    background-color: rgb(255, 217, 147);
+    height: 500px;
+    margin-top: 25px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: white;
+    opacity: 0;
+    direction: rtl;
+}
+.closeButton{
+    height: 50px;
+    width: 50px;
+    float:right;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 60px;
+    padding: 0px;
+    line-height: 15px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    background-color: rgb(255,217,147);
+}
+.closeButton:hover{
+    background-color: rgb(253, 206, 118)
+}
+.loginPage input {
+    font-family: 'Ploni';
+    background-color: #0000 !important; 
+    border: none;
+    width: 80%;
+    height: 100%;
+    font-size: 2.5em;
+    color: #FFF;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+    font-weight: 500;
+    border-bottom: 2px solid #FFF;
+
+  }
+  .loginPage p {
+    color: #FFF;
+    font-family: "Ploni";
+    font-size: 2.5em;
+    pointer-events: none;
+    transition: 0.2s;
+  }
