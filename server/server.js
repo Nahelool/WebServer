@@ -4,6 +4,10 @@ const express = require('express')
 const app = express();
 
 app.use(express.static('../Public'));
+app.use(express.urlencoded({
+  extended: false
+  }));
+
 const index =  readFileSync('../Public/HTML/index.html')
 
 app.get( '/*',(req,res)=>{
@@ -13,10 +17,11 @@ app.get( '/*',(req,res)=>{
   }
 })
 
-app.post('/*', (req,res)=>{
-  console.log("Hello")
-  console.log(req.body)
-  res.end("Ended Successfully!")
+app.post('/', function(req,res){
+  const userParams = req.body
+  console.log("User name is "+ userParams.user)
+  console.log("User password is "+userParams.password)
+  res.end()
 })
 
 const PORT = 5000;
