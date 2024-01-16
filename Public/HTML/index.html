@@ -96,6 +96,10 @@
         "Content-Type": "application/x-www-form-urlencoded",
         },
         'body': encoded
+    }).then( res => res.json())
+    .then(data => {
+      sessionStorage.name = data.user
+      location.href = '/profile'
     })
   })
     users = ["Yahel", "Yonatan", "Omer", "David", "Nigger"];
