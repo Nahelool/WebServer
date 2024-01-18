@@ -117,26 +117,37 @@ const Functions= {
       password: '',
       database: 'database_shvavhav'
     });
-    connection.connect();
-    const query = `
-    SELECT *
-    FROM Volunteer_info
-    WHERE Volunteer_ID=?
-    `;
-    connection.query(query, [volID], (error, results) => {
-        if (error) {
-          console.error('Error selecting data:', error);
-          throw error;
+  
+    try {
+      connection.query(
+        'SELECT * FROM Volunteer_info WHERE Volunteer_ID = ?',
+        [volID],
+        (error, results, fields) => {
+          if (error) {
+            console.error('Error selecting data:', error);
+            throw error;
+          }
+  
+          if (results.length === 0) {
+            console.log(`No row found with Volunteer_ID=${volID}`);
+            return null; // Return null or handle the case when no row is found
+          }
+  
+          const rowData = results[0];
+  
+          // Convert the object properties to an array of values
+          const valuesArray = Object.values(rowData);
+  
+          console.log('Selected row values:', valuesArray);
+          return valuesArray;
         }
-    
-        if (results.length === 0) {
-          console.log(`No row found with Volunteer_ID=${volID}`);
-        } else {
-          console.log('Selected row:', results[0]);
-        }
-    
-        connection.end();
-    });
+      );
+    } catch (error) {
+      console.error('Error in try-catch block:', error);
+    } finally {
+      // Ensure the connection is always closed
+      connection.end();
+    }
   },
   async AnimInfo(AnimID) { //takes dog id and returns all info in the row
     const connection = mysql.createConnection({

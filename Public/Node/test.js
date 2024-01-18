@@ -9,6 +9,6 @@ const connection = mysql.createConnection({
 
 //Functions.openMedInfo(60);
 //Functions.AnimInfo(3);
-Functions.deleteRow(6)
+Functions.VolInfo(3);
 //Functions.AnimInsert(60,"orball",54,"C:/Users/user/Documents/hello.pdf");
 connection.end();
