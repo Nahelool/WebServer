@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
     <title>הרשמו - שבב הב</title>
     <link rel="stylesheet" href="../Style/sign-up-page-style.css">
 </head>
@@ -16,7 +15,7 @@
         <p>:תעודת זהות</p>
         <input type="text" id="id">
     </div>  
-    <divv class="question-div" id="insert-phone">
+    <div class="question-div" id="insert-phone">
         <p>:טלפון</p>
         <input type="text" id="phone">
     </div>
@@ -38,60 +37,14 @@
 <script>
     function passValue(){
         var name =  document.getElementById("name").value;
-=======
-<title>הרשמו - שבב הב</title>
-<link rel="stylesheet" href="../Style/sign-up-page-style.css">
-<link rel="script" href="./database.js">
-</head>
-<body>
-    <button class="sign-up-button" onclick=passValue()>
-        כפתור לא אדום אבל גדול
-    </button>
-    <div class="quastionaire">
-        <div class="question-div" id="insert-name">
-            <p>:שם מלא</p>
-            <input type="text" id="name">
-        </div>
-        <div class="question-div" id="insert-id">
-            <p>:תעודת זהות</p>
-            <input type="text" id="id">
-        </div>  
-        <div class="question-div" id="insert-phone">
-            <p>:טלפון</p>
-            <input type="text" id="phone">
-        </div>
-        <div class="question-div" id="insert-gmail">
-            <p>:אימייל</p>
-            <input type="text" id="gmail">
-        </div>
-        <div class="question-div" id="insert-password">
-            <p>:סיסמה</p>
-            <input type="text" id="password">
-        </div>
-    </div>
-
-</body>
-<script type="module" src='../Node/database.js'></script>
-<script type="module">
-    function passValue(){
-        var name =  document.getElementById("name").value;   
->>>>>>> 609913c93d823f0e51944c71812e09b9555fdc1d
         var id = document.getElementById("id").value;
         var phone = document.getElementById("phone").value;
         var gmail = document.getElementById("gmail").value;
         var password = document.getElementById("password").value;
-<<<<<<< HEAD
-        console.log(name);
-        console.log(gmail);
-        Functions.VolSignup(id,name,3,phone,password);
-    }
-</script>
-<script  type="module" src="../Node/Client.js"></script>
-=======
+
         console.log(name)  
         console.log(gmail)
         Functions.VolSignup(id,name,3,phone,password)
  }
 </script>    
->>>>>>> 609913c93d823f0e51944c71812e09b9555fdc1d
-</html>
+    </html>
