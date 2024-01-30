@@ -158,9 +158,7 @@ const Functions= {
     });
     connection.connect();
     const query = `
-    SELECT *
-    FROM Animal_info
-    WHERE Animal_ID=?
+    SELECT * FROM Animal_info WHERE Animal_ID=?
     `;
     connection.query(query, [AnimID], (error, results) => {
         if (error) {
@@ -169,11 +167,10 @@ const Functions= {
         }
     
         if (results.length === 0) {
-          console.log(`No row found with Volunteer_ID=${AnimID}`);
+          console.log(`No row found with Animal_ID=${AnimID}`);
         } else {
           console.log('Selected row:', results[0]);
-        }
-    
+        } 
         connection.end();
     });
   },
@@ -228,7 +225,7 @@ const Functions= {
       }
     );
   },
-  async deleteRow(AnimID){
+  async deleteAnim(AnimID){
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -253,6 +250,135 @@ const Functions= {
   
       connection.end();
   });
+  },
+  async findAnimalsByColor(color) {
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'database_shvavhav'
+    });
+    const query = `
+    SELECT Animal_ID FROM Animal_info WHERE Color=?
+    `;
+    connection.query(query, [color], (error, results) => {
+        if (error) {
+          console.error('Error selecting data:', error);
+          throw error;
+        }
+
+        if (results.length === 0) {
+          console.log(`No row found with Animal_ID=${color}`);
+        } else {
+          const numbersArray = results.map(({ Animal_ID }) => Animal_ID);
+          console.log('Selected rows:', numbersArray);
+        } 
+        connection.end();
+    });
+  },
+  async findLatest(color) {
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'database_shvavhav'
+    });
+    const query = `
+    SELECT Animal_ID FROM Animal_info WHERE Color=?
+    `;
+    connection.query(query, [color], (error, results) => {
+        if (error) {
+          console.error('Error selecting data:', error);
+          throw error;
+        }
+    
+        if (results.length === 0) {
+          console.log(`No row found with Animal_ID=${color}`);
+        } else {
+          console.log('Selected rows:', results);
+        } 
+        connection.end();
+    });
+  },
+  async TripInsert(VolID,AnimID,DateTime,Type){
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'database_shvavhav'
+    });
+    connection.connect();
+    const tableName = 'Trips';
+  
+    const dataToInsert = {
+      Volunteer_ID: parseInt(VolID,10),
+      Animal_ID: parseInt(AnimID,10),
+      Date: DateTime,
+      Type: Type,
+    };
+  
+    const query = `INSERT INTO ${tableName} SET ?`;
+  
+    connection.query(query, dataToInsert, (error, results) => {
+      if (error) {
+        console.error('Error inserting data:', error);
+        throw error;
+      }
+      console.log('Data inserted successfully:', results);
+      connection.end();
+    });
+  },
+  async deleteVol(VolID){
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'database_shvavhav'
+    });
+    connection.connect();
+
+    const query = "DELETE FROM Volunteer_info WHERE Volunteer_ID=?";
+
+    connection.query(query, [VolID], (error, results) => {
+      if (error) {
+        console.error('Error selecting data:', error);
+        throw error;
+      }
+  
+      if (results.length === 0) {
+        console.log(`No row found with Volunteer_ID=${VolID}`);
+      } else {
+        console.log('Row deleted with Volunteer_ID =', results[0]);
+      }
+  
+      connection.end();
+  });
+  },
+  async SchedInsert(VolID,Arrival){
+    const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'database_shvavhav'
+    });
+    connection.connect();
+    const tableName = 'Arrival';
+  
+    const dataToInsert = {
+      Volunteer_ID: parseInt(VolID,10),
+      Arrival_Time: Arrival,
+    };
+  
+    const query = `INSERT INTO ${tableName} SET ?`;
+  
+    connection.query(query, dataToInsert, (error, results) => {
+      if (error) {
+        console.error('Error inserting data:', error);
+        throw error;
+      }
+      console.log('Data inserted successfully:', results);
+      connection.end();
+    });
   }
-};
+}
 export default Functions;
