@@ -149,31 +149,38 @@ const Functions= {
       connection.end();
     }
   },
-  async AnimInfo(AnimID) { //takes dog id and returns all info in the row
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
+  async AnimInfo(AnimID) { //takes animal id and returns the info of the animal exept pds. it works with get.
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav'
+        });
+        
+        connection.connect();
+        
+        const query = 'SELECT Animal_ID, Animal_Name, Color, Age FROM Animal_info WHERE Animal_ID=?';
+        connection.query(query, [AnimID], (error, results) => {
+            if (error) {
+                console.error('Error selecting data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                if (results.length === 0) {
+                    console.log(`No row found with Animal_ID=${AnimID}`);
+                    connection.end();
+                    resolve(null); // Resolve with null if no rows are found
+                } else {
+                    console.log('Animal_info according to the id given:', results[0]);
+                    connection.end();
+                    resolve(results[0]); // Resolve with the first row if found
+                }
+            }
+        });
     });
-    connection.connect();
-    const query = `
-    SELECT * FROM Animal_info WHERE Animal_ID=?
-    `;
-    connection.query(query, [AnimID], (error, results) => {
-        if (error) {
-          console.error('Error selecting data:', error);
-          throw error;
-        }
-    
-        if (results.length === 0) {
-          console.log(`No row found with Animal_ID=${AnimID}`);
-        } else {
-          console.log('Selected row:', results[0]);
-        } 
-        connection.end();
-    });
-  },
+}
+,
   async openMedInfo(AnimID){
     const connection = mysql.createConnection({
       host: 'localhost',

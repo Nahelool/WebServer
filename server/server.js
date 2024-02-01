@@ -1,4 +1,3 @@
-import Functions from "../Public/Node/database.js"
 const http = require('http')
 const {readFileSync} = require('fs')
 const express = require('express')
