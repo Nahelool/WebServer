@@ -179,8 +179,7 @@ const Functions= {
             }
         });
     });
-}
-,
+},
   async openMedInfo(AnimID){
     const connection = mysql.createConnection({
       host: 'localhost',
