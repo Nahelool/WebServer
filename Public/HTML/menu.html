@@ -29,21 +29,25 @@
 <img class="logo" src="../Icons/WebsiteIcon.svg">
 </div>
 </div>
-<div id="loginPage" class="loginPage">
+<div id="loginPage" class="loginPage" style="display: flex;">
 <button class="closeButton" onclick=closeLoginBox()>&times;</button>
-<div>
-<p>שם משתמש:</p>
-<input class="Username-input"> 
+<div style="position: relative; margin-top: 70px;">
+<p id="userP" style="position:absolute; bottom: 0;">שם משתמש:</p>
+<input id="username-input"> 
 </div>
-<div>
-    <p>סיסמה:</p>
-<input class="password-input">
+<div style="position: relative; margin-top: 70px;">
+    <p id="passwordP" style="position: absolute; bottom:0;">סיסמה:</p>
+<input id="password-input">
 </div>
 </div>
 </body>
 <script>
     loginPage = document.getElementById("loginPage")
     loginButton = document.getElementById("login-button")
+    passwordInput = document.getElementsById("password-input")
+    usernameInput = document.getElementsById("username-input")
+    userP = document.getElementById("userP")
+    passwordP = document.getElementById("passwordP")
       
 function closeLoginBox(){
     loginPage.style = "opacity: 0; transition: 0.2s"  
@@ -51,6 +55,15 @@ function closeLoginBox(){
        }
 function openLoginBox(){
     loginPage.style = "opacity: 100; transition: 0.2s;"
-}    
+}
+
+usernameInput.addEventListener("focus", function () {
+      usernameInput.style = "color: #FFF;";
+    });  
+passwordInput.addEventListener("focus", function () {
+  passwordInput.style = "color: #FFF;";
+
+    });  
+
    </script>
 </html>
