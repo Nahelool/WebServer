@@ -7,11 +7,12 @@ const connection = mysql.createConnection({
     database: 'database_shvavhav'
   });
 
-Functions.openMedInfo(60);
+//Functions.openMedInfo(60);
 //Functions.AnimInfo(3);
 //Functions.AnimInfo(60);
 //Functions.AnimInsert(60,"orball",54,"C:/Users/user/Documents/hello.pdf");
 //Functions.findAnimalsByColor('Green');
 //Functions.TripInsert(3,60,"2024-01-04 05:32:49","Garden");
 //Functions.SchedInsert(3,"2023-03-23 12:00:00");
+Functions.changeColmn('Animal_info',5,'Color','Yellow','Animal');
 connection.end();

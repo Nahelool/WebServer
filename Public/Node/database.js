@@ -385,6 +385,31 @@ const Functions= {
       console.log('Data inserted successfully:', results);
       connection.end();
     });
+  },
+  async changeColmn(tableName,ID,change,value,animOrvoll){
+    return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+          host: 'localhost',
+          user: 'root',
+          password: '',
+          database: 'database_shvavhav'
+      });
+      
+      connection.connect();
+      
+      const query = `UPDATE ${tableName} SET ${change} = ? WHERE ${animOrvoll}_ID = ?`;
+      connection.query(query, [value, ID], (error, results) => {
+          if (error) {
+              console.error('Error updating data:', error);
+              connection.end();
+              reject(error); // Reject the promise if an error occurs
+          } else {
+              console.log(`Updated ${change} for row with id ${ID}`);
+              connection.end();
+              resolve(results); // Resolve with the results of the update operation
+          }
+      });
+  });
   }
 }
 export default Functions;
