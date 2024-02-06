@@ -394,7 +394,6 @@ const Functions= {
           password: '',
           database: 'database_shvavhav'
       });
-      
       connection.connect();
       
       const query = `UPDATE ${tableName} SET ${change} = ? WHERE ${animOrvoll}_ID = ?`;
