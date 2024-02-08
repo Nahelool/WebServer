@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+ <html>
+<head>
+<title>פרופיל אישי - משימות המתנדב</title>
+</head>
+<body>
+<canvas id="backgroundZigZag"></canvas>
+</body>
+<script>
+    var c = document.getElementById("backgroundZigZag");
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+const bCanvas = c.getContext("2d");
+var lineSpacing = c.width / 12; // Adjust the number of segments by changing the divisor
+var startX = (-80); // Calculate startX to center the zigzag
+var startY = (c.height) / 2; // Calculate startY to center the zigzag
+
+bCanvas.lineWidth = 15;
+bCanvas.strokeStyle = "#0096FF"; // blue-ish color
+bCanvas.beginPath();
+
+// Draw zigzag lines
+for (var i = 1; i <= 20; i++) { // Reduced to 5 segments to ensure it doesn't go out of screen
+    bCanvas.lineTo(startX + i * lineSpacing - lineSpacing / 2, startY + (i % 2 === 0 ? lineSpacing : -lineSpacing));
+    
+
+}
+
+bCanvas.stroke();
+    bcanvas.shadowColor = "#0a0500";
+    bcanvas.shadowBlur = 80;
+</script>
+</html>

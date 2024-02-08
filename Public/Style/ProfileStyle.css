@@ -190,6 +190,7 @@ h1{
   font-size: 30px;
   background-color: rgb(255,255,255,0.9);
   padding-top: 10px;
+  border-radius: 0px 0px 10px 10px;
 
 
 }
@@ -197,6 +198,8 @@ h1{
   margin: 10px;
   border-bottom: 5px dashed rgb(90, 90, 90);
   padding-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
   
     
 }
