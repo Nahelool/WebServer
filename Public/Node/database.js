@@ -179,7 +179,7 @@ const Functions= {
             }
         });
     });
-},
+  },
   async openMedInfo(AnimID){
     const connection = mysql.createConnection({
       host: 'localhost',
@@ -282,28 +282,56 @@ const Functions= {
         connection.end();
     });
   },
-  async findLatest(color) {
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
-    });
-    const query = `
-    SELECT Animal_ID FROM Animal_info WHERE Color=?
-    `;
-    connection.query(query, [color], (error, results) => {
-        if (error) {
-          console.error('Error selecting data:', error);
-          throw error;
-        }
-    
-        if (results.length === 0) {
-          console.log(`No row found with Animal_ID=${color}`);
-        } else {
-          console.log('Selected rows:', results);
-        } 
-        connection.end();
+  async findLeastRecentAnimalByColor(color) {
+    return new Promise((resolve, reject) => {
+        // Function that returns an array of animal IDs with the specified color
+        Functions.findAnimalsByColor(color)
+            .then(numbersArray => {
+                if (numbersArray.length === 0) {
+                    console.log(`No animals found with color=${color}`);
+                    resolve(null); // Resolve with null if no animals are found
+                } else {
+                    const animalIdList = numbersArray.join(','); // Convert array of IDs to comma-separated string
+                    const connection = mysql.createConnection({
+                        host: 'localhost',
+                        user: 'root',
+                        password: '',
+                        database: 'database_shvavhav'
+                    });
+                    
+                    connection.connect();
+                    
+                    const query = `
+                        SELECT Animal_id 
+                        FROM trips 
+                        WHERE Animal_id IN (${animalIdList}) 
+                        ORDER BY Date ASC
+                        LIMIT 1
+                    `;
+                    
+                    connection.query(query, (error, results) => {
+                        if (error) {
+                            console.error('Error selecting data:', error);
+                            connection.end();
+                            reject(error); // Reject the promise if an error occurs
+                        } else {
+                            if (results.length === 0) {
+                                console.log(`No animal found with color=${color}`);
+                                connection.end();
+                                resolve(null); // Resolve with null if no animal is found
+                            } else {
+                                console.log('Least recent animal with color', color, ':', results[0].Animal_id);
+                                connection.end();
+                                resolve(results[0].Animal_id); // Resolve with the ID of the least recent animal
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject(error); // Reject the promise if an error occurs while getting animal IDs by color
+            });
     });
   },
   async TripInsert(VolID,AnimID,DateTime,Type){

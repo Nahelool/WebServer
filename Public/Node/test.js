@@ -14,5 +14,6 @@ const connection = mysql.createConnection({
 //Functions.findAnimalsByColor('Green');
 //Functions.TripInsert(3,60,"2024-01-04 05:32:49","Garden");
 //Functions.SchedInsert(3,"2023-03-23 12:00:00");
-Functions.changeColmn('Animal_info',5,'Color','Yellow','Animal');
+//Functions.changeColmn('Animal_info',5,'Color','Yellow','Animal');
+Functions.findLeastRecentAnimalByColor("Green"  );
 connection.end();
