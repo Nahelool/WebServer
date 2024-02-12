@@ -1,0 +1,92 @@
+body{
+    background-color: #ADD8E6;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* This ensures that there's no scrolling */
+    height: 100%; /* Ensure full height */
+    direction: rtl;
+}
+#backgroundZigZag {
+    position: fixed; /* Position the canvas fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Set z-index to -1 so that it's behind other content */
+}
+.content {
+    position: relative; /* Position the content relative to allow z-index to work */
+    z-index: 1; /* Set z-index to a value higher than the canvas */
+    padding: 20px; /* Add some padding to make the content readable */
+}
+.favDogCont{
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white; 
+    width: 400px;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+.favDogHeader, .favDogName{
+display: flex;
+height: 50px;
+align-items: center;
+justify-content: center;
+color: white;
+background-color:#008080;
+font-size: 40px;
+font-weight: bold;
+font-family: ploni;
+}
+.favDogHeader{
+    border-radius: 15px 15px 0px 0px;
+}
+.favDogName{
+    border-radius: 0px 0px 15px 15px;
+}
+.favDogPictureCont{
+    height: 200px;
+}
+.weeklyMissions{
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white; 
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    right: 70px;  
+}
+.weeklyMissionsHeader{
+    display: flex;
+height: 50px;
+align-items: center;
+justify-content: center;
+color: white;
+background-color:#008080;
+font-size: 40px;
+font-weight: bold;
+font-family: ploni;
+border-radius: 15px 15px 0px 0px;
+}
+.missionsCont{
+display: block;
+}
+#task1{
+    appearance: none; /* Remove default styles */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    width: 20px; /* Set custom width */
+    height: 20px; /* Set custom height */
+    border: 2px solid #ffffff; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    background-color: rgb(240, 240, 240);
+}
+#task1:checked{
+    background-color: #0fcc5e; /* Example color */
+    border-color: #ffffff; /* Example color */
+    color: white;
+    content: "\2713";
+}   
