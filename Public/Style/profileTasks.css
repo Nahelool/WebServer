@@ -1,0 +1,130 @@
+@font-face {
+    font-family: "Ploni";
+    src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+  }
+  @font-face {
+    font-family: "Ploni";
+    src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "Ploni";
+    src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
+    font-weight:500;
+  }  
+body{
+    background-color: #ADD8E6;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* This ensures that there's no scrolling */
+    height: 100%; /* Ensure full height */
+    direction: rtl;
+}
+#backgroundZigZag {
+    position: fixed; /* Position the canvas fixed to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Set z-index to -1 so that it's behind other content */
+}
+.content {
+    position: relative; /* Position the content relative to allow z-index to work */
+    z-index: 1; /* Set z-index to a value higher than the canvas */
+    padding: 20px; /* Add some padding to make the content readable */
+}
+.favDogCont{
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white; 
+    width: 400px;
+    position: absolute;
+    left: 100px;
+    top: 50px;
+}
+.favDogHeader, .favDogName{
+display: flex;
+height: 50px;
+align-items: center;
+justify-content: center;
+color: white;
+background-color:#008080;
+font-size: 40px;
+font-weight: bold;
+font-family: ploni;
+}
+.favDogHeader{
+    border-radius: 15px 15px 0px 0px;
+}
+.favDogName{
+    border-radius: 0px 0px 15px 15px;
+}
+.favDogPictureCont{
+    height: 200px;
+}
+.weeklyMissions{
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white; 
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    left: 100px; 
+    top: 400px; 
+}
+.weeklyMissionsHeader{
+    display: flex;
+height: 50px;
+align-items: center;
+justify-content: center;
+color: white;
+background-color:#008080;
+font-size: 40px;
+font-weight: bold;
+font-family: ploni;
+border-radius: 15px 15px 0px 0px;
+}
+.missionsCont{
+display: block;
+}
+.taskbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0050c9;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Style the tick when the checkbox is checked */
+.taskbox:checked::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.taskbox:checked {
+    background-color: #0050c9;
+    border-color: #ffffff;
+    color: white;
+}
+.missionCont{   
+display: flex;
+align-items: center;
+padding-right: 10px;    
+}
+.missionText{
+font-size: 30px;
+margin-right: 5px;
+font-family: ploni;
+color: rgb(1, 1, 53);
+}
