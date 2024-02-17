@@ -39,7 +39,7 @@ void setup(){
 void loop(){
   if (SerialPort.available() > 0) {
     t = SerialPort.read();
-    //Read data from RFID scanner
+    //Read data from RFID scanner in ASCII form
     if (t>47){
       if (t<58){
         nextNum =  t -48;
@@ -63,6 +63,7 @@ void loop(){
     }
   }
   if (counter == 14){
+    //Once all Integers are read, A message will appear
     Serial.println("-------------------------------");
     Serial.println("Chip Found!");
     Serial.print("Country Code : ");
@@ -70,13 +71,14 @@ void loop(){
     Serial.print("ID Number : ");
     Serial.println(PriUint64<DEC>(idCode));
     Serial.println("-------------------------------");
+
     if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
 
     http.begin(serverUrl);
     http.addHeader("Content-Type", "application/json");
   
-        // Create a JSON document
+    // Create a JSON document
     StaticJsonDocument<200> jsonDoc;
     jsonDoc["chipNum"] = 1;
     jsonDoc["countryCode"] = countryCode;
@@ -86,7 +88,9 @@ void loop(){
     String jsonString;
     serializeJson(jsonDoc, jsonString);
     
+
     int httpResponseCode = http.POST(jsonString);
+    //Sending a POST request to the web server
 
     if (httpResponseCode > 0) {
       Serial.print("HTTP Response code: ");
@@ -94,6 +98,7 @@ void loop(){
     } else {
       Serial.println("Error sending request");
     }
+
     counter = 0;
     idCode=0;
     countryCode=0;
