@@ -32,7 +32,7 @@ app.get('/trips', async (req, res) => {
     const filteredArray = await trips.filter(element => animalids.includes(element));
     // Send the response with the retrieved animal IDs array as JSON
     
-    res.json({ filteredArray });
+    res.json(filteredArray);
   } catch (error) {
     // Handle any errors that occur during the database query
     console.error('Error:', error);

@@ -258,29 +258,34 @@ const Functions= {
   });
   },
   async findAnimalsByColor(color) {
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
-    });
-    const query = `
-    SELECT Animal_ID FROM Animal_info WHERE Color=?
-    `;
-    connection.query(query, [color], (error, results) => {
+    return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'database_shvavhav'
+      });
+      const query = `
+        SELECT Animal_ID FROM Animal_info WHERE Color=?
+      `;
+      connection.query(query, [color], (error, results) => {
         if (error) {
           console.error('Error selecting data:', error);
-          throw error;
-        }
-
-        if (results.length === 0) {
-          console.log(`No row found with Animal_ID=${color}`);
+          connection.end();
+          reject(error); // Reject the promise if an error occurs
         } else {
-          const numbersArray = results.map(({ Animal_ID }) => Animal_ID);
-          console.log('Selected rows:', numbersArray);
-        } 
+          if (results.length === 0) {
+            console.log(`No row found with Animal_ID=${color}`);
+            resolve([]); // Resolve with an empty array if no rows are found
+          } else {
+            const numbersArray = results.map(({ Animal_ID }) => Animal_ID);
+            console.log('Selected rows:', numbersArray);
+            resolve(numbersArray); // Resolve with the array of Animal_IDs
+          }
+        }
         connection.end();
-    });
+      });
+    });  
   },
   async TripInsert(VolID,AnimID,DateTime,Type){
     const connection = mysql.createConnection({
@@ -405,18 +410,93 @@ const Functions= {
       `;
 
       connection.query(query, (error, results) => {
-          if (error) {
-              console.error('Error selecting data:', error);
-              connection.end();
-              reject(error); // Reject the promise if an error occurs
-          } else {
-              const animalIds = results.map(row => row.Animal_id);
-              console.log('Animal IDs ordered by least recent:', animalIds);
-              connection.end();
-              resolve(animalIds); // Resolve with the array of animal IDs
+        if (error) {
+          console.error('Error selecting data:', error);
+          connection.end();
+          reject(error); // Reject the promise if an error occurs
+        } else {
+          const animalIds = results.map(row => row.Animal_id);
+          console.log('Animal IDs ordered by least recent:', animalIds);
+          connection.end();
+          resolve(animalIds); // Resolve with the array of animal IDs
           }
       });
   });
+  },
+  async currentDateTime() {
+    return new Promise((resolve, reject) => {
+        try {
+            // Get the current date and time
+            const currentDate = new Date();
+
+            // Get the current timezone offset in minutes
+            const timezoneOffset = currentDate.getTimezoneOffset();
+
+            // Calculate the offset for GMT+2 (120 minutes ahead of UTC)
+            const gmtPlus2Offset = 120;
+
+            // Adjust the date and time for GMT+2
+            const currentDateGMTPlus2 = new Date(currentDate.getTime() + (gmtPlus2Offset + timezoneOffset) * 60000);
+
+            // Get the date in GMT+2
+            const yearGMTPlus2 = currentDateGMTPlus2.getFullYear();
+            const monthGMTPlus2 = currentDateGMTPlus2.getMonth() + 1; // Month is zero-based
+            const dayGMTPlus2 = currentDateGMTPlus2.getDate();
+
+            // Get the time of day in GMT+2
+            const hourGMTPlus2 = currentDateGMTPlus2.getHours();
+            const minuteGMTPlus2 = currentDateGMTPlus2.getMinutes();
+            const secondGMTPlus2 = currentDateGMTPlus2.getSeconds();
+
+            // Combine date and time into single values
+            const dateGMTPlus2 = `${yearGMTPlus2}-${monthGMTPlus2}-${dayGMTPlus2}`;
+            const timeGMTPlus2 = `${hourGMTPlus2}:${minuteGMTPlus2}:${secondGMTPlus2}`;
+
+            // Resolve the promise with an object containing the date and time
+            console.log(dateGMTPlus2,timeGMTPlus2);
+            resolve({ date: dateGMTPlus2, time: timeGMTPlus2 });
+        } catch (error) {
+            // Reject the promise if an error occurs
+            reject(error);
+        }
+    });
+  },
+  async getWeekly() {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav'
+        });
+
+        connection.connect();
+
+        // Calculate the date one week from today
+        const oneWeekFromNow = new Date();
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+
+        const formattedOneWeekFromNow = oneWeekFromNow.toISOString().slice(0, 19).replace('T', ' '); // Convert to MySQL DATETIME format
+
+        const query = `
+            SELECT Volunteer_ID, Arrival_Time
+            FROM arrival
+            WHERE Arrival_Time BETWEEN NOW() AND ?
+        `;
+
+        connection.query(query, [formattedOneWeekFromNow], (error, results) => {
+            if (error) {
+                console.error('Error selecting data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                // Convert arrival time strings to Date objects
+                console.log('Result:', results);
+                connection.end();
+                resolve(results); // Resolve with the array of results
+            }
+        });
+    });
   }
 }
 export default Functions;

@@ -15,5 +15,6 @@ const connection = mysql.createConnection({
 //Functions.TripInsert(3,5,"2024-01-02 09:32:49","Garden");
 //Functions.SchedInsert(3,"2023-03-23 12:00:00");
 //Functions.changeColmn('Animal_info',5,'Color','Yellow','Animal');
-Functions.leastrecent();
+//Functions.leastrecent();
+Functions.getWeekly();
 connection.end();
