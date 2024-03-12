@@ -287,12 +287,13 @@ const Functions= {
       });
     });  
   },
-  async TripInsert(VolID,AnimID,DateTime,Type){
+  async TripInsert(VolID,AnimID,LeaveTime,ReturnTime,Type){
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
       password: '',
-      database: 'database_shvavhav'
+      database: 'database_shvavhav',
+      timezone: 'Z'
     });
     connection.connect();
     const tableName = 'Trips';
@@ -300,7 +301,8 @@ const Functions= {
     const dataToInsert = {
       Volunteer_ID: parseInt(VolID,10),
       Animal_ID: parseInt(AnimID,10),
-      Date: DateTime,
+      Leave: LeaveTime,
+      Return: ReturnTime,
       Type: Type,
     };
   
@@ -346,7 +348,8 @@ const Functions= {
       host: 'localhost',
       user: 'root',
       password: '',
-      database: 'database_shvavhav'
+      database: 'database_shvavhav',
+      timezone: 'Z'
     });
     connection.connect();
     const tableName = 'Arrival';
@@ -406,7 +409,7 @@ const Functions= {
           SELECT Animal_id 
           FROM trips 
           GROUP BY Animal_id 
-          ORDER BY MAX(Date) ASC
+          ORDER BY MAX(Return) ASC
       `;
 
       connection.query(query, (error, results) => {
@@ -423,77 +426,79 @@ const Functions= {
       });
   });
   },
-  async currentDateTime() {
+  async updateColumn(tableName, columnName, value, idColumnName, idValue) {
     return new Promise((resolve, reject) => {
-        try {
-            // Get the current date and time
-            const currentDate = new Date();
-
-            // Get the current timezone offset in minutes
-            const timezoneOffset = currentDate.getTimezoneOffset();
-
-            // Calculate the offset for GMT+2 (120 minutes ahead of UTC)
-            const gmtPlus2Offset = 120;
-
-            // Adjust the date and time for GMT+2
-            const currentDateGMTPlus2 = new Date(currentDate.getTime() + (gmtPlus2Offset + timezoneOffset) * 60000);
-
-            // Get the date in GMT+2
-            const yearGMTPlus2 = currentDateGMTPlus2.getFullYear();
-            const monthGMTPlus2 = currentDateGMTPlus2.getMonth() + 1; // Month is zero-based
-            const dayGMTPlus2 = currentDateGMTPlus2.getDate();
-
-            // Get the time of day in GMT+2
-            const hourGMTPlus2 = currentDateGMTPlus2.getHours();
-            const minuteGMTPlus2 = currentDateGMTPlus2.getMinutes();
-            const secondGMTPlus2 = currentDateGMTPlus2.getSeconds();
-
-            // Combine date and time into single values
-            const dateGMTPlus2 = `${yearGMTPlus2}-${monthGMTPlus2}-${dayGMTPlus2}`;
-            const timeGMTPlus2 = `${hourGMTPlus2}:${minuteGMTPlus2}:${secondGMTPlus2}`;
-
-            // Resolve the promise with an object containing the date and time
-            console.log(dateGMTPlus2,timeGMTPlus2);
-            resolve({ date: dateGMTPlus2, time: timeGMTPlus2 });
-        } catch (error) {
-            // Reject the promise if an error occurs
-            reject(error);
+      const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'database_shvavhav',
+        timezone:'Z',
+      });
+  
+      connection.connect();
+  
+      const query = `UPDATE ${tableName} SET ${columnName} = ? WHERE ${idColumnName} = ?`;
+  
+      connection.query(query, [value, idValue], (error, results) => {
+        if (error) {
+          console.error('Error updating data:', error);
+          connection.end();
+          reject(error); // Reject the promise if an error occurs
+        } else {
+          console.log(`Updated ${columnName} for row with ${idColumnName} ${idValue}`);
+          connection.end();
+          resolve(results); // Resolve with the results of the update operation
         }
+      });
     });
   },
-  async getWeekly() {
+  async getSchedule(period) {
     return new Promise((resolve, reject) => {
+        const currentDate = new Date();
+        let startDate;
+        let endDate;
+
+        if (period === 'week') {
+            startDate = new Date(currentDate);
+            startDate.setDate(currentDate.getDate() - currentDate.getDay()); // Start of the current week
+            endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 6); // End of the current week
+        } else if (period === 'day') {
+            startDate = new Date(currentDate);
+            startDate.setHours(0, 0, 0, 0); // Start of the current day
+            endDate = new Date(currentDate);
+            endDate.setHours(23, 59, 59, 999); // End of the current day
+        } else {
+            reject(new Error('Invalid period. Please specify "week" or "day".'));
+            return;
+        }
+
         const connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
             password: '',
-            database: 'database_shvavhav'
+            database: 'database_shvavhav',
+            timezone: 'Z',
         });
 
         connection.connect();
 
-        // Calculate the date one week from today
-        const oneWeekFromNow = new Date();
-        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
-
-        const formattedOneWeekFromNow = oneWeekFromNow.toISOString().slice(0, 19).replace('T', ' '); // Convert to MySQL DATETIME format
-
         const query = `
-            SELECT Volunteer_ID, Arrival_Time
-            FROM arrival
-            WHERE Arrival_Time BETWEEN NOW() AND ?
+            SELECT *
+            FROM Arrival
+            WHERE Arrival_Time BETWEEN ? AND ?
         `;
 
-        connection.query(query, [formattedOneWeekFromNow], (error, results) => {
+        connection.query(query, [startDate.toISOString().slice(0, 10), endDate.toISOString().slice(0, 10)], (error, results) => {
             if (error) {
-                console.error('Error selecting data:', error);
+                console.error('Error fetching schedule:', error);
                 connection.end();
                 reject(error); // Reject the promise if an error occurs
             } else {
-                // Convert arrival time strings to Date objects
-                console.log('Result:', results);
+                console.log(`Schedule for the ${period}:`, results);
                 connection.end();
-                resolve(results); // Resolve with the array of results
+                resolve(results); // Resolve with the array of schedule entries
             }
         });
     });
