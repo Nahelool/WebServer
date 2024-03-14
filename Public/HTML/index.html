@@ -88,21 +88,23 @@
 
     userLoginForm.addEventListener("submit", async (e)=>{
       e.preventDefault()
-      const formData =  new FormData(userLoginForm)
-      const encoded =  new URLSearchParams(formData).toString()
-      fetch("http://localhost:5000", {
+      const infoJson = {}
+      const infoJsonString = JSON.stringify(infoJson)
+      fetch("http://localhost:5000/", {
         method: 'POST',
         headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         },
-        'body': encoded
+        'body': infoJsonString
     }).then( res => res.json())
     .then(data => {
       sessionStorage.name = data.user
+      sessionStorage.Volunteer_ID = data.Volunteer_ID
+      sessionStorage.age = data.age
       location.href = '/profile'
     })
   })
-    users = ["Yahel", "Yonatan", "Omer", "David", "Nigger"];
+    users = ["Yahel", "Yonatan", "Omer", "David"];
 
     user.addEventListener("blur", function () {
       var username = user.value;

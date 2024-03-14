@@ -128,3 +128,36 @@ margin-right: 5px;
 font-family: ploni;
 color: rgb(1, 1, 53);
 }
+
+.hour-column{
+    font-family: "Ploni";
+    background-color: rgb(255, 255, 255);
+    color: rgb(1, 57, 94);
+    text-align: center;
+    border-radius: 20px;
+    height: 60px;
+}
+.hour-column td, .days-row th{
+    border-radius: 10px;
+}
+.schedule{
+    border-spacing: 10px;
+}
+.days-row{
+background-color: #40B5AD;
+color: white;
+font-family: "Ploni";
+}
+.schedule-cont{
+position: relative;
+top: 150px;
+right: 100px;   
+}
+.schedule-header{
+    font-size: 30px;
+    font-family: "Ploni";
+    font-weight: bold;
+    color: #008080;
+    
+
+}

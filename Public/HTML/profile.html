@@ -29,13 +29,16 @@
       <div id="personalInfoPageHeader">פרטים אישיים
       </div>
       <div class="personalInfo">
-        <p style="margin-top:0;">מספר זהות</p>
-        <p>אימייל</p>
-        <p>גיל</p>
-        <p style="border: none; margin-bottom: 0;" >מספר טלפון</p>
+        <p id="Volunteer_ID" style="margin-top:0;">מספר זהות</p>
+        <p id="gmail">אימייל</p>
+        <p id="age">גיל</p>
+        <p id="phoneNumber" style="border: none; margin-bottom: 0;">מספר טלפון</p>
       </div>
       <div class="editButtonCont"></div>
-      <div class="changePasswordCont"></div><
+      <div class="changePasswordCont"></div>
+    </div>
+    <div class="missions-button-cont">
+      <button class="missions-button" onclick="openProfileTasks()">לחצו כאן למשימות היומיות</button>
     </div>
     </div>
 
@@ -268,7 +271,15 @@ function checkMarkedHours(){
     }
   })
 }
-
-
+function openProfileTasks(){
+      fetch("http://localhost:5000", {
+        method: 'GET'
+    }).then( res => res.json())
+    .then(data => {
+      sessionStorage.Tasks = data.tasksArray
+      sessionStorage.favDogPicLink = data.favDogPicLink
+      location.href = '/profileTasks'
+    })
+  }
 </script>
 </html>

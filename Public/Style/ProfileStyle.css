@@ -214,3 +214,26 @@ h1{
   font-weight: bold;
   font-family: ploni;
 }
+.missions-button{
+height: 150px;
+width: 350px;
+background-color: rgba(255, 255, 255, 0.3);
+border-style: solid;
+border-width: 5px;
+border-radius: 20px;
+font-size: 30px;
+font-family: ploni;
+font-weight: bold;
+color: white;
+border-color: white;
+transition: 0.2s;
+position: absolute;
+left: 200px;
+}
+.missions-button:hover{
+  height: 200px;
+  width: 467px;
+  font-size: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}
