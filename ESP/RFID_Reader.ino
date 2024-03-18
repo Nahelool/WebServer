@@ -16,24 +16,41 @@ int nextNum;
 int counter = 0;
 int countryCode =0;
 uint64_t idCode =0;
+int ipD3 = 5;
+int ipD2 = 4;
+int ipD1 = 19;
+int ipD0 = 15;
+int receivedLight = 33; 
+int errorLight = 14;
+int pendingLight = 26;
+
+
 //Variables initialization
 
-const char* ssid = "Bezeq";
-const char* password = "your-password";
-const char* serverUrl = "http://10.0.0.8:5000/dogData";
-
+const char* ssid = "Bezeq";  
 
 void setup(){
   Serial.begin(9600);
   //Start serial to PC
   SerialPort.begin(9600, SERIAL_8N1, 16, 17);
   //Start serial to RFID
+  pinMode(ipD0, INPUT);
+  pinMode(ipD1, INPUT);
+  pinMode(ipD2, INPUT);
+  pinMode(ipD3, INPUT);
+  pinMode(receivedLight, OUTPUT);
+  pinMode(errorLight, OUTPUT);
+  pinMode(pendingLight, OUTPUT);
+
+
    WiFi.begin(ssid);
+  digitalWrite(errorLight, HIGH);
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting to WiFi...");
   }
+  digitalWrite(errorLight, LOW);
+  lightBlink(receivedLight);
 }
 
 void loop(){
@@ -41,14 +58,7 @@ void loop(){
     t = SerialPort.read();
     //Read data from RFID scanner
     if (t>47){
-      if (t<58){
-        nextNum =  t -48;
-        //Converts ASCII form to corresponding INT
-      }
-      if (t>64){
-        nextNum = t - 55;
-        //Converts ASCII form to corresponding INT
-      }
+      nextNum = convertToInt(t);
       counter=counter+1;
       if (counter<5){
         countryCode=countryCode<<4;
@@ -63,17 +73,16 @@ void loop(){
     }
   }
   if (counter == 14){
-    Serial.println("-------------------------------");
-    Serial.println("Chip Found!");
-    Serial.print("Country Code : ");
-    Serial.println(countryCode);
-    Serial.print("ID Number : ");
-    Serial.println(PriUint64<DEC>(idCode));
-    Serial.println("-------------------------------");
+    digitalWrite(pendingLight,HIGH);
     if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
 
-    http.begin(serverUrl);
+    int D0 = digitalRead(ipD0);
+    int D1 = digitalRead(ipD1);
+    int D2 = digitalRead(ipD2);
+    int D3 = digitalRead(ipD3);
+
+    http.begin(getURL(D3,D2,D1,D0));
     http.addHeader("Content-Type", "application/json");
   
         // Create a JSON document
@@ -87,12 +96,17 @@ void loop(){
     serializeJson(jsonDoc, jsonString);
     
     int httpResponseCode = http.POST(jsonString);
-
+    
+    digitalWrite(pendingLight,LOW);
+    
     if (httpResponseCode > 0) {
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpResponseCode);
+      digitalWrite(receivedLight,HIGH);
+      delay(2000);
+      digitalWrite(receivedLight,LOW);
     } else {
-      Serial.println("Error sending request");
+      digitalWrite(errorLight,HIGH);
+      delay(2000);
+      digitalWrite(errorLight,LOW);      
     }
     counter = 0;
     idCode=0;

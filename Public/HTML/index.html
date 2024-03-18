@@ -54,7 +54,7 @@
         </section>
       </div>
     </main>
-    <div class="loginWrapper" id="loginWrapper" style="opacity: 0;">
+    <div class="loginWrapper" id="loginWrapper" style="opacity: 0; visibility: hidden;">
       <div class="loginBox" id="loginBox">
         <h>התחברות</h>
         <button class="closeButton" onclick=closeLoginBox()>סגור</button>
@@ -88,20 +88,20 @@
 
     userLoginForm.addEventListener("submit", async (e)=>{
       e.preventDefault()
-      const infoJson = {}
-      const infoJsonString = JSON.stringify(infoJson)
-      fetch("http://localhost:5000/", {
+      const formData =  new FormData(userLoginForm)
+      const encoded =  new URLSearchParams(formData).toString()
+      fetch("http://localhost:5000", {
         method: 'POST',
         headers: {
         "Content-Type": "application/json",
         },
         'body': infoJsonString
     }).then( res => res.json())
+    //The response of the server will be parsed to JSON format
     .then(data => {
       sessionStorage.name = data.user
-      sessionStorage.Volunteer_ID = data.Volunteer_ID
-      sessionStorage.age = data.age
       location.href = '/profile'
+      //sends a GET request to the server
     })
   })
     users = ["Yahel", "Yonatan", "Omer", "David"];
@@ -123,14 +123,54 @@
     });
 
     loginButton.addEventListener("click", function(){
-      loginWrapper.style = "opacity: 100;"
       body.style.overflowY = "hidden"
+      //Lock from scrolling in the background
+      let opacityValue = 0
+      let backdropValue = 0
+      //Initialize the values of the opacity and backdrop blur
+      popUpAnimation = setInterval(()=>{
+        loginWrapper.style = "visibilty: visible"
+        //A code that repeats itself every 5ms
+        if (opacityValue<1){
+          loginWrapper.style = "opacity: " + opacityValue.toString() + ";"
+          opacityValue += 0.025
+          //Increasing the Wrapper's opacity gradually
+        } else if (backdropValue<40){
+          loginWrapper.style = "opacity: 1;"
+          //If the opacity is below 1, The backdrop filter wont work
+          loginBox.style = "backdrop-filter: blur(" + backdropValue.toString() + "px);"
+          backdropValue += 0.725
+          //Increasing the box's backdrop blur gradually
+        } else {
+          clearInterval(popUpAnimation)
+          //Once done, the repeating code will stop
+        }
+      }, 5)
+
     })
 
     function closeLoginBox(){
-      loginWrapper.style = "opacity: 0;"
-      body.style.overflowY = "visible"   
+      clearInterval(popUpAnimation)
+      body.style.overflowY = "visible"
+      //Unlock scrolling
+      let opacityValue = 1
+      let backdropValue = 40
+      popDownAnimation = setInterval(()=>{
+        //A code that repeats itself every 5ms
+       if (backdropValue>0){
+          backdropValue -= 0.725
+          loginBox.style = "backdrop-filter: blur(" + backdropValue.toString() + "px);"
+          //Decreasing the box's backdrop blur gradually 
+       } else if (opacityValue>0){
+          opacityValue -= 0.025
+          loginWrapper.style = "opacity: " + opacityValue.toString() + ";"
+          //Decreasing the Wrapper's opacity gradually
+        } else {
+          loginWrapper.style.visibility = "hidden"
+          clearInterval(popDownAnimation)
+          //Once done, the repeating code will stop
+        }
+      }, 5)
     }
-  
   </script>
 </html>
