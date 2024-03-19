@@ -2,7 +2,7 @@ import mysql from "mysql2";
 import open from "open";
 import fs from "fs";
 import os from "os";
-import path, { resolve } from "path";
+import path from "path";
 
 const Functions= {
   async VolLogin(Volunteer_ID_check,Volunteer_Pass_check) { //recieves id and password and checks if it exists or not
@@ -516,7 +516,7 @@ const Functions= {
         connection.connect();
 
         let leaveTime = Left;
-        if (leave.toLowerCase() === 'now') {
+        if (Left.toLowerCase() === 'now') {
             // Get the current date and time
             const currentDate = new Date();
             const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // Format to MySQL DATETIME
@@ -545,43 +545,51 @@ const Functions= {
         });
     });
   },
-  async volReturned(volunteer_id, animal_id, returnTime, type) {
+  async volReturned(Volunteer_ID, Animal_ID, Returned) {
     return new Promise((resolve, reject) => {
         const connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
             password: '',
-            database: 'database_shvavhav',
-            timezone: 'Z',
+            database: 'database_shvavhav'
         });
-
         connection.connect();
-
-        let returnTimeString = returnTime;
-        if (returnTime.toLowerCase() === 'now') {
-            // Get the current date and time
-            const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // Format to MySQL DATETIME
-            returnTimeString = formattedDate;
-        }
-
-        const query = `
-            UPDATE Trips
-            SET Returned = ?, Type = ?
+        
+        // Select the most recent trip for the volunteer and animal IDs
+        const selectQuery = `
+            SELECT Left
+            FROM Trips
             WHERE Volunteer_ID = ? AND Animal_ID = ?
-            ORDER BY 'Left' DESC
+            ORDER BY Left DESC
             LIMIT 1
         `;
-
-        connection.query(query, [returnTimeString, type, volunteer_id, animal_id], (error, results) => {
-            if (error) {
-                console.error('Error updating trip data:', error);
+        
+        connection.query(selectQuery, [Volunteer_ID, Animal_ID], (selectError, selectResults) => {
+            if (selectError) {
+                console.error('Error selecting trip:', selectError);
                 connection.end();
-                reject(error); // Reject the promise if an error occurs
+                reject(selectError);
             } else {
-                console.log('Trip data updated successfully:', results);
-                connection.end();
-                resolve(results); // Resolve with the result of the update operation
+                const leftTime = selectResults[0].Left;
+
+                // Update the return time of the most recent trip
+                const updateQuery = `
+                    UPDATE Trips
+                    SET Returned = ?
+                    WHERE Volunteer_ID = ? AND Animal_ID = ? AND Left = ?
+                `;
+                
+                connection.query(updateQuery, [Returned, Volunteer_ID, Animal_ID, leftTime], (updateError, updateResults) => {
+                    if (updateError) {
+                        console.error('Error updating trip data:', updateError);
+                        connection.end();
+                        reject(updateError);
+                    } else {
+                        console.log('Trip data updated successfully:', updateResults);
+                        connection.end();
+                        resolve(updateResults);
+                    }
+                });
             }
         });
     });
