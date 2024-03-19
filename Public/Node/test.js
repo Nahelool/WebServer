@@ -17,6 +17,8 @@ const connection = mysql.createConnection({
 //Functions.changeColmn('Animal_info',5,'Color','Yellow','Animal');
 //Functions.leastrecent();
 //Functions.getWeekly();
-Functions.getSchedule();
+//Functions.getSchedule();
 //Functions.updateColumn("Volunteer_info","Volunteer_Phone","0235574","Volunteer_id",3);
+//Functions.volLeft(3,60,"2024-03-19 10:30:00");
+Functions.volReturned(3,60,"2024-03-19 12:00:00","Garden and Normal");
 connection.end();

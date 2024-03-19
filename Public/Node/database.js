@@ -2,10 +2,10 @@ import mysql from "mysql2";
 import open from "open";
 import fs from "fs";
 import os from "os";
-import path from "path";
+import path, { resolve } from "path";
 
 const Functions= {
-  async VolLogin(Volunteer_ID_check,Volunteer_Pass_check) { //takes id and password and checks if it exists or not
+  async VolLogin(Volunteer_ID_check,Volunteer_Pass_check) { //recieves id and password and checks if it exists or not
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -50,7 +50,7 @@ const Functions= {
         }
     });
   },
-  async VolSignup(idValue, nameValue, ageValue, phoneValue, passValue) { //takes all vol values and inserts
+  async VolSignup(idValue, nameValue, ageValue, phoneValue, passValue) { //receives all vol values and inserts
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -80,7 +80,7 @@ const Functions= {
       connection.end();
     });
   },
-  async AnimInsert(idValue, nameValue, ageValue, medInfoPath) { //takes all dog values and inserts
+  async AnimInsert(idValue, nameValue, ageValue, medInfoPath) { //receives all dog values and inserts
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -110,7 +110,7 @@ const Functions= {
       connection.end();
     });
   },
-  async VolInfo(volID) { //takes volunteer id and returns all info in the row
+  async VolInfo(volID) { //receives volunteer id and returns all info in the row
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -149,7 +149,7 @@ const Functions= {
       connection.end();
     }
   },
-  async AnimInfo(AnimID) { //takes animal id and returns the info of the animal exept pds. it works with get.
+  async AnimInfo(AnimID) { //receives animal id and returns the info of the animal exept pds. it works with get.
     return new Promise((resolve, reject) => {
         const connection = mysql.createConnection({
             host: 'localhost',
@@ -180,7 +180,7 @@ const Functions= {
         });
     });
   },
-  async openMedInfo(AnimID){
+  async openMedInfo(AnimID){ //receives the animal id and opens their medical pdf info
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -231,7 +231,7 @@ const Functions= {
       }
     );
   },
-  async deleteAnim(AnimID){
+  async deleteAnim(AnimID){ //receives animal id and deletes that row
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -257,7 +257,7 @@ const Functions= {
       connection.end();
   });
   },
-  async findAnimalsByColor(color) {
+  async findAnimalsByColor(color) { //receives color and returns the ids of all dogs corresponding to the color
     return new Promise((resolve, reject) => {
       const connection = mysql.createConnection({
         host: 'localhost',
@@ -287,7 +287,7 @@ const Functions= {
       });
     });  
   },
-  async TripInsert(VolID,AnimID,LeaveTime,ReturnTime,Type){
+  async TripInsert(VolID,AnimID,LeaveTime,ReturnTime,Type){ //inserts a trip 
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -301,7 +301,7 @@ const Functions= {
     const dataToInsert = {
       Volunteer_ID: parseInt(VolID,10),
       Animal_ID: parseInt(AnimID,10),
-      Leave: LeaveTime,
+      Left: LeaveTime,
       Return: ReturnTime,
       Type: Type,
     };
@@ -317,7 +317,7 @@ const Functions= {
       connection.end();
     });
   },
-  async deleteVol(VolID){
+  async deleteVol(VolID){ //receives volunter id and delets its row
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -394,7 +394,7 @@ const Functions= {
       });
   });
   },
-  async leastrecent(){
+  async leastrecent(){ //returns the 
     return new Promise((resolve, reject) => {
       const connection = mysql.createConnection({
           host: 'localhost',
@@ -453,7 +453,7 @@ const Functions= {
       });
     });
   },
-  async getSchedule(period) {
+  async getSchedule(period) { //recieves either the word "Week" or the word "Day" and returns an array of the arrival of volunteers
     return new Promise((resolve, reject) => {
         const currentDate = new Date();
         let startDate;
@@ -502,6 +502,89 @@ const Functions= {
             }
         });
     });
+  },
+  async volLeft(volunteer_id, animal_id, Left) {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav',
+            timezone: 'Z',
+        });
+
+        connection.connect();
+
+        let leaveTime = Left;
+        if (leave.toLowerCase() === 'now') {
+            // Get the current date and time
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // Format to MySQL DATETIME
+            leaveTime = formattedDate;
+        }
+
+        const tableName = 'Trips';
+        const dataToInsert = {
+            Volunteer_ID: volunteer_id,
+            Animal_ID: animal_id,
+            Left: leaveTime,
+        };
+
+        const query = `INSERT INTO ${tableName} SET ?`;
+
+        connection.query(query, dataToInsert, (error, results) => {
+            if (error) {
+                console.error('Error inserting trip data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                console.log('Trip data inserted successfully:', results);
+                connection.end();
+                resolve(results); // Resolve with the result of the insert operation
+            }
+        });
+    });
+  },
+  async volReturned(volunteer_id, animal_id, returnTime, type) {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav',
+            timezone: 'Z',
+        });
+
+        connection.connect();
+
+        let returnTimeString = returnTime;
+        if (returnTime.toLowerCase() === 'now') {
+            // Get the current date and time
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // Format to MySQL DATETIME
+            returnTimeString = formattedDate;
+        }
+
+        const query = `
+            UPDATE Trips
+            SET Returned = ?, Type = ?
+            WHERE Volunteer_ID = ? AND Animal_ID = ?
+            ORDER BY 'Left' DESC
+            LIMIT 1
+        `;
+
+        connection.query(query, [returnTimeString, type, volunteer_id, animal_id], (error, results) => {
+            if (error) {
+                console.error('Error updating trip data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                console.log('Trip data updated successfully:', results);
+                connection.end();
+                resolve(results); // Resolve with the result of the update operation
+            }
+        });
+    });
   }
 }
-export default Functions;
+export default Functions; //exports all of the functions as the default import of the file
