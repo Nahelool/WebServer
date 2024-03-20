@@ -1,12 +1,8 @@
 #include <ArduinoJson.h>
-#include <PriUint64.h>
-//Library used to print out the 38 bit long ID Code
 #include <HardwareSerial.h>
 //UART communication on GPIO Pins
 #include <WiFi.h>
 #include <HTTPClient.h>
-
-
 
 HardwareSerial SerialPort(2);
 //UART2 , Meaning Pin 16 and 17 are used
@@ -24,10 +20,9 @@ int receivedLight = 33;
 int errorLight = 14;
 int pendingLight = 26;
 
-
+const char* ssid = "Bezeq";  
 //Variables initialization
 
-const char* ssid = "Bezeq";  
 
 void setup(){
   Serial.begin(9600);
