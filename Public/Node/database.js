@@ -5,51 +5,55 @@ import os from "os";
 import path from "path";
 
 const Functions= {
-  async VolLogin(Volunteer_ID_check,Volunteer_Pass_check) { //recieves id and password and checks if it exists or not
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
-    });
-    connection.connect();
-    const query = `
-    SELECT Volunteer_ID, Volunteer_Pass
-    FROM Volunteer_info
-    `;
-
-    connection.query(query, (error, results, fields) => {
-        if (error) {
-            console.error('Error fetching data:', error);
-            throw error;
-        }
-
-        const idList= [];
-        const passList= [];
-        results.forEach(row => {
-            idList.push(row[`Volunteer_ID`])
-            passList.push(row[`Volunteer_Pass`])
+  async VolLogin(Volunteer_ID_check, Volunteer_Pass_check) {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav'
         });
-        connection.end();
+        connection.connect();
 
-        const idIndex = idList.indexOf(Volunteer_ID_check);
-        const passIndex = passList.indexOf(Volunteer_Pass_check);
+        const query = `
+            SELECT Volunteer_ID, Volunteer_Pass
+            FROM Volunteer_info
+        `;
 
-        console.log(Volunteer_ID_check,Volunteer_Pass_check)
-        console.log(idList,passList)
-        console.log(idIndex,passIndex)
+        connection.query(query, (error, results, fields) => {
+            if (error) {
+                console.error('Error fetching data:', error);
+                reject(error);
+            }
 
-        var ID_exist=false;
-        if (idList.includes(Volunteer_ID_check) && passList.includes(Volunteer_Pass_check) && idIndex!=-1 && passIndex!=-1 && idIndex==passIndex) {
-            ID_exist=true
-            console.log(`It is there let's go`)
-        }
-        else{
-            ID_exist=false
-            console.log(`Your name is invalid, activating computer.explode now.`)
-        }
+            const idList = [];
+            const passList = [];
+            results.forEach(row => {
+                idList.push(row[`Volunteer_ID`]);
+                passList.push(row[`Volunteer_Pass`]);
+            });
+            connection.end();
+
+            const idIndex = idList.indexOf(Volunteer_ID_check);
+            const passIndex = passList.indexOf(Volunteer_Pass_check);
+
+            console.log(Volunteer_ID_check, Volunteer_Pass_check);
+            console.log(idList, passList);
+            console.log(idIndex, passIndex);
+
+            let ID_exist = false;
+            if (idList.includes(Volunteer_ID_check) && passList.includes(Volunteer_Pass_check) && idIndex !== -1 && passIndex !== -1 && idIndex === passIndex) {
+                ID_exist = true;
+                console.log(`It is there, let's go`);
+            } else {
+                ID_exist = false;
+                console.log(`Your name is invalid, activating computer.explode now.`);
+            }
+
+            resolve(ID_exist); // Resolve with ID_exist value
+        });
     });
-  },
+},
   async VolSignup(idValue, nameValue, ageValue, phoneValue, passValue) { //receives all vol values and inserts
     const connection = mysql.createConnection({
       host: 'localhost',
@@ -110,45 +114,39 @@ const Functions= {
       connection.end();
     });
   },
-  async VolInfo(volID) { //receives volunteer id and returns all info in the row
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
+  async VolInfo(volID) { //recieves id of volunteer and returns the entire line of information
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav'
+        });
+
+        connection.query(
+            'SELECT * FROM Volunteer_info WHERE Volunteer_ID = ?',
+            [volID],
+            (error, results, fields) => {
+                if (error) {
+                    console.error('Error selecting data:', error);
+                    reject(error);
+                } else {
+                    if (results.length === 0) {
+                        console.log(`No row found with Volunteer_ID=${volID}`);
+                        resolve(null); // Resolve with null when no row is found
+                    } else {
+                        const rowData = results[0];
+                        const valuesArray = Object.values(rowData);
+                        console.log('Selected row values:', valuesArray);
+                        resolve(valuesArray);
+                    }
+                }
+            }
+        );
+
+        connection.end(); // Close connection after query
     });
-  
-    try {
-      connection.query(
-        'SELECT * FROM Volunteer_info WHERE Volunteer_ID = ?',
-        [volID],
-        (error, results, fields) => {
-          if (error) {
-            console.error('Error selecting data:', error);
-            throw error;
-          }
-  
-          if (results.length === 0) {
-            console.log(`No row found with Volunteer_ID=${volID}`);
-            return null; // Return null or handle the case when no row is found
-          }
-  
-          const rowData = results[0];
-  
-          // Convert the object properties to an array of values
-          const valuesArray = Object.values(rowData);
-  
-          console.log('Selected row values:', valuesArray);
-          return valuesArray;
-        }
-      );
-    } catch (error) {
-      console.error('Error in try-catch block:', error);
-    } finally {
-      // Ensure the connection is always closed
-      connection.end();
-    }
-  },
+},
   async AnimInfo(AnimID) { //receives animal id and returns the info of the animal exept pds. it works with get.
     return new Promise((resolve, reject) => {
         const connection = mysql.createConnection({
@@ -317,7 +315,7 @@ const Functions= {
       connection.end();
     });
   },
-  async deleteVol(VolID){ //receives volunter id and delets its row
+  async deleteVol(VolID){ //receives volunter id and deletes its row
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -409,7 +407,7 @@ const Functions= {
           SELECT Animal_id 
           FROM trips 
           GROUP BY Animal_id 
-          ORDER BY MAX(Return) ASC
+          ORDER BY MAX(Returned) ASC
       `;
 
       connection.query(query, (error, results) => {
@@ -503,96 +501,33 @@ const Functions= {
         });
     });
   },
-  async volLeft(volunteer_id, animal_id, Left) {
-    return new Promise((resolve, reject) => {
-        const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'database_shvavhav',
-            timezone: 'Z',
-        });
-
-        connection.connect();
-
-        let leaveTime = Left;
-        if (Left.toLowerCase() === 'now') {
-            // Get the current date and time
-            const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // Format to MySQL DATETIME
-            leaveTime = formattedDate;
-        }
-
-        const tableName = 'Trips';
-        const dataToInsert = {
-            Volunteer_ID: volunteer_id,
-            Animal_ID: animal_id,
-            Left: leaveTime,
-        };
-
-        const query = `INSERT INTO ${tableName} SET ?`;
-
-        connection.query(query, dataToInsert, (error, results) => {
-            if (error) {
-                console.error('Error inserting trip data:', error);
-                connection.end();
-                reject(error); // Reject the promise if an error occurs
-            } else {
-                console.log('Trip data inserted successfully:', results);
-                connection.end();
-                resolve(results); // Resolve with the result of the insert operation
-            }
-        });
+  async updateTrip(volunteerId, animalId, type) {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'database_shvavhav'
     });
-  },
-  async volReturned(Volunteer_ID, Animal_ID, Returned) {
-    return new Promise((resolve, reject) => {
-        const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'database_shvavhav'
-        });
-        connection.connect();
-        
-        // Select the most recent trip for the volunteer and animal IDs
-        const selectQuery = `
-            SELECT Left
-            FROM Trips
-            WHERE Volunteer_ID = ? AND Animal_ID = ?
-            ORDER BY Left DESC
-            LIMIT 1
-        `;
-        
-        connection.query(selectQuery, [Volunteer_ID, Animal_ID], (selectError, selectResults) => {
-            if (selectError) {
-                console.error('Error selecting trip:', selectError);
-                connection.end();
-                reject(selectError);
-            } else {
-                const leftTime = selectResults[0].Left;
 
-                // Update the return time of the most recent trip
-                const updateQuery = `
-                    UPDATE Trips
-                    SET Returned = ?
-                    WHERE Volunteer_ID = ? AND Animal_ID = ? AND Left = ?
-                `;
-                
-                connection.query(updateQuery, [Returned, Volunteer_ID, Animal_ID, leftTime], (updateError, updateResults) => {
-                    if (updateError) {
-                        console.error('Error updating trip data:', updateError);
-                        connection.end();
-                        reject(updateError);
-                    } else {
-                        console.log('Trip data updated successfully:', updateResults);
-                        connection.end();
-                        resolve(updateResults);
-                    }
-                });
+    try {
+        connection.query(
+            'UPDATE Trips SET `Left` = IFNULL(`Left`, NOW()), Returned = IF(`Left` IS NULL, NULL, IFNULL(Returned, NOW())), Type = IFNULL(Type, ?) WHERE Volunteer_ID = ? AND Animal_ID = ?',
+            [type, volunteerId, animalId],
+            (error, results, fields) => {
+                if (error) {
+                    console.error('Error updating trip data:', error);
+                    throw error;
+                }
+
+                console.log('Trip data updated successfully:', results.affectedRows);
             }
-        });
-    });
-  }
+        );
+    } catch (error) {
+        console.error('Error in try-catch block:', error);
+    } finally {
+        // Ensure the connection is always closed
+        connection.end();
+    }
+}
 }
 export default Functions; //exports all of the functions as the default import of the file

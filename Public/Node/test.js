@@ -19,6 +19,6 @@ const connection = mysql.createConnection({
 //Functions.getWeekly();
 //Functions.getSchedule();
 //Functions.updateColumn("Volunteer_info","Volunteer_Phone","0235574","Volunteer_id",3);
-//Functions.volLeft(3,60,"2024-03-19 17:30:00");
-Functions.volReturned(3,60,"2024-03-19 19:00:00","Garden and Normal");
+//Functions.TripInsert(3,60);
+Functions.updateTrip(3,60,"balls");
 connection.end();
