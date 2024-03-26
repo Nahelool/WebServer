@@ -9,12 +9,12 @@ const app = express();
 const port = 3000;
 
 // Create a MySQL connection pool
-// const pool = mysql.createPool({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'database_shvavhav'
-// });
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'database_shvavhav'
+});
 
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
