@@ -1,15 +1,15 @@
 import express from 'express';
+import http from 'http';
 import bodyParser from 'body-parser';
 import mysql from 'mysql'; // Import mysql library
 import Functions from './database.mjs'; // Import your database function
 import {readFileSync} from 'fs' 
 
 const app = express();
-const port = 5000;
+const port = 3000;
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-  connectionLimit: 10,
   host: 'localhost',
   user: 'root',
   password: '',
@@ -19,6 +19,15 @@ const pool = mysql.createPool({
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
 
+//Automatic send neccesarry files
+app.use(express.static('../'));
+app.use(express.urlencoded({
+  extended: false
+  }));
+
+  let index =  readFileSync('../HTML/index.html')
+  let profile =  readFileSync('../HTML/profile.html')
+  
 // Route to handle incoming requests
 app.post('/login', async (req, res) => {
   try {
@@ -57,11 +66,9 @@ app.post('/login', async (req, res) => {
   }
 });
 
-const index =  readFileSync('../HTML/index.html')
-const profile =  readFileSync('../HTML/profile.html')
-
 app.get( '/*',(req,res)=>{
   if (req.url == '/'){
+    console.log("Success");
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(index)
   }
