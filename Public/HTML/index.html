@@ -101,7 +101,7 @@
     };
 
     try {
-        const response = await fetch("http://localhost:5500/login", requestOptions);
+        const response = await fetch(serverAdress+"login", requestOptions);
         
         if (!response.ok) {
             throw new Error('Network response was not ok');

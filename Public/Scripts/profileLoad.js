@@ -10,5 +10,8 @@ window.onload = ()=>{
   } else {
     firstName.innerHTML = sessionStorage.name
     Volunteer_ID.innerHTML = sessionStorage.Volunteer_ID
+    gmail.innerHTML = sessionStorage.gmail
+    age.innerHTML = sessionStorage.age
+    phoneNumber.innerHTML = sessionStorage.phoneNumber
   }
 }
