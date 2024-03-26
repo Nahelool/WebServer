@@ -1,5 +1,4 @@
 import express from 'express';
-import http from 'http';
 import bodyParser from 'body-parser';
 import mysql from 'mysql'; // Import mysql library
 import Functions from './database.mjs'; // Import your database function
@@ -68,7 +67,6 @@ app.post('/login', async (req, res) => {
 
 app.get( '/*',(req,res)=>{
   if (req.url == '/'){
-    console.log("Success");
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(index)
   }
