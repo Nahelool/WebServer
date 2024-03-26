@@ -8,10 +8,10 @@ window.onload = ()=>{
   if(!sessionStorage.name){
     location.href = '/'
   } else {
-    firstName.innerHTML = sessionStorage.name
-    Volunteer_ID.innerHTML = sessionStorage.Volunteer_ID
-    gmail.innerHTML = sessionStorage.gmail
+    firstName.innerHTML = sessionStorage.userData.name
+    Volunteer_ID.innerHTML = sessionStorage.userData.Volunteer_ID
+    gmail.innerHTML = sessionStorage.userData.gmail
     age.innerHTML = sessionStorage.age
-    phoneNumber.innerHTML = sessionStorage.phoneNumber
+    phoneNumber.innerHTML = sessionStorage.userData.phoneNumber
   }
 }
