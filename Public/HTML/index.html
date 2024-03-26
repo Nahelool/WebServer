@@ -54,7 +54,7 @@
         </section>
       </div>
     </main>
-    <div class="loginWrapper" id="loginWrapper" style="opacity: 0;">
+    <div class="loginWrapper" id="loginWrapper" style="opacity: 0; visibility: hidden;">
       <div class="loginBox" id="loginBox">
         <h>התחברות</h>
         <button class="closeButton" onclick=closeLoginBox()>סגור</button>
@@ -70,12 +70,13 @@
             <p style="visibility: hidden">סיסמה שגויה</p>
           </div>
           
-          <button id="submitUser" class="submit">תכניסו אותי!</button>
+          <button type="submit" id="submitUser" class="submit">תכניסו אותי!</button>
         </form>
       </div>
     </div>
     <main class="info"></main>
   </body>
+  <script src="../serverAdress.js"></script>
   <script>
     const user = document.getElementById("user");
     const submitUser = document.getElementById("submitUser")
@@ -86,23 +87,36 @@
     const body = document.getElementById("body")
     const userLoginForm = document.getElementById("userLoginForm")
 
-    userLoginForm.addEventListener("submit", async (e)=>{
-      e.preventDefault()
-      const formData =  new FormData(userLoginForm)
-      const encoded =  new URLSearchParams(formData).toString()
-      fetch("http://localhost:5000", {
+    userLoginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(userLoginForm);
+    const formDataJson = Object.fromEntries(formData.entries()); // Convert FormData to JSON
+
+    const requestOptions = {
         method: 'POST',
         headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
         },
-        'body': encoded
-    }).then( res => res.json())
-    .then(data => {
-      sessionStorage.name = data.user
-      location.href = '/profile'
-    })
-  })
-    users = ["Yahel", "Yonatan", "Omer", "David", "Nigger"];
+        body: JSON.stringify(formDataJson) // Stringify the JSON data
+    };
+
+    try {
+        const response = await fetch(serverAdress+"login", requestOptions);
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        sessionStorage.userData = data;
+        location.href = '/profile.html'; // Assuming the profile HTML file is named 'profile.html'
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+    }
+});
+
+    users = ["Yahel", "Yonatan", "Omer", "David"];
 
     user.addEventListener("blur", function () {
       var username = user.value;
@@ -121,14 +135,54 @@
     });
 
     loginButton.addEventListener("click", function(){
-      loginWrapper.style = "opacity: 100;"
       body.style.overflowY = "hidden"
+      //Lock from scrolling in the background
+      let opacityValue = 0
+      let backdropValue = 0
+      //Initialize the values of the opacity and backdrop blur
+      popUpAnimation = setInterval(()=>{
+        loginWrapper.style = "visibilty: visible"
+        //A code that repeats itself every 5ms
+        if (opacityValue<1){
+          loginWrapper.style = "opacity: " + opacityValue.toString() + ";"
+          opacityValue += 0.025
+          //Increasing the Wrapper's opacity gradually
+        } else if (backdropValue<40){
+          loginWrapper.style = "opacity: 1;"
+          //If the opacity is below 1, The backdrop filter wont work
+          loginBox.style = "backdrop-filter: blur(" + backdropValue.toString() + "px);"
+          backdropValue += 0.725
+          //Increasing the box's backdrop blur gradually
+        } else {
+          clearInterval(popUpAnimation)
+          //Once done, the repeating code will stop
+        }
+      }, 5)
+
     })
 
     function closeLoginBox(){
-      loginWrapper.style = "opacity: 0;"
-      body.style.overflowY = "visible"   
+      clearInterval(popUpAnimation)
+      body.style.overflowY = "visible"
+      //Unlock scrolling
+      let opacityValue = 1
+      let backdropValue = 40
+      popDownAnimation = setInterval(()=>{
+        //A code that repeats itself every 5ms
+       if (backdropValue>0){
+          backdropValue -= 0.725
+          loginBox.style = "backdrop-filter: blur(" + backdropValue.toString() + "px);"
+          //Decreasing the box's backdrop blur gradually 
+       } else if (opacityValue>0){
+          opacityValue -= 0.025
+          loginWrapper.style = "opacity: " + opacityValue.toString() + ";"
+          //Decreasing the Wrapper's opacity gradually
+        } else {
+          loginWrapper.style.visibility = "hidden"
+          clearInterval(popDownAnimation)
+          //Once done, the repeating code will stop
+        }
+      }, 5)
     }
-  
   </script>
 </html>

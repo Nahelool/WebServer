@@ -129,3 +129,111 @@ h1{
   position: relative;
   background-color: rgb(228, 148, 28);
 }
+.schedule {
+  height: 400px;
+  position: absolute;
+  width: 840px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 55px repeat(4, 1fr);
+  grid-gap: 15px;
+  right: 50%;
+  transform: translate(50%,0);
+
+  
+}
+.schedule-days{
+  background-color: rgb(255, 255, 255,0.2);
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  text-align: center; 
+  font-size: 30px;
+  font-family: "Ploni";
+  border: solid white 2px;
+  backdrop-filter: blur(20px);
+  height: max-content;
+}
+.schedule div:not(.schedule-days){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(21, 144, 214);
+  background-color: rgb(255, 255, 255);
+  font-size: 30px;
+  font-family: "Ploni";
+  font-weight: bold;
+  border-radius: 20px;
+  height: 10vh;
+}
+.schedule-days:active{
+  color: green;
+}
+#closeButton{
+  background-color: red;
+  position: absolute;
+  right: 0;
+  height: 50px;
+  width: 100px;
+  border: none;
+}
+.personalInfoPage{
+  border-radius: 15px;
+  border-style: solid;
+  border-color: white; 
+  width: 400px;
+  position: absolute;
+  right: 70px;
+
+  
+}
+.personalInfo{
+  font-size: 30px;
+  background-color: rgb(255,255,255,0.9);
+  padding-top: 10px;
+  border-radius: 0px 0px 10px 10px;
+
+
+}
+.personalInfo p{
+  margin: 10px;
+  border-bottom: 5px dashed rgb(90, 90, 90);
+  padding-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
+  
+    
+}
+#personalInfoPageHeader{
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgb(255,255,255,0.1);
+  font-size: 40px;
+  font-weight: bold;
+  font-family: ploni;
+}
+.missions-button{
+height: 150px;
+width: 350px;
+background-color: rgba(255, 255, 255, 0.3);
+border-style: solid;
+border-width: 5px;
+border-radius: 20px;
+font-size: 30px;
+font-family: ploni;
+font-weight: bold;
+color: white;
+border-color: white;
+transition: 0.2s;
+position: absolute;
+left: 200px;
+}
+.missions-button:hover{
+  height: 200px;
+  width: 467px;
+  font-size: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+}

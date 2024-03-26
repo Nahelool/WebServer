@@ -1,21 +1,15 @@
 const http = require('http')
 const {readFileSync} = require('fs')
 const express = require('express')
-const session = require('express-session')
-
+const bodyParser = require('body-parser');
 const app = express();
 
-//  app.use(session({
-//   secret: 'its my secret',
-//   cookie: { expires: 15000 },
-//   resave: true,
-//   saveUninitialized: false
-// }))
 
 app.use(express.static('../Public'));
 app.use(express.urlencoded({
   extended: false
   }));
+app.use(bodyParser.json());
 
 const index =  readFileSync('../Public/HTML/index.html')
 const profile =  readFileSync('../Public/HTML/profile.html')
@@ -32,13 +26,17 @@ app.get( '/*',(req,res)=>{
   }
 })
 
-app.post('/', function(req,res){
+app.post('/userLoginData', function(req,res){
   const userParams = req.body
   console.log("User name is "+ userParams.user)
   console.log("User password is "+userParams.password)
   res.json(userParams)
 })
 
+app.post('/dogData', (req, res) => {
+  console.log('Received data from ESP32:', req.body);
+  res.send('Data received successfully!');
+});
 const PORT = 5000;
 
 app.listen(PORT, () => {

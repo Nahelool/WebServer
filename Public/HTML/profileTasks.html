@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+ <html>
+    <style>
+        body, html {
+          margin: 0;
+          padding: 0;
+          overflow: hidden; /* This ensures that there's no scrolling */
+        }
+      </style>
+<head>
+<title>פרופיל אישי - משימות המתנדב</title>
+<link rel="stylesheet" href="../Style/profileTasks.css">
+</head>
+<body>
+<canvas id="backgroundZigZag" ></canvas>
+
+<div class="schedule-cont">
+    <div class="schedule-header">לוח שבועי</div>
+    <table class="schedule">
+        <tr class="days-row">
+            <th>ראשון</th>
+            <th>שני</th>
+            <th>שלישי</th>
+            <th>רביעי</th>
+            <th>חמישי</th>
+            <th>שישי</th>
+            <th>שבת</th>
+        </tr>
+        <tr class="hour-column">
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+            <td>9:30-11:00</td>
+        </tr>
+        <tr class="hour-column">
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+            <td>11:00-12:30</td>
+        </tr>   
+        <tr class="hour-column">
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+            <td>12:30-14:00</td>
+        </tr>
+    </table>
+</div>    
+<div class="favDogCont">
+    <div class="favDogHeader">הכלב שהוצאת הכי הרבה</div>
+    <div class="favDogPictureCont">כאן נכנסת תמונה</div>
+    <div class="favDogName">שם הכלב</div>
+</div>
+<div class="weeklyMissions">
+<div class="weeklyMissionsHeader">משימות שבועיות</div>
+<div class="missions">
+<div class="missionCont">    
+<input type="checkbox" class="taskbox" id="task1" name="task1">
+<label for="task1" class="missionText">לנקות את התא</label>
+</div>
+<div class="missionCont">
+<input type="checkbox" class="taskbox" id="task2" name="task2">
+<label for="task2" class="missionText">יהל</label>
+</div>
+</div>
+</body>
+<script>
+    var c = document.getElementById("backgroundZigZag");
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+const bCanvas = c.getContext("2d");
+
+var lineSpacing = c.width / 12; // Adjust the number of segments by changing the divisor
+var startX = (-80); // Calculate startX to center the zigzag
+var startY = (c.height) / 2; // Calculate startY to center the zigzag
+
+bCanvas.lineWidth = 15;
+bCanvas.strokeStyle = "#87CEEB"; // blue-ish color
+bCanvas.shadowColor = "rgba(15, 82, 186,0.7)"; // shadow color
+bCanvas.shadowBlur = 50; // shadow blur radius
+bCanvas.beginPath();
+
+// Draw zigzag lines
+for (var i = 1; i <= 20; i++) { // Reduced to 5 segments to ensure it doesn't go out of screen
+    bCanvas.lineTo(startX + i * lineSpacing - lineSpacing / 2, startY + (i % 2 === 0 ? lineSpacing : -lineSpacing));
+    
+
+}
+
+bCanvas.stroke();
+
+
+</script>
+<script>
+
+</script>
+</html>

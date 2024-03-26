@@ -25,19 +25,145 @@
           </button>
         </div>
       </div>
+    <div class="personalInfoPage">
+      <div id="personalInfoPageHeader">פרטים אישיים
+      </div>
+      <div class="personalInfo">
+        <p id="Volunteer_ID" style="margin-top:0;">מספר זהות</p>
+        <p id="gmail">אימייל</p>
+        <p id="age">גיל</p>
+        <p id="phoneNumber" style="border: none; margin-bottom: 0;">מספר טלפון</p>
+      </div>
+      <div class="editButtonCont"></div>
+      <div class="changePasswordCont"></div>
     </div>
+    <div class="missions-button-cont">
+      <button class="missions-button" onclick="openProfileTasks()">לחצו כאן למשימות היומיות</button>
+    </div>
+    </div>
+
     <div class="border"></div>
       <div id="mainWrapper" style="height: 201vh;">
     <div style="height: 100vh;">
       <h>מידע מסכם</h>
+      <div class="schedule">
+        <div class="schedule-days">
+          ראשון
+        </div>
+        <div class="schedule-days">
+          שני
+        </div>
+        <div class="schedule-days">
+          שלישי
+        </div>
+        <div class="schedule-days">
+          רביעי
+        </div>
+        <div class="schedule-days">
+          חמישי
+        </div>
+        <div class="schedule-days">
+          שישי
+        </div>
+        <div class="schedule-days">
+          שבת
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          יוגב
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+        <div class="schedule-hours">
+          שלישי
+        </div>
+      </div>
+    <button id="closeButton" onclick =checkMarkedHours()>הזן שעות</button>
     </div>
   </div>
   <script src="../Scripts/profileLoad.js"></script>
+  </div>
 </body> 
 <script>
   const colInf = document.getElementById("colorInfo")
   const colP = document.getElementById("colorInfoParagraph")
   const wrapper = document.getElementById("mainWrapper")
+
 
   //Display user's color information
   function displayInfo(){
@@ -88,6 +214,7 @@
     bCanvas.fill()
     bCanvas.shadowColor = "#612f03";
     bCanvas.shadowBlur = 80;
+
   }
 
   //Triggers when a scroll occurs
@@ -110,6 +237,7 @@
     }
   }
   document.addEventListener("keydown", event =>{
+    //If Down
     if (event.keyCode === 40){
       //Wrapper goes down
       wrapper.style ="transform: translate3d(0, -101vh, 0); transition: all 700ms ease"
@@ -122,11 +250,36 @@
       wrapper.style ="transform: translate3d(0, 0, 0); transition: all 700ms ease"
       //Background goes down
       c.style ="transform: translate3d(0, 0, 0); transition: all 700ms ease"
+      
     }
   });
-
-
-
-
+var schedule = document.getElementsByClassName("schedule");
+var closeButton = document.getElementById("closeButton")
+if (schedule.length > 0){
+  var selectHours = schedule[0].querySelectorAll("div");
+}
+selectHours.forEach(function(div) {
+  div.addEventListener("click", function(){
+  div.style.color = "white";
+  div.style.backgroundColor = "green";
+  })
+})  
+function checkMarkedHours(){
+  selectHours.forEach(function(div){
+    if (div.style.backgroundColor == "green"){
+      console.log(div.innerText);
+    }
+  })
+}
+function openProfileTasks(){
+      fetch("http://localhost:5000", {
+        method: 'GET'
+    }).then( res => res.json())
+    .then(data => {
+      sessionStorage.Tasks = data.tasksArray
+      sessionStorage.favDogPicLink = data.favDogPicLink
+      location.href = '/profileTasks'
+    })
+  }
 </script>
 </html>
