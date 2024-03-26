@@ -519,7 +519,7 @@ const Functions= {
                     throw error;
                 }
 
-                console.log('Trip data updated successfully:', results.affectedRows);
+                console.log('Trip data updated successfully:');
             }
         );
     } catch (error) {

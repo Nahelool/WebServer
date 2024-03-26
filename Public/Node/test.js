@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     database: 'database_shvavhav'
   });
 
-//Functions.openMedInfo(60);
+Functions.openMedInfo(60);
 //Functions.AnimInfo(3);
 //Functions.AnimInfo(60);
 //Functions.AnimInsert(60,"orball",54,"C:/Users/user/Documents/hello.pdf");
@@ -20,5 +20,5 @@ const connection = mysql.createConnection({
 //Functions.getSchedule();
 //Functions.updateColumn("Volunteer_info","Volunteer_Phone","0235574","Volunteer_id",3);
 //Functions.TripInsert(3,60);
-Functions.updateTrip(3,60,"balls");
+//Functions.updateTrip(3,60,"balls");
 connection.end();
