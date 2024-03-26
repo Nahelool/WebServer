@@ -26,7 +26,7 @@ app.get( '/*',(req,res)=>{
   }
 })
 
-app.post('/', function(req,res){
+app.post('/userLoginData', function(req,res){
   const userParams = req.body
   console.log("User name is "+ userParams.user)
   console.log("User password is "+userParams.password)

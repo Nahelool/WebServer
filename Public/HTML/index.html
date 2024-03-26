@@ -76,6 +76,7 @@
     </div>
     <main class="info"></main>
   </body>
+  <script src="../serverAdress.js"></script>
   <script>
     const user = document.getElementById("user");
     const submitUser = document.getElementById("submitUser")
@@ -92,7 +93,7 @@
       const encoded =  new URLSearchParams(formData).toString()
       //Encodes thr Forms data (ID and password)
 
-      fetch("http://localhost:5000", {
+      fetch(serverAdress+"userLoginData", {
         //Sends the encoded data in the background
         method: 'POST',
         headers: {
