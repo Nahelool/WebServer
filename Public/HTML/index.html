@@ -70,7 +70,7 @@
             <p style="visibility: hidden">סיסמה שגויה</p>
           </div>
           
-          <button id="submitUser" class="submit">תכניסו אותי!</button>
+          <button type="submit" id="submitUser" class="submit">תכניסו אותי!</button>
         </form>
       </div>
     </div>
@@ -86,24 +86,35 @@
     const body = document.getElementById("body")
     const userLoginForm = document.getElementById("userLoginForm")
 
-    userLoginForm.addEventListener("submit", async (e)=>{
-      e.preventDefault()
-      const formData =  new FormData(userLoginForm)
-      const encoded =  new URLSearchParams(formData).toString()
-      fetch("http://localhost:5000", {
+    userLoginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(userLoginForm);
+    const formDataJson = Object.fromEntries(formData.entries()); // Convert FormData to JSON
+
+    const requestOptions = {
         method: 'POST',
         headers: {
-        "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
-        'body': infoJsonString
-    }).then( res => res.json())
-    //The response of the server will be parsed to JSON format
-    .then(data => {
-      sessionStorage.name = data.user
-      location.href = '/profile'
-      //sends a GET request to the server
-    })
-  })
+        body: JSON.stringify(formDataJson) // Stringify the JSON data
+    };
+
+    try {
+        const response = await fetch("http://localhost:5500/login", requestOptions);
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        sessionStorage.name = data.user;
+        location.href = '/profile.html'; // Assuming the profile HTML file is named 'profile.html'
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+    }
+});
+
     users = ["Yahel", "Yonatan", "Omer", "David"];
 
     user.addEventListener("blur", function () {

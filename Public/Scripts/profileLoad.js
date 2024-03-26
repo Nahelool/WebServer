@@ -9,5 +9,6 @@ window.onload = ()=>{
     location.href = '/'
   } else {
     firstName.innerHTML = sessionStorage.name
+    Volunteer_ID.innerHTML = sessionStorage.Volunteer_ID
   }
 }

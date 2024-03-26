@@ -1,5 +1,5 @@
 import mysql from "mysql2";
-import open from "open";
+// import open from "open";
 import fs from "fs";
 import os from "os";
 import path from "path";
