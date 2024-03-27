@@ -91,7 +91,7 @@
     e.preventDefault();
     const formData = new FormData(userLoginForm);
     const formDataJson = Object.fromEntries(formData.entries()); // Convert FormData to JSON
-
+      console.log(formDataJson)
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -106,10 +106,10 @@
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
-        const data = await response.json();
+        const data =  await response.json();
         sessionStorage.userData = data;
-        location.href = '/profile.html'; // Assuming the profile HTML file is named 'profile.html'
+        location.href = '/profile'; // Assuming the profile HTML file is named 'profile.html'
+        
     } catch (error) {
         console.error('Error:', error);
         // Handle error
