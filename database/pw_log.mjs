@@ -1,4 +1,4 @@
- import express from 'express';
+import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import mysql from 'mysql'; // Import mysql library
@@ -20,13 +20,13 @@ const pool = mysql.createPool({
 app.use(bodyParser.json());
 
 //Automatic send neccesarry files
-app.use(express.static('../'));
+app.use(express.static('../Public'));
 app.use(express.urlencoded({
   extended: false
   }));
 
-  let index =  readFileSync('../HTML/index.html')
-  let profile =  readFileSync('../HTML/profile.html')
+  let index =  readFileSync('../Public/HTML/index.html')
+  let profile =  readFileSync('../Public/HTML/profile.html')
   
 // Route to handle incoming requests
 app.post('/login', async (req, res) => {
@@ -52,13 +52,15 @@ app.post('/login', async (req, res) => {
               // Release the connection back to the pool
               connection.release();
               // Respond with the retrieved user data as JSON
-              res.json(userData);
+              res.status(200).json(userData);
             }) 
+          } else{
+            res.status(400).json({ 'error': 'Incorret Information' })
           }
         })
         .catch(error => {
           console.error('Error executing database function:', error);
-          res.status(500).json({ error: 'Internal server error' });
+          res.status(500).json({ 'error': 'Internal server error' });
 
           // Release the connection back to the pool
           connection.release();
@@ -67,7 +69,7 @@ app.post('/login', async (req, res) => {
   } catch (error) {
     // Handle any errors that occur during processing
     console.error('Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ 'error': 'Internal server error' });
   }
 });
 
