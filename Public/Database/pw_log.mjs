@@ -1,4 +1,4 @@
-import express from 'express';
+ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import mysql from 'mysql'; // Import mysql library
@@ -32,8 +32,9 @@ app.use(express.urlencoded({
 app.post('/login', async (req, res) => {
   try {
     // Extract username and password from the request body
-    const { username, password } = req.body;
-
+    const  Id = req.body.user;
+    const password = req.body.password;
+    const username = parseInt(Id);
     // Get a connection from the pool
     pool.getConnection((err, connection) => {
       if (err) {
@@ -44,14 +45,19 @@ app.post('/login', async (req, res) => {
 
       // Call your database function to process the username and password
       Functions.VolLogin(username, password)
-        .then(userData => {
-          // Release the connection back to the pool
-          connection.release();
-
-          // Respond with the retrieved user data as JSON
-          res.json(userData);
+        .then(login => {
+          if (login){
+            Functions.VolInfo(username)
+            .then((userData)=>{
+              // Release the connection back to the pool
+              connection.release();
+              // Respond with the retrieved user data as JSON
+              console.log(userData)
+              res.json(userData);
+            }) 
+          }
         })
-        .catch(error => {g
+        .catch(error => {
           console.error('Error executing database function:', error);
           res.status(500).json({ error: 'Internal server error' });
 

@@ -108,8 +108,12 @@
         }
 
         const data = await response.json();
-        sessionStorage.userData = data;
-        location.href = '/profile.html'; // Assuming the profile HTML file is named 'profile.html'
+        sessionStorage.name = data.name;
+        sessionStorage.Volunteer_ID = data.Volunteer_ID;
+        sessionStorage.color = data.color;
+        sessionStorage.age = data.age;
+        sessionStorage.phoneNumber = data.phoneNumber
+        location.href = '/profile'; // Assuming the profile HTML file is named 'profile.html'
     } catch (error) {
         console.error('Error:', error);
         // Handle error

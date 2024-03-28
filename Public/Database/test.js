@@ -1,4 +1,4 @@
-import Functions from './database.js';
+import Functions from './database.mjs';
 import mysql from 'mysql2'
 
 const connection = mysql.createConnection({
@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     database: 'database_shvavhav'
 });
 
-//VolLogin(69696969,'sean123');
+Functions.VolLogin(215575234,'Yahel100');
 //VolSignup(id,name,age,phone,password)
 //VolInfo(69696969)
 //Functions.AnimInfo(3) 
