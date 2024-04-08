@@ -33,7 +33,7 @@ app.post('/signup', async (req, res) => {
       }
 
       // Call the database function to sign up the user
-      Functions.VolSignup(connection, name, age, id, phone, pass)
+      Functions.VolSignup(name, age, id, phone, pass)
         .then(() => {
           // Release the connection back to the pool
           connection.release();
