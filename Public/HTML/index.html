@@ -61,7 +61,7 @@
         <form id="userLoginForm">
           <div class="userType">
             <input name="user" type="text" id="user" autocomplete="off" required />
-            <label id="userLabel">שם משתמש</label>
+            <label id="userLabel">תעודת זהות</label>
             <p style="visibility: hidden">שם משתמש לא תקין / לא מזוהה</p>
           </div>
           <div class="passwordType">
@@ -91,7 +91,6 @@
     e.preventDefault();
     const formData = new FormData(userLoginForm);
     const formDataJson = Object.fromEntries(formData.entries()); // Convert FormData to JSON
-      console.log(formDataJson)
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -102,21 +101,25 @@
 
     try {
         const response = await fetch(serverAdress+"login", requestOptions);
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        if (response.status!=200) {
+            alert("Error code " + response.status);
+        }else{
+
+        const data = await response.json();
+        sessionStorage.name = data.name;
+        sessionStorage.Volunteer_ID = data.Volunteer_ID;
+        sessionStorage.color = data.color;
+        sessionStorage.age = data.age;
+        sessionStorage.phoneNumber = data.phoneNumber
+        location.href = '/profile';
         }
-        const data =  await response.json();
-        sessionStorage.userData = data;
-        location.href = '/profile'; // Assuming the profile HTML file is named 'profile.html'
-        
     } catch (error) {
         console.error('Error:', error);
         // Handle error
     }
 });
 
-    users = ["Yahel", "Yonatan", "Omer", "David"];
+    users = ["215575234", "215813114", "214886798", "209670017"];
 
     user.addEventListener("blur", function () {
       var username = user.value;

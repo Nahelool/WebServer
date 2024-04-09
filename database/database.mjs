@@ -14,7 +14,8 @@ const Functions= {
             database: 'database_shvavhav'
         });
         connection.connect();
-
+        console.log(Volunteer_ID_check);
+        console.log(Volunteer_Pass_check);
         const query = `
             SELECT Volunteer_ID, Volunteer_Pass
             FROM Volunteer_info
@@ -29,7 +30,7 @@ const Functions= {
             const idList = [];
             const passList = [];
             results.forEach(row => {
-                idList.push(row[`Volunteer_ID`]);
+                idList.push(row['Volunteer_ID']);
                 passList.push(row[`Volunteer_Pass`]);
             });
             connection.end();
@@ -37,9 +38,6 @@ const Functions= {
             const idIndex = idList.indexOf(Volunteer_ID_check);
             const passIndex = passList.indexOf(Volunteer_Pass_check);
 
-            console.log(Volunteer_ID_check, Volunteer_Pass_check);
-            console.log(idList, passList);
-            console.log(idIndex, passIndex);
 
             let ID_exist = false;
             if (idList.includes(Volunteer_ID_check) && passList.includes(Volunteer_Pass_check) && idIndex !== -1 && passIndex !== -1 && idIndex === passIndex) {
@@ -138,7 +136,13 @@ const Functions= {
                         const rowData = results[0];
                         const valuesArray = Object.values(rowData);
                         console.log('Selected row values:', valuesArray);
-                        resolve(valuesArray);
+                        resolve({
+                          'Volunteer_ID': valuesArray[0],
+                          'name': valuesArray[1],
+                          'color': valuesArray[2],
+                          'age': valuesArray[3],
+                          'phoneNumber': valuesArray[4],
+                        });
                     }
                 }
             }

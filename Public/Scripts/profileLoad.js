@@ -5,7 +5,7 @@ const gmail = document.getElementById("gmail")
 const age = document.getElementById("age")
 const phoneNumber = document.getElementById("phoneNumber")
 window.onload = ()=>{
-  if(!sessionStorage.userData){
+  if(!sessionStorage.name){
     location.href = '/'
   } else {
     firstName.innerHTML = sessionStorage.name
