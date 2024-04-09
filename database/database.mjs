@@ -532,6 +532,37 @@ const Functions= {
         // Ensure the connection is always closed
         connection.end();
     }
-}
+},
+async getTodaysTrips() {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '', // Empty for null password
+        database: 'database_shvavhav'
+    });
+
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().slice(0, 10);
+
+    const query = `
+        SELECT Volunteer_ID, Animal_ID, Returned
+        FROM Trips
+        WHERE DATE(Left) = ?
+    `;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [today], (error, results) => {
+            if (error) {
+                console.error('Error fetching trips:', error);
+                connection.end();
+                reject(error);
+            } else {
+                console.log('Today\'s trips:', results);
+                connection.end();
+                resolve(results);
+            }
+        });
+    });
+  }
 }
 export default Functions; //exports all of the functions as the default import of the file
