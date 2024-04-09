@@ -1,0 +1,99 @@
+@font-face {
+    font-family: "Ploni";
+    src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+  }
+  @font-face {
+    font-family: "Ploni";
+    src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: "Ploni";
+    src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
+    font-weight:500;
+
+  } 
+
+  .schedule-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .days-plan td{
+    height: 400px;
+    border-style: dashed;
+    border-color: rgb(80, 80, 80);
+    border-radius: 10px;
+    background-color: #54cfa2;
+    width: 200px;
+    
+  }
+
+  .days-row th{
+    font-family: Ploni;
+    padding-bottom: 20px;
+    font-size: 30px;
+  }
+  .dog-walks-cont{
+    border-radius: 15px;
+    border-style: solid;
+    border-color: white; 
+    width: 400px;
+
+}
+  .dog-walks-header{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color:#54cfa2;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: ploni;
+    border-radius: 15px 15px 0px 0px;
+    }
+    .text-cont{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      justify-content: center;
+      border-style: dashed;
+      border-top: none;
+      border-radius: 0px 0px 15px 15px;
+      margin: auto;
+    }
+    .dog-name, .dog-walks-start, .dog-walks-end, .dog-walks-total{
+      margin-bottom: 10px;
+      font-family: Ploni;
+      margin: auto;
+      
+    }
+
+.dog-info-button, .voulenteer-info-button{
+  color: white;
+  background-color: rgb(86, 191, 226);
+  border-color: white;
+  border-style: solid;
+  border-radius: 10px;
+  width: 350px;
+  height: 150px;
+  font-size: 40px;
+  font-family: Ploni;
+  transition: 0.2s;
+}
+.dog-info-button:hover, .voulenteer-info-button:hover{
+  cursor: pointer;
+  border-color: rgb(86, 191, 226);
+  background-color: white;
+  color: rgb(86, 191, 226);
+}
+.dog-info-cont, .voulenteer-info-cont{
+  width: 400px;
+  margin-right: 40px;
+  margin: auto;
+} 
+.bottom-part{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 80px;
+} 
