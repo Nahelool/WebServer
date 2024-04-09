@@ -22,7 +22,7 @@ const pool = mysql.createPool({
 app.get('/allTrips', async (req, res) => {
   try {
     // Call the database function to get all trips
-    const trips = await Functions.getTrips();
+    const trips = await Functions.getTodayTrips();
 
     // Respond with the retrieved trips data as JSON
     res.json(trips);
