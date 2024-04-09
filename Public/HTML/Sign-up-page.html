@@ -39,12 +39,30 @@
         var name =  document.getElementById("name").value;
         var id = document.getElementById("id").value;
         var phone = document.getElementById("phone").value;
-        var gmail = document.getElementById("gmail").value;
+        var age = document.getElementById("gmail").value;
         var password = document.getElementById("password").value;
-
+        var placeholder = new { key: "value"};
+        var newVoulenteerData = new {
+             name,
+             id, 
+             phone,
+             age,
+             password
+        }
         console.log(name)  
         console.log(gmail)
         Functions.VolSignup(id,name,3,phone,password)
  }
+ function passValue(){
+    const newVoulenteerDataJson = Object.fromEntries(newVoulenteerData.entries());
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataJson) // Stringify the JSON data
+    }; 
+      location.href = '/index'
+    }
 </script>    
     </html>
