@@ -145,48 +145,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/dogData", async (req, res) => {
-  try {
-    let wentToTrip = false;
-    const now = new Date();
-    const dogNum = req.body.idCode % 100;
-    //Returns the last 2 digits of the idCode
-
-    dogMatrix.forEach((trip) => {
-      if (trip[0] === dogNum) {
-        console.log("Trip In Progress Found!");
-        wentToTrip = true;
-        // Get a connection from the pool
-        pool.getConnection((err, connection) => {
-          if (err) {
-            console.error("Error getting MySQL connection:", err);
-            res.status(500).json({ error: "Internal server error" });
-            return;
-          }
-          Functions.TripInsert(null, dogNum, trip[1], now, "Normal").then(
-            () => {
-              // Release the connection back to the pool
-              connection.release();
-
-              // Respond with a 200 status code indicating successful operation
-              res.sendStatus(200);
-            }
-          );
-        });
-        dogMatrix = dogMatrix.filter(item => item !== trip)
-      }
-    });
-    if (!wentToTrip) {
-      console.log("No Trip In Progress Found");
-      dogMatrix.push([dogNum, now]);
-      res.sendStatus(200);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
