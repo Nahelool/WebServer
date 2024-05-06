@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>הרשמו - שבב הב</title>
     <link rel="stylesheet" href="../Style/sign-up-page-style.css">
 </head>
@@ -39,12 +40,42 @@
         var name =  document.getElementById("name").value;
         var id = document.getElementById("id").value;
         var phone = document.getElementById("phone").value;
-        var gmail = document.getElementById("gmail").value;
+        var age = document.getElementById("age").value;
         var password = document.getElementById("password").value;
+        var placeholder = new { key: "value"};
+        var newVoulenteerData = {
+             name: name,
+             id: id, 
+             phone: phone,
+             age: age,
+             password: password
+        };
+ 
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVoulenteerData) // Stringify the JSON data
+    }; 
+    fetch('/index', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the response data if needed
+            console.log(data);
+            // Redirect to '/index' after successful request
+            location.href = '/index';
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('There was a problem with the fetch operation:', error);
+        });
 
-        console.log(name)  
-        console.log(gmail)
-        Functions.VolSignup(id,name,3,phone,password)
- }
+    }
 </script>    
     </html>

@@ -8,6 +8,7 @@
         }
       </style>
 <head>
+    <meta charset="UTF-8">
 <title>פרופיל אישי - משימות המתנדב</title>
 <link rel="stylesheet" href="../Style/profileTasks.css">
 </head>
@@ -61,7 +62,7 @@
     <div class="favDogName">שם הכלב</div>
 </div>
 <div class="weeklyMissions">
-<div class="weeklyMissionsHeader">משימות שבועיות</div>
+<div class="weeklyMissionsHeader">כלבים להוצאה</div>
 <div class="missions">
 <div class="missionCont">    
 <input type="checkbox" class="taskbox" id="task1" name="task1">
@@ -101,6 +102,29 @@ bCanvas.stroke();
 
 </script>
 <script>
+const color = document.getElementById("color");
+const colorJson = Object.fromEntries(color.entries());
+const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataJson) // Stringify the JSON data
+    };
 
+    try {
+        const response = await fetch(serverAdress+"dogsByColor", requestOptions);
+        if (response.status!=200) {
+            alert("Error code " + response.status);
+        }else{
+
+        const data = await response.json();
+            sessionStorage.color = data.color
+
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+    }
 </script>
 </html>

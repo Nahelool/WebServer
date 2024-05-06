@@ -156,7 +156,7 @@
     <button id="closeButton" onclick =checkMarkedHours()>הזן שעות</button>
     </div>
   </div>
-  <script src="../Scripts/profileLoad.js"></script>
+  <!-- <script src="../Scripts/profileLoad.js"></script> -->
   </div>
 </body> 
 <script>
@@ -191,8 +191,8 @@
   var n = 6
 
   //First and last colors of the circles in the background, in RGB format
-  const first = [147,73,22]
-  const last = [161,117,61]
+  const last = [173, 216, 230]
+  const first = [96, 182, 211]
 
   //Clear Canvas
   bCanvas.clearRect(0,0,c.width,c.height)
@@ -212,7 +212,7 @@
     bCanvas.arc(16*c.width/17,9*c.height/16,r,0,2*Math.PI,false)
     bCanvas.fillStyle=color
     bCanvas.fill()
-    bCanvas.shadowColor = "#612f03";
+    bCanvas.shadowColor = "#387083";
     bCanvas.shadowBlur = 80;
 
   }
