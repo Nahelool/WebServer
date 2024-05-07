@@ -129,46 +129,41 @@ h1{
   position: relative;
   background-color: rgb(228, 148, 28);
 }
-.schedule {
-  height: 400px;
-  position: absolute;
-  width: 840px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 55px repeat(4, 1fr);
-  grid-gap: 15px;
-  right: 50%;
-  transform: translate(50%,0);
-
-  
-}
-.schedule-days{
-  background-color: rgb(255, 255, 255,0.2);
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  text-align: center; 
-  font-size: 30px;
+.hour-column{
   font-family: "Ploni";
-  border: solid white 2px;
-  backdrop-filter: blur(20px);
-  height: max-content;
-}
-.schedule div:not(.schedule-days){
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(21, 144, 214);
   background-color: rgb(255, 255, 255);
+  color: rgb(1, 57, 94);
+  text-align: center;
+  border-radius: 20px;
+  height: 60px;
+}
+.hour-column td, .days-row th{
+  border-radius: 10px;
+}
+.schedule{
+  border-spacing: 10px;
+  position: absolute;
+  right: 50%;
+}
+.days-row{
+background-color: #40B5AD;
+color: white;
+font-family: "Ploni";
+}
+.schedule-cont{
+position: relative;
+top: 150px;
+right: 100px;   
+}
+.schedule-header{
   font-size: 30px;
   font-family: "Ploni";
   font-weight: bold;
-  border-radius: 20px;
-  height: 10vh;
+  color: #008080;
+  
+
 }
-.schedule-days:active{
-  color: green;
-}
-#closeButton{
+.sendHoursButton{
   background-color: red;
   position: absolute;
   right: 0;
