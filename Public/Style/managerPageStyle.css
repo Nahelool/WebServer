@@ -14,6 +14,12 @@
 
   } 
 
+  body{
+    background-image: url('../Images/ManagerBackgorund.png');
+    background-repeat: no-repeat;
+    background-size:100vw;
+    background-color: #aed8e6;
+  }
   .schedule-cont{
     display: flex;
     flex-direction: column;
