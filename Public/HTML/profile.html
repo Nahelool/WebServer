@@ -46,115 +46,47 @@
       <div id="mainWrapper" style="height: 201vh;">
     <div style="height: 100vh;">
       <h>מידע מסכם</h>
-      <div class="schedule">
-        <div class="schedule-days">
-          ראשון
-        </div>
-        <div class="schedule-days">
-          שני
-        </div>
-        <div class="schedule-days">
-          שלישי
-        </div>
-        <div class="schedule-days">
-          רביעי
-        </div>
-        <div class="schedule-days">
-          חמישי
-        </div>
-        <div class="schedule-days">
-          שישי
-        </div>
-        <div class="schedule-days">
-          שבת
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          יוגב
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-        <div class="schedule-hours">
-          שלישי
-        </div>
-      </div>
-    <button id="closeButton" onclick =checkMarkedHours()>הזן שעות</button>
-    </div>
+      <div class="schedule-header">לוח שבועי</div>
+      <table class="schedule">
+          <tr class="days-row">
+              <th>ראשון</th>
+              <th>שני</th>
+              <th>שלישי</th>
+              <th>רביעי</th>
+              <th>חמישי</th>
+              <th>שישי</th>
+              <th>שבת</th>
+          </tr>
+          <tr class="hour-column">
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+              <td>9:30-11:00</td>
+          </tr>
+          <tr class="hour-column">
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              <td>11:00-12:30</td>
+              
+          </tr>   
+          <tr class="hour-column">
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+              <td>12:30-14:00</td>
+          </tr>
+      </table>
+      <button class="sendHoursButton" onclick="checkMarkedHours()">שלח שעות</button>   
   </div>
   <!-- <script src="../Scripts/profileLoad.js"></script> -->
   </div>
@@ -254,20 +186,20 @@
     }
   });
 var schedule = document.getElementsByClassName("schedule");
-var closeButton = document.getElementById("closeButton")
+var sendHoursButton = document.getElementsByClassName("sendHoursButton")
 if (schedule.length > 0){
-  var selectHours = schedule[0].querySelectorAll("div");
+  var selectHours = schedule[0].querySelectorAll("td");
 }
-selectHours.forEach(function(div) {
-  div.addEventListener("click", function(){
-  div.style.color = "white";
-  div.style.backgroundColor = "green";
+selectHours.forEach(function(td) {
+  td.addEventListener("click", function(){
+  td.style.color = "white";
+  td.style.backgroundColor = "green";
   })
 })  
 function checkMarkedHours(){
-  selectHours.forEach(function(div){
-    if (div.style.backgroundColor == "green"){
-      console.log(div.innerText);
+  selectHours.forEach(function(td){
+    if (td.style.backgroundColor == "green"){
+      console.log(td.innerText);
     }
   })
 }
