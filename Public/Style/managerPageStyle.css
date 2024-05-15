@@ -97,3 +97,61 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 80px;
 } 
+.enterDogID{
+  background-color: rgb(255, 217, 147);
+  height: 500px;
+  margin-top: 25px;
+  margin-left: 30%;
+  margin-right: 30%;
+  border-style: solid;
+  border-radius: 20px;
+  border-color: white;
+  opacity: 0;
+  direction: rtl;
+}
+.closeButton{
+  height: 50px;
+  width: 50px;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 60px;
+  padding: 0px;
+  line-height: 15px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  background-color: rgb(255,217,147);
+  display: inline-block;
+}
+.closeButton:hover{
+  background-color: rgb(253, 206, 118);
+  cursor: pointer;
+}
+.enterDogID input {
+  font-family: 'Ploni';
+  background-color: #0000 !important; 
+  border: none;
+  width: 80%;
+  height: 100%;
+  font-size: 30px;
+  color: #FFF;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+  font-weight: 500;
+  border-bottom: 2px solid #FFF;
+  margin: 0;
+  
+
+}
+.enterDogID p {
+  color: #000000;
+  font-family: "Ploni";
+  font-size: 30px;
+  pointer-events: none;
+  transition: 0.2s;
+  margin: 0;
+}
+.enterDogID input:focus .loginPage p{
+  color: green;
+}

@@ -51,12 +51,32 @@
     </template>
 </div> 
 <div class="dog-info-cont">
-<button class="dog-info-button">למידע על הכלבים לחצו פה!</button>    
+<button class="dog-info-button" onclick = openLoginBox()>למידע על הכלבים לחצו פה!</button>    
 </div>
 <div class="voulenteer-info-cont">
 <button class="voulenteer-info-button">למידע על המתנדבים לחצו פה!</button>    
 </div>
+<div class="popUpDogID" style="display: flex;">
+    <button class="closeButton" onclick = closeLoginBox()>&times;</button>
+    <div style="position: relative; margin-top: 70px;">
+    <p class="enterDogID" style="position:absolute; bottom: 0;"> מספר כלב:</p>
+    <input id="dogID"> 
+    </div>
+    </div>
 </div>
 </body>
-<script src="../Scripts/allTripsClient.js"></script>        
+<script src="../Scripts/allTripsClient.js">
+enterDogID = document.getElementsByClassName("enterDogID");
+closeButton = document.getElementsByClassName("closeButton")
+dogID = document.getElementsByClassName("dogID")
+popUpDogID = document.getElementsByClassName("popUpDogID")
+
+function closeLoginBox(){
+    popUpDogID.style = "opacity: 0; transition: 0.2s"  
+    console.log("Pressed") 
+       }
+function openLoginBox(){
+    popUpDogID.style = "opacity: 100; transition: 0.2s;"
+}
+</script>        
 </html>
