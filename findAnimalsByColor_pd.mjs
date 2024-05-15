@@ -16,14 +16,17 @@ const pool = mysql.createPool({
   database: 'database_shvavhav'
 });
 
-// Route to handle GET request for week schedule
-app.get('/weekSched', async (req, res) => {
+// Route to handle POST request for finding animals by color
+app.post('/dogsByColor', async (req, res) => {
   try {
-    // Call the database function to get week schedule
-    const weekSchedule = await Functions.getSchedule('Week');
+    // Extract the color from the request body
+    const { color } = req.body;
 
-    // Respond with the week schedule array
-    res.send(weekSchedule);
+    // Call the database function to find animals by color
+    const animals = await Functions.findAnimalsByColor(color);
+
+    // Respond with the output of the function
+    res.json(animals);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal server error' });
