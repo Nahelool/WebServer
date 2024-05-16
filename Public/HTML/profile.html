@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../Style/ProfileStyle.css">
   <title>שבב הב</title>
   <link rel="icon" href="../Icons/WebsiteIcon.svg" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -92,6 +93,7 @@
   </div>
 </body> 
 <script>
+  
   const colInf = document.getElementById("colorInfo")
   const colP = document.getElementById("colorInfoParagraph")
   const wrapper = document.getElementById("mainWrapper")
@@ -197,12 +199,18 @@ selectHours.forEach(function(td) {
   })
 })  
 function checkMarkedHours(){
+  var i = 0;
+  var temp = 0
   selectHours.forEach(function(td){
+    i++;
     if (td.style.backgroundColor == "green"){
-      console.log(td.innerText);
-    }
-  })
-}
+      temp = i;
+      temp = temp % 7 - 1;
+      console.log(`${td.innerText}`, $('.days-row th:eq(' + temp + ')').text());
+
+};
+    });
+  }
 function openProfileTasks(){
       fetch("http://localhost:5000", {
         method: 'GET'
