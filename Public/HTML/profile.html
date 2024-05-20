@@ -58,7 +58,7 @@
               <th>שישי</th>
               <th>שבת</th>
           </tr>
-          <tr class="hour-column">
+          <tr id="column1" class="hour-column">
               <td>9:30-11:00</td>
               <td>9:30-11:00</td>
               <td>9:30-11:00</td>
@@ -67,7 +67,7 @@
               <td>9:30-11:00</td>
               <td>9:30-11:00</td>
           </tr>
-          <tr class="hour-column">
+          <tr id="column2" class="hour-column">
               <td>11:00-12:30</td>
               <td>11:00-12:30</td>
               <td>11:00-12:30</td>
@@ -77,7 +77,7 @@
               <td>11:00-12:30</td>
               
           </tr>   
-          <tr class="hour-column">
+          <tr id="column3" class="hour-column">
               <td>12:30-14:00</td>
               <td>12:30-14:00</td>
               <td>12:30-14:00</td>
@@ -189,6 +189,9 @@
   });
 var schedule = document.getElementsByClassName("schedule");
 var sendHoursButton = document.getElementsByClassName("sendHoursButton")
+const column1 = document.getElementById("column1");
+const column2 = document.getElementById("column2");
+const column3 = document.getElementById("column3");
 if (schedule.length > 0){
   var selectHours = schedule[0].querySelectorAll("td");
 }
@@ -207,7 +210,41 @@ function checkMarkedHours(){
       temp = i;
       temp = temp % 7 - 1;
       console.log(`${td.innerText}`, $('.days-row th:eq(' + temp + ')').text());
+      console.log(temp);
+    function getDayNumber(){
+      let currentDate = new Date();
+      let dayOfWeek = currentDate.getDay();
+      return dayOfWeek;
+}
+    currentDay = getDayNumber();
+    if (currentDay > temp){
+        sum = 7 - (currentDay-temp);
+    }
+    else if (currentDay < temp) {
+      sum = 7 + (temp-currentDay);
+    }
+    else {
+      sum = 7;
+    }
+  let currentDate = new Date();
+  currentDate.getDate();
 
+  currentDate.setDate(currentDate.getDate() + sum);
+  let year = currentDate.getFullYear();
+  let month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
+  let day = currentDate.getDate().toString().padStart(2, '0');
+  if (td.innerText == '9:30-11:00'){
+  console.log(`${year}-${month}-${day} 9:30:00`);
+  console.log(`${year}-${month}-${day} 11:00:00`);
+  }
+  else if (td.innerText == '11:00-12:30'){
+    console.log(`${year}-${month}-${day} 11:00:00`);
+    console.log(`${year}-${month}-${day} 12:30:00`);
+  }
+  else if (td.innerText == '12:30-14:00'){
+    console.log(`${year}-${month}-${day} 12:30:00`);
+    console.log(`${year}-${month}-${day} 14:00:00`);
+  }
 };
     });
   }
@@ -221,5 +258,7 @@ function openProfileTasks(){
       location.href = '/profileTasks'
     })
   }
+
+
 </script>
 </html>
