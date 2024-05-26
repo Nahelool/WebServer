@@ -13,8 +13,21 @@
     font-weight:500;
 
   } 
+
+  body{
+    direction: rtl;
+    background-image: url('../Images/SignupBackground.png');
+    background-repeat: no-repeat;
+    background-size:100vw;
+    background-color: #aed8e6;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: 50%;
+  }
+  
 .quastionaire{
-    background-color: #80dbc3;
     width: 800px;
     float: right;
     row-gap: 80px;
@@ -22,6 +35,7 @@
     position: relative;
 }
 p{
+    direction: ltr;
     font-size: 30px;
     right: 20px;
     margin: 0;
@@ -29,26 +43,25 @@ p{
     float: right;
     margin-right: 20px;
 }
-input{  
-    margin: 1px;
+input{
+    background-color: #f1f1f1;
     height: 40px;
     font-size: 30px;
     direction: rtl;
     position: relative;
-    float: right;
+    border-radius: 20px;
+    padding-right: 30px;
+    float: left;
     outline: none;
     border: none;
 }
-input:active{
-    border:none;    
-}
+
 .question-div{
     position:absolute;
     right: 60px;
     background-color: white;
     border-style: solid;
-    border-color:blue;
-    padding-left: 20px;
+    border-color:rgb(143, 143, 143);
     border-radius: 20px;
     width: 600px;
     
@@ -70,18 +83,24 @@ input:active{
 #insert-password{
     top: 475px;
 }
-.sign-up-button{  
-    background-color: red;
+.sign-up-button{ 
+    color: white;
+    background-color: rgba(255, 255, 255, 0.336);
     width: 400px; 
     height: 60px; 
     border-style: solid;
-    border-color: black;
+    border-color: white;
+    border-width: 3px;
     font-size: 30px;
     margin-right: 40px;
     margin-left: 50px;
+    transition: ease-in-out 0.5s;
+    border-radius: 50vb;
 }
 .sign-up-button:hover{
     cursor:pointer;
+    width: 500px;
+    height: 75px;
 }
 .sign-up-button:active{
     opacity: 0.7;
@@ -93,9 +112,4 @@ input:active{
     border-style: solid;
     border-color: black;
     font-size: 30px;  
-}
-body{
-    display: flex;
-    align-items: center;
-    background-color: #80dbc3;
 }

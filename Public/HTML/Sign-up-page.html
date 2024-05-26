@@ -31,7 +31,7 @@
 </div>
 <div>
     <button class="sign-up-button" onclick="passValue()">
-        כפתור 
+        הירשם! 
     </button>
 </div>
 </body>
@@ -58,7 +58,7 @@
         },
         body: JSON.stringify(newVoulenteerData) // Stringify the JSON data
     }; 
-    fetch('/index', requestOptions)
+    fetch('/signup', requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
