@@ -117,42 +117,31 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 80px;
 } 
-.enterDogID{
-  background-color: rgb(255, 217, 147);
-  height: 500px;
-  margin-top: 25px;
-  margin-left: 30%;
-  margin-right: 30%;
-  border-style: solid;
-  border-radius: 20px;
-  border-color: white;
-  opacity: 0;
-  direction: rtl;
-}
+
 .closeButton{
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   margin-top: 10px;
   margin-right: 10px;
-  font-size: 60px;
+  font-size: 33px;
   padding: 0px;
   line-height: 15px;
   border: none;
   border-radius: 30px;
   color: white;
-  background-color: rgb(255,217,147);
+  background-color: rgb(3, 214, 115);
   display: inline-block;
 }
 .closeButton:hover{
-  background-color: rgb(253, 206, 118);
+  opacity: 0.6;
   cursor: pointer;
 }
 #dogID {
   font-family: 'Ploni';
   background-color: #0000 !important; 
   border: none;
-  width: 100px;
-  height: 50px;
+  width: 175px;
+  height: 30px;
   font-size: 30px;
   color: #FFF;
   border: none;
@@ -161,23 +150,28 @@
   font-weight: 500;
   border-bottom: 2px solid #FFF;
   margin: 0;
+  display: block;
   
 
 }
 .enterDogID {
-  color: #000000;
+  color: #ffffff;
   font-family: "Ploni";
   font-size: 30px;
-  pointer-events: none;
+  height: 40px;
+  width: 200px;
   transition: 0.2s;
   margin: 0;
+  display: block;
+
 }
 .popUpDogID{
-  width: 200px;
-  height: 300px;
+  width: 400px;
+  height: 200px;
   border-style: solid;
   border-radius: 10px;
   border-color: white;
+  opacity: 0;
 }
 
 .header{
@@ -185,4 +179,28 @@
   color: white;
   font-family: 'Ploni';
   font-weight: 500;
+}
+#dogInfoText{
+  width: 200px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+}
+#submitButton{
+  background-color: rgb(3, 214, 115);
+  height: 40px;
+  width: 75px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 20px;
+  color: white;
+  transition: 0.5s;
+
+}
+#submitButton:hover{
+  background-color: rgb(82, 223, 157);
+  cursor: pointer;
+
 }

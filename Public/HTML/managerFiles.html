@@ -48,20 +48,23 @@
         <div class="dog-walks-total">41 דקות</div>
     </template>
 </div> 
-<div class="dog-info-cont">
-<button class="dog-info-button" onclick = openLoginBox()>למידע על הכלבים לחצו פה!</button>    
-</div>
-<div class="voulenteer-info-cont">
-<button class="voulenteer-info-button">למידע על המתנדבים לחצו פה!</button>    
-</div>
 <div id="popUpDogID"class="popUpDogID" style="display: flex;">
     <button id="closeButton" class="closeButton" onclick = closeLoginBox()>&times;</button>
-    <div style="position: relative; margin-top: 70px;">
-    <p class="enterDogID" style="position:absolute; bottom: 0;"> מספר כלב:</p>
-    <input id="dogID"> 
-    </div>
-    </div>
+    <br>
+    <div style="display: flex;">
+    <div>
+    <p class="enterDogID"> מספר כלב:</p>
+    <input id="dogID">
+</div> 
+    <div id="dogInfoText">שם<br>גיל<br>צבע</div>
 </div>
+<button id="submitButton">הזן</button>
+</div>
+<div class="dog-info-cont">
+
+<button class="dog-info-button" onclick = openLoginBox()>למידע על הכלבים לחצו פה!</button>    
+</div>
+
 </body>
 <script src="../Scripts/tripsLoadClient.js"></script>        
 <script>
@@ -73,12 +76,10 @@ popUpDogID = document.getElementById("popUpDogID")
 
 function closeLoginBox(){
     popUpDogID.style = "opacity: 0; transition: 0.2s"
-    enterDogID.style = "opacity: 0; transition: 0.2s"
     console.log("Pressed") 
        }
 function openLoginBox(){
     popUpDogID.style = "opacity: 100; transition: 0.2s;"
-    enterDogID.style = "opacity: 100 transition: 0.2s;"
 }
 </script>
 </html>
