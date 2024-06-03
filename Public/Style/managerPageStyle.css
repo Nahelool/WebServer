@@ -65,7 +65,8 @@
       justify-content: center;
       border-style: dashed;
       border-top: none;
-      border-radius: 0px 0px 15px 15px;
+      border-right: none;
+      border-left: none;
       margin: auto;
     }
     .dog-name, .dog-walks-start, .dog-walks-end, .dog-walks-total{
