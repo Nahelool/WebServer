@@ -4,6 +4,7 @@ const Volunteer_ID = document.getElementById("Volunteer_ID")
 const gmail = document.getElementById("gmail")
 const age = document.getElementById("age")
 const phoneNumber = document.getElementById("phoneNumber")
+const profileColor = document.querySelector(".profileColor")
 window.onload = ()=>{
   if(!sessionStorage.name){
     location.href = '/'
@@ -13,5 +14,6 @@ window.onload = ()=>{
     gmail.innerHTML = sessionStorage.gmail
     age.innerHTML = sessionStorage.age
     phoneNumber.innerHTML = sessionStorage.phoneNumber
+    profileColor.style = `background-color: ${sessionStorage.color}`
   }
 }
