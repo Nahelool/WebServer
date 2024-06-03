@@ -134,12 +134,12 @@
   background-color: rgb(253, 206, 118);
   cursor: pointer;
 }
-.enterDogID input {
+#dogID {
   font-family: 'Ploni';
   background-color: #0000 !important; 
   border: none;
-  width: 80%;
-  height: 100%;
+  width: 100px;
+  height: 50px;
   font-size: 30px;
   color: #FFF;
   border: none;
@@ -151,7 +151,7 @@
   
 
 }
-.enterDogID p {
+.enterDogID {
   color: #000000;
   font-family: "Ploni";
   font-size: 30px;
@@ -159,6 +159,10 @@
   transition: 0.2s;
   margin: 0;
 }
-.enterDogID input:focus .loginPage p{
-  color: green;
+.popUpDogID{
+  width: 200px;
+  height: 300px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: white;
 }

@@ -55,8 +55,8 @@
 <div class="voulenteer-info-cont">
 <button class="voulenteer-info-button">למידע על המתנדבים לחצו פה!</button>    
 </div>
-<div class="popUpDogID" style="display: flex;">
-    <button class="closeButton" onclick = closeLoginBox()>&times;</button>
+<div id="popUpDogID"class="popUpDogID" style="display: flex;">
+    <button id="closeButton" class="closeButton" onclick = closeLoginBox()>&times;</button>
     <div style="position: relative; margin-top: 70px;">
     <p class="enterDogID" style="position:absolute; bottom: 0;"> מספר כלב:</p>
     <input id="dogID"> 
@@ -64,18 +64,22 @@
     </div>
 </div>
 </body>
-<script src="../Scripts/tripsLoadClient.js">
+<script src="../Scripts/tripsLoadClient.js"></script>        
+<script>
+    
 enterDogID = document.getElementsByClassName("enterDogID");
-closeButton = document.getElementsByClassName("closeButton")
+closeButton = document.getElementById("closeButton")
 dogID = document.getElementsByClassName("dogID")
-popUpDogID = document.getElementsByClassName("popUpDogID")
+popUpDogID = document.getElementById("popUpDogID")
 
 function closeLoginBox(){
-    popUpDogID.style = "opacity: 0; transition: 0.2s"  
+    popUpDogID.style = "opacity: 0; transition: 0.2s"
+    enterDogID.style = "opacity: 0; transition: 0.2s"
     console.log("Pressed") 
        }
 function openLoginBox(){
     popUpDogID.style = "opacity: 100; transition: 0.2s;"
+    enterDogID.style = "opacity: 100 transition: 0.2s;"
 }
-</script>        
+</script>
 </html>
