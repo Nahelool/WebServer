@@ -86,7 +86,6 @@ h1{
   height: 3vmin;
   width: 3vmin;
   border-radius: 50%;
-  background-color: red;
   display: inline-block;
   border: none;
   position: relative;
@@ -95,7 +94,6 @@ h1{
 }
 
 .profileColor:hover{
-  background-color: #FF4444;
   cursor:pointer;
 }
 
