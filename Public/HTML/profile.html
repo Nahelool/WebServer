@@ -254,7 +254,7 @@ function openProfileTasks(){
         method: 'GET'
     }).then( res => res.json())
     .then(data => {
-      sessionStorage.Tasks = data.tasksArray
+      sessionStorage.dogs = data.dogsArray
       sessionStorage.favDogPicLink = data.favDogPicLink
       location.href = '/profileTasks'
     })
