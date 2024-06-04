@@ -1,12 +1,14 @@
-window.onload = async() =>{
-let dogTrip = div.querySelector("missionCont");
-dogNamesArray = []
+window.onload = () =>{
+let dogTrip = document.querySelector(".missionCont");
+let dogText = dogTrip.content.querySelector(".missionText")
+dogNamesArray = ["Ordol","Fred","Astro"]
 
 dogNamesArray.forEach(name => {
    let dogName = name;
-   let div = document.importNode(dogTrip, true)
-   div.querySelector("missionText").textContent = dogName;
-   document.querySelector("missionCont").appendChild(div)
+   console.log("ni")
+   let a = document.importNode(dogText, true)
+   a.textContent = dogName;
+   document.querySelector(".missionCont").appendChild(a)
 
 });
 }
