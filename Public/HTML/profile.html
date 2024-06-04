@@ -235,7 +235,8 @@ function checkMarkedHours(){
   let day = currentDate.getDate().toString().padStart(2, '0');
   let = timesArray = []
   if (td.innerText == '9:30-11:00'){
-  timesArray.push('(`${year}-${month}-${day} 9:30:00');
+
+  timesArray.push(json.stringify('`${year}-${month}-${day} 9:30:00'));
   timesArray.push('(`${year}-${month}-${day} 11:00:00');
   }
   else if (td.innerText == '11:00-12:30'){
@@ -248,6 +249,8 @@ function checkMarkedHours(){
   }
 };
     });
+  
+
   }
 function openProfileTasks(){
       fetch("http://localhost:5000", {
