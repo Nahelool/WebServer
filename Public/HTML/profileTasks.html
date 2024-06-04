@@ -64,16 +64,16 @@
 <div class="weeklyMissions">
 <div class="weeklyMissionsHeader">כלבים להוצאה</div>
 <div class="missions">
-<div class="missionCont">    
+<template class="missionCont">
+<div> 
 <input type="checkbox" class="taskbox" id="task1" name="task1">
-<label for="task1" class="missionText">לנקות את התא</label>
+<label for="task1" class="missionText">שם</label>
 </div>
-<div class="missionCont">
-<input type="checkbox" class="taskbox" id="task2" name="task2">
-<label for="task2" class="missionText">יהל</label>
-</div>
+</template>
+
 </div>
 </body>
+<script src="../Scripts/dogsToTakeClient.js"></script>
 <script>
     var c = document.getElementById("backgroundZigZag");
 c.width = window.innerWidth;
