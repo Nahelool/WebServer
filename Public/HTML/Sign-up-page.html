@@ -58,7 +58,7 @@
         },
         body: JSON.stringify(newVoulenteerData) // Stringify the JSON data
     }; 
-    fetch('/signup', requestOptions)
+    fetch(serverAdress+'/signup', requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -69,7 +69,7 @@
             // Handle the response data if needed
             console.log(data);
             // Redirect to '/index' after successful request
-            location.href = '/index';
+            location.href = 'pages/index';
         })
         .catch(error => {
             // Handle errors

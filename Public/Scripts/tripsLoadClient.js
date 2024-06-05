@@ -3,8 +3,8 @@ window.onload = async ()=>  {
     let tripDiv = tripTemp.content.querySelector(".text-cont");
     const now = new Date()
 
-    // const tripArray = await fetch(serverAdress+"allTrips", {method: 'GET'});
-    const tripArray = [{"Animal_ID": 67,"Left": now, "Return": now},{"Animal_ID": 32,"Left": "11:00", "Return": "12:00"}]
+    const tripArray = await fetch(serverAdress+"allTrips", {method: 'GET'});
+    // const tripArray = [{"Animal_ID": 67,"Left": now, "Return": now},{"Animal_ID": 32,"Left": "11:00", "Return": "12:00"}]
     tripArray.forEach(trip => {
         let Animal_ID = trip.Animal_ID
         let leaveTime = trip.Left

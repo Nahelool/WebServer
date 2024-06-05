@@ -1,18 +1,9 @@
 @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+    font-family: "Heebo";
+    src: url("../Fonts/Heebo-VariableFont_wght.ttf");
   }
-  @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
-    font-weight: bold;
-  }
-  @font-face {
-    font-family: "Ploni";
-    src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
-    font-weight:500;
 
-  } 
+
 
   body{
     direction: rtl;

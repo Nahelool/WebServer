@@ -95,7 +95,7 @@ async function getDogInfo() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(dogID) // Stringify the JSON data
+        body: JSON.stringify({id: dogID}) // Stringify the JSON data
     };
 
     try {

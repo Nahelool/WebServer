@@ -3,33 +3,17 @@ html {
 }
 
 @font-face {
-  font-family: "Ploni";
-  src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
-}
-
-@font-face {
-  font-family: "Almoni-Regular";
-  src: url("../fonts/Almoni-Regular.otf");
-  font-weight: normal;
-  margin-top: 30px;
-}
-
-@font-face {
   font-family: "Rubik-Light";
   src: url("../fonts/Rubik-VariableFont_wght.ttf");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "Ploni";
-  src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
-  font-weight: bold;
+  font-family: "Heebo";
+  src: url("../Fonts/Heebo-VariableFont_wght.ttf");
 }
-@font-face {
-  font-family: "Ploni";
-  src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
-  font-weight:500;
-}
+
+
 
 html {
   box-sizing: border-box;
@@ -137,7 +121,7 @@ header li {
 
 .menuButton {
   color: white;
-  font-family: "Ploni", Arial, sans-serif;
+  font-family: "Heebo", Arial, sans-serif;
   font-size: 3vmin;
   display: table-cell;
   box-sizing: border-box;
@@ -263,7 +247,7 @@ header li {
   box-sizing: border-box;
   vertical-align: middle;
   color: white;
-  font-family: "Ploni", Arial, sans-serif;
+  font-family: "Heebo", Arial, sans-serif;
   font-weight: bold;
   font-size: 12vw;
   text-align: center;
@@ -273,7 +257,7 @@ header li {
   cursor: default;
   display: block;
   box-sizing: border-box;
-  font-family: "Ploni", Arial, sans-serif;
+  font-family: "Heebo", Arial, sans-serif;
   color: white;
   font-size: 4.07vw;
 }
@@ -317,7 +301,7 @@ header li {
 .loginBox h {
   top: 8%;
   position: relative;
-  font-family: "Ploni";
+  font-family: "Heebo";
   font-weight: bold;
   font-size: 400%;
   color: #fff;
@@ -336,7 +320,7 @@ header li {
   top:20%;
   color: #FFF;
   position: absolute;
-  font-family: "Ploni";
+  font-family: "Heebo";
   font-size: 2.5em;
   pointer-events: none;
   transition: 0.2s;
@@ -344,7 +328,7 @@ header li {
 }
 
 .loginBox input {
-  font-family: 'Ploni';
+  font-family: 'Heebo';
   background-color: #0000 !important; 
   border: none;
   width: 100%;
@@ -364,7 +348,7 @@ header li {
   transition: all 300ms ease;
   background-color: transparent;
   color: #FFF;
-  font-family: 'Ploni';
+  font-family: 'Heebo';
   font-size: 210%;
   border-radius: 2000px;
   top:3%;
@@ -423,7 +407,7 @@ header li {
   background-color: transparent;
   border-radius: 2000px;
   border: solid 2px white;
-  font-family: 'Ploni';
+  font-family: 'Heebo';
   font-weight: 500;
   color: #FFF;
   font-size: 2vw;

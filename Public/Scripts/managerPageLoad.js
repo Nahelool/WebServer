@@ -3,7 +3,7 @@ window.onload = () =>{
       method: 'GET'
   }).then( res => res.json())
   .then(data => {
-    sessionStorage.voulenteers = data.voulenteersArray
+    sessionStorage.voulenteers = data
   })
 }
 let voulenteerArrival = document.querySelector(".missionCont");

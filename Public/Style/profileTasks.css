@@ -1,17 +1,9 @@
 @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+    font-family: "Heebo";
+    src: url("../Fonts/Heebo-VariableFont_wght.ttf");
   }
-  @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
-    font-weight: bold;
-  }
-  @font-face {
-    font-family: "Ploni";
-    src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
-    font-weight:500;
-  }  
+
+
 body{
     background-color: #ADD8E6;
 }
@@ -51,9 +43,9 @@ align-items: center;
 justify-content: center;
 color: white;
 background-color:#008080;
-font-size: 40px;
+font-size: 35px;
 font-weight: bold;
-font-family: ploni;
+font-family: Heebo;
 }
 .favDogHeader{
     border-radius: 15px 15px 0px 0px;
@@ -83,7 +75,7 @@ color: white;
 background-color:#008080;
 font-size: 40px;
 font-weight: bold;
-font-family: ploni;
+font-family: Heebo;
 border-radius: 15px 15px 0px 0px;
 }
 .missionsCont{
@@ -125,12 +117,12 @@ padding-right: 10px;
 .missionText{
 font-size: 30px;
 margin-right: 5px;
-font-family: ploni;
+font-family: Heebo;
 color: rgb(1, 1, 53);
 }
 
 .hour-column{
-    font-family: "Ploni";
+    font-family: "Heebo";
     background-color: rgb(255, 255, 255);
     color: rgb(1, 57, 94);
     text-align: center;
@@ -146,7 +138,7 @@ color: rgb(1, 1, 53);
 .days-row{
 background-color: #40B5AD;
 color: white;
-font-family: "Ploni";
+font-family: "Heebo";
 }
 .schedule-cont{
 position: relative;
@@ -155,7 +147,7 @@ right: 100px;
 }
 .schedule-header{
     font-size: 30px;
-    font-family: "Ploni";
+    font-family: "Heebo";
     font-weight: bold;
     color: #008080;
     

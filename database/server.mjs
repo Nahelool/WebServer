@@ -96,7 +96,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Route to handle GET request for all trips
-app.get("/allTrips", async (req, res) => {
+app.get("/allTrips", async (req, res)  => {
   try {
     // Call the database function to get all trips
     const trips = await Functions.getTodayTrips();
@@ -113,7 +113,8 @@ app.get("/allTrips", async (req, res) => {
 app.post("/signup", async (req, res) => {
   try {
     // Extract user details from the request body
-    const { name, id, phone, age, pass } = req.body;
+    const body = JSON.parse(req.body)
+    const { name, id, phone, age, password } = body;
 
     console.log(
       "Data Arrived! Volunteers Name is " + name + " and age is " + age
@@ -127,7 +128,7 @@ app.post("/signup", async (req, res) => {
       }
 
       // Call the database function to sign up the user
-      Functions.VolSignup(name, age, id, phone, pass)
+      Functions.VolSignup(name, age, id, phone, password)
         .then(() => {
           // Release the connection back to the pool
           connection.release();
@@ -152,8 +153,9 @@ app.post("/signup", async (req, res) => {
 // Route to handle POST request for inserting schedule
 app.post('/volSchedInsert', async (req, res) => {
   try {
-    // Extract the array of schedules from the request body
-    const schedules = req.body;
+    // Extract the array of schedules from the request 
+    const body = JSON.parse(req.body)
+    const schedules = body;
 
     // Validate that schedules is an array
     if (!Array.isArray(schedules)) {
@@ -163,7 +165,8 @@ app.post('/volSchedInsert', async (req, res) => {
     // Loop through each schedule and insert it into the database
     for (const schedule of schedules) {
       // Extract id and time from the schedule
-      const { id, time } = schedule;
+      scheduleParse = JSON.parse(schedule)
+      const { id, time } = scheduleParse;
 
       // Call the database function to insert schedule
       await Functions.SchedInsert(id, time);
@@ -195,7 +198,8 @@ app.get('/weekSched', async (req, res) => {
 app.post('/dogsByColor', async (req, res) => {
   try {
     // Extract the color from the request body
-    const { color } = req.body;
+    const body = JSON.parse(req.body)
+    const { color } = body;
 
     // Call the database function to find animals by color
     const animals = await Functions.findAnimalsByColor(color);
@@ -212,7 +216,8 @@ app.post('/dogsByColor', async (req, res) => {
 app.post('/dogInfo', async (req, res) => {
   try {
     // Extract the animal ID from the request body
-    const { id } = req.body;
+    const body = JSON.parse(req.body)
+    const { id } = body;
 
     // Call the database function to retrieve animal info by ID
     const animalInfo = await Functions.AnimInfo(id);
@@ -229,8 +234,9 @@ app.post('/dogInfo', async (req, res) => {
 app.post('/dogData', async (req, res) => {
   try {
     // Extract the animal ID from the request body
-    const {tagNum,countryNum,idString} = req.body;
-    const id = (parseInt(idString))%100
+    const body = JSON.parse(req.body)
+    const {chipNum,countryCode,idCode} = body;
+    const id = (parseInt(idCode))%100
 
     // Call the database function to insert a dogs trip
     Functions.updateTrip(215575234,id,'Normal');

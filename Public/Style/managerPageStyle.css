@@ -1,18 +1,8 @@
 @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-regular-aaa\ \(1\).ttf");
+    font-family: "Heebo";
+    src: url("../Fonts/Heebo-VariableFont_wght.ttf");
   }
-  @font-face {
-    font-family: "Ploni";
-    src: url("../Fonts/ploni-bold-aaa.a5b40e4.ttf");
-    font-weight: bold;
-  }
-  @font-face {
-    font-family: "Ploni";
-    src: url('../Fonts/ploni-medium-aaa.1299fb2.ttf');
-    font-weight:500;
 
-  } 
 
   body{
     background-image: url('../Images/ManagerBackgorund.png'),linear-gradient(90deg, rgba(174,216,230,1) 0%, rgba(156,205,222,1) 40%, rgba(107,175,202,1) 100%);
@@ -21,7 +11,7 @@
   }
   .welcome-header{
     color: white;
-    font-family: 'Ploni';
+    font-family: 'Heebo';
     font-size: 4vmin;
     position: absolute;
   }
@@ -46,7 +36,7 @@
 
   .days-row th{
     color: white;
-    font-family: 'Ploni';
+    font-family: 'Heebo';
     padding-bottom: 20px;
     font-size: 30px;
     font-weight: 100;
@@ -67,7 +57,7 @@
     background-color:rgb(86, 191, 226);
     font-size: 40px;
     font-weight: bold;
-    font-family: ploni;
+    font-family: Heebo;
     border-radius: 15px 15px 0px 0px;
     }
     .text-cont{
@@ -84,7 +74,7 @@
     }
     .dog-name, .dog-walks-start, .dog-walks-end, .dog-walks-total{
       margin-bottom: 10px;
-      font-family: Ploni;
+      font-family: Heebo;
       margin: auto;
       
     }
@@ -98,7 +88,7 @@
   width: 350px;
   height: 150px;
   font-size: 40px;
-  font-family: Ploni;
+  font-family: Heebo;
   transition: 0.2s;
 }
 .dog-info-button:hover, .voulenteer-info-button:hover{
@@ -137,7 +127,7 @@
   cursor: pointer;
 }
 #dogID {
-  font-family: 'Ploni';
+  font-family: 'Heebo';
   background-color: #0000 !important; 
   border: none;
   width: 175px;
@@ -156,7 +146,7 @@
 }
 .enterDogID {
   color: #ffffff;
-  font-family: "Ploni";
+  font-family: "Heebo";
   font-size: 30px;
   height: 40px;
   width: 200px;
@@ -177,7 +167,7 @@
 .header{
   font-size: 10vmin;
   color: white;
-  font-family: 'Ploni';
+  font-family: 'Heebo';
   font-weight: 500;
 }
 #dogInfoText{
