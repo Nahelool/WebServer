@@ -498,9 +498,10 @@ const Functions= {
                 connection.end();
                 reject(error); // Reject the promise if an error occurs
             } else {
-                console.log(`Schedule for the ${period}:`, results);
-                connection.end();
-                resolve(results); // Resolve with the array of schedule entries
+              console.log(`Schedule for the ${period}:`, results);
+              const simplifiedResults = results.map(row => [row.Volunteer_ID, row.Arrival_Time]);
+              connection.end();
+              resolve(simplifiedResults); // Resolve with the simplified array of schedule entries
             }
         });
     });
