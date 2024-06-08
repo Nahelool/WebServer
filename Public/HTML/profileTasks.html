@@ -80,14 +80,14 @@ c.width = window.innerWidth;
 c.height = window.innerHeight;
 const bCanvas = c.getContext("2d");
 
-var lineSpacing = c.width / 12; // Adjust the number of segments by changing the divisor
+var lineSpacing = c.width / 12; 
 var startX = (-80); // Calculate startX to center the zigzag
 var startY = (c.height) / 2; // Calculate startY to center the zigzag
 
 bCanvas.lineWidth = 15;
-bCanvas.strokeStyle = "#87CEEB"; // blue-ish color
-bCanvas.shadowColor = "rgba(15, 82, 186,0.7)"; // shadow color
-bCanvas.shadowBlur = 50; // shadow blur radius
+bCanvas.strokeStyle = "#87CEEB"; 
+bCanvas.shadowColor = "rgba(15, 82, 186,0.7)"; 
+bCanvas.shadowBlur = 50; 
 bCanvas.beginPath();
 
 // Draw zigzag lines
