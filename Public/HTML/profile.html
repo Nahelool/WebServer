@@ -23,8 +23,7 @@
           <h1 id="firstName">firstName</h1>
           <button class="profileColor" onmouseover="displayInfo()" onmouseout="unDisplayInfo()">
             <div class="colorInfo" id="colorInfo">
-              <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלבייה. היות והצבע שלך הוא אדום,
-                אתה רשאי לקחת כל כלב בכלבייה ללא מגבלה</p>
+              <p id="colorInfoParagraph">הצבע מייצג את סיווגך בהתאם לשיטת הרמזור של הכלבייה.</p>
             </div>
           </button>
         </div>
@@ -92,9 +91,10 @@
         </table>
         <button class="sendHoursButton" onclick="checkMarkedHours()">שלח שעות</button>
       </div>
-      <!-- <script src="../Scripts/profileLoad.js"></script> -->
     </div>
 </body>
+<script src="../Scripts/profileLoad.js"></script>
+<script src="../serverAdress.js"></script>
 <script>
 
   const colInf = document.getElementById("colorInfo")
@@ -106,7 +106,7 @@
   function displayInfo() {
     colP.style.transition = "0.5s ease-in-out"
     colInf.style.transition = "0.5s ease-in-out"
-    colInf.style.backgroundColor = "rgba(255, 255, 255, 0.8)"
+    colInf.style.backgroundColor = "rgba(255, 255, 255, 1)"
     colInf.style.visibility = "visible"
     colP.style.color = "#666"
   }
@@ -238,7 +238,7 @@
         let day = currentDate.getDate().toString().padStart(2, '0');
         let = timesArray = []
         if (td.innerText == '9:30-11:00') {
-          timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 9:30:00` }));
+          timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 09:30:00` }));
         }
         else if (td.innerText == '11:00-12:30') {
           timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 11:00:00` }));

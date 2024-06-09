@@ -93,6 +93,7 @@ h1{
   right: 170%;
   top: 0;
   align-items: center;
+  z-index: 100;
 }
 
 .colorInfo p{
@@ -100,7 +101,7 @@ h1{
   font-family: "Rubik";
   margin: 0 auto;
   text-align:start;
-  color: #00000000;
+  color: #bd0e0e;
   position: relative;
 }
 
@@ -146,13 +147,29 @@ right: 100px;
 
 }
 .sendHoursButton{
-  background-color: red;
   position: absolute;
-  right: 0;
-  height: 50px;
-  width: 100px;
-  border: none;
+  right: 50px;
+  height: 150px;
+  width: 350px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 20px;
+  font-size: 30px;
+  font-family: Heebo;
+  font-weight: bold;
+  color: white;
+  transition: 0.2s;
+  border-color: white;
 }
+
+.sendHoursButton:hover{
+  height: 200px;
+  width: 467px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
 .personalInfoPage{
   border-radius: 15px;
   border-style: solid;
@@ -212,5 +229,4 @@ left: 200px;
   width: 467px;
   font-size: 40px;
   cursor: pointer;
-  transition: 0.2s;
 }
