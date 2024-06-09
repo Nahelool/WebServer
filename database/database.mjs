@@ -14,8 +14,6 @@ const Functions= {
             database: 'database_shvavhav'
         });
         connection.connect();
-        console.log(Volunteer_ID_check);
-        console.log(Volunteer_Pass_check);
         const query = `
             SELECT Volunteer_ID, Volunteer_Pass
             FROM Volunteer_info
@@ -42,47 +40,49 @@ const Functions= {
             let ID_exist = false;
             if (idList.includes(Volunteer_ID_check) && passList.includes(Volunteer_Pass_check) && idIndex !== -1 && passIndex !== -1 && idIndex === passIndex) {
                 ID_exist = true;
-                console.log(`It is there, let's go`);
+                console.log(`Corect password`);
             } else {
                 ID_exist = false;
-                console.log(`Your name is invalid, activating computer.explode now.`);
+                console.log(`Your ID or passowrd is invalid`);
             }
 
             resolve(ID_exist); // Resolve with ID_exist value
         });
     });
-},
-  async VolSignup(idValue, nameValue, ageValue, phoneValue, passValue) { //receives all vol values and inserts
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav'
-    });
-    connection.connect();
-    const tableName = 'Volunteer_info';
-  
-    const dataToInsert = {
-      Volunteer_ID: parseInt(idValue,10),
-      volunteer_Name: nameValue,
-      Color: `Green`,
-      Age: ageValue,
-      Volunteer_Phone: parseInt(phoneValue, 10),
-      Volunteer_Pass: passValue, 
-    };
-  
-    const query = `INSERT INTO ${tableName} SET ?`;
-  
-    connection.query(query, dataToInsert, (error, results) => {
-      if (error) {
-        console.error('Error inserting data:', error);
-        throw error;
-      }
-      console.log('Data inserted successfully:', results);
-      connection.end();
-    });
-  },
-  async AnimInsert(idValue, nameValue, ageValue, medInfoPath) { //receives all dog values and inserts
+ },
+ async VolSignup(idValue, nameValue, ageValue, phoneValue, passValue) {
+  return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+          host: 'localhost',
+          user: 'root',
+          password: '',
+          database: 'database_shvavhav'
+      });
+      connection.connect();
+
+      const dataToInsert = {
+          Volunteer_ID: parseInt(idValue, 10),
+          volunteer_Name: nameValue,
+          Color: 'Green',
+          Age: ageValue,
+          Volunteer_Phone: parseInt(phoneValue, 10),
+          Volunteer_Pass: passValue,
+      };
+
+      const query = `INSERT INTO Volunteer_info SET ?`;
+
+      connection.query(query, dataToInsert, (error, results) => {
+          connection.end(); // Close the connection in both success and error cases
+          if (error) {
+              console.error('Error inserting data:', error);
+              return reject(error); // Reject the promise with the error
+          }
+          console.log('Data inserted successfully:', results);
+          resolve(results); // Resolve the promise with the results
+      });
+  });
+ },
+ async AnimInsert(idValue, nameValue, ageValue, medInfoPath) { //receives all dog values and inserts
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -111,46 +111,45 @@ const Functions= {
       console.log('Data inserted successfully:', results);
       connection.end();
     });
-  },
-  async VolInfo(volID) { //recieves id of volunteer and returns the entire line of information
-    return new Promise((resolve, reject) => {
-        const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'database_shvavhav'
-        });
+ },
+ async VolInfo(volID) { //recieves id of volunteer and returns the entire line of information
+  return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'database_shvavhav'
+      });
 
-        connection.query(
-            'SELECT * FROM Volunteer_info WHERE Volunteer_ID = ?',
-            [volID],
-            (error, results, fields) => {
-                if (error) {
-                    console.error('Error selecting data:', error);
-                    reject(error);
+      connection.query(
+        'SELECT * FROM Volunteer_info WHERE Volunteer_ID = ?',
+        [volID],
+        (error, results, fields) => {
+            if (error) {
+                console.error('Error selecting data:', error);
+                reject(error);
+            } else {
+                if (results.length === 0) {
+                    console.log(`No row found with Volunteer_ID=${volID}`);
+                    resolve(null); // Resolve with null when no row is found
                 } else {
-                    if (results.length === 0) {
-                        console.log(`No row found with Volunteer_ID=${volID}`);
-                        resolve(null); // Resolve with null when no row is found
-                    } else {
-                        const rowData = results[0];
-                        const valuesArray = Object.values(rowData);
-                        console.log('Selected row values:', valuesArray);
-                        resolve({
-                          'Volunteer_ID': valuesArray[0],
-                          'name': valuesArray[1],
-                          'color': valuesArray[2],
-                          'age': valuesArray[3],
-                          'phoneNumber': valuesArray[4],
-                        });
-                    }
-                }
-            }
-        );
-
-        connection.end(); // Close connection after query
-    });
-},
+                    const rowData = results[0];
+                    const valuesArray = Object.values(rowData);
+                    console.log('Selected row values:', valuesArray);
+                    resolve({
+                      'Volunteer_ID': valuesArray[0],
+                      'name': valuesArray[1],
+                      'color': valuesArray[2],
+                      'age': valuesArray[3],
+                      'phoneNumber': valuesArray[4],
+                    });
+                 }
+             }
+        }
+      );
+    connection.end(); // Close connection after query
+  });
+ },
   async AnimInfo(AnimID) { //receives animal id and returns the info of the animal exept pds. it works with get.
     return new Promise((resolve, reject) => {
         const connection = mysql.createConnection({
@@ -345,33 +344,37 @@ const Functions= {
       connection.end();
   });
   },
-  async SchedInsert(VolID,Arrival){
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'database_shvavhav',
-      timezone: 'Z'
+  async SchedInsert(VolID, Arrival) {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav',
+            timezone: 'Z'
+        });
+        connection.connect();
+
+        const dataToInsert = {
+            Volunteer_ID: parseInt(VolID, 10),
+            Arrival_Time: Arrival,
+        };
+
+        const query = `INSERT INTO Arrival SET ?`;
+
+        connection.query(query, dataToInsert, (error, results) => {
+            if (error) {
+                console.error('Error inserting data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                console.log('Data inserted successfully:', results);
+                connection.end();
+                resolve(results); // Resolve with the results of the insertion
+            }
+        });
     });
-    connection.connect();
-    const tableName = 'Arrival';
-  
-    const dataToInsert = {
-      Volunteer_ID: parseInt(VolID,10),
-      Arrival_Time: Arrival,
-    };
-  
-    const query = `INSERT INTO ${tableName} SET ?`;
-  
-    connection.query(query, dataToInsert, (error, results) => {
-      if (error) {
-        console.error('Error inserting data:', error);
-        throw error;
-      }
-      console.log('Data inserted successfully:', results);
-      connection.end();
-    });
-  },
+},
   async changeColmn(tableName,ID,change,value,animOrvoll){
     return new Promise((resolve, reject) => {
       const connection = mysql.createConnection({
@@ -457,6 +460,16 @@ const Functions= {
   },
   async getSchedule(period) { //recieves either the word "Week" or the word "Day" and returns an array of the arrival of volunteers
     return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav',
+            timezone: 'Z',
+        });
+
+        connection.connect();
+        
         const currentDate = new Date();
         let startDate;
         let endDate;
@@ -475,16 +488,6 @@ const Functions= {
             reject(new Error('Invalid period. Please specify "week" or "day".'));
             return;
         }
-
-        const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'database_shvavhav',
-            timezone: 'Z',
-        });
-
-        connection.connect();
 
         const query = `
             SELECT *
@@ -506,33 +509,35 @@ const Functions= {
         });
     });
   },
-  async updateTrip(volunteerId, animalId, type) {
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'database_shvavhav'
-    });
+async updateTrip(volunteerId, animalId, type) {
+    return new Promise((resolve, reject) => {
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'database_shvavhav'
+        });
 
-    try {
-        connection.query(
-            'UPDATE Trips SET `Left` = IFNULL(`Left`, NOW()), Returned = IF(`Left` IS NULL, NULL, IFNULL(Returned, NOW())), Type = IFNULL(Type, ?) WHERE Volunteer_ID = ? AND Animal_ID = ?',
-            [type, volunteerId, animalId],
-            (error, results, fields) => {
-                if (error) {
-                    console.error('Error updating trip data:', error);
-                    throw error;
-                }
+        const query = `
+            UPDATE Trips
+            SET \`Left\` = IFNULL(\`Left\`, NOW()), 
+                Returned = IF(\`Left\` IS NULL, NULL, IFNULL(Returned, NOW())), 
+                Type = IFNULL(Type, ?)
+            WHERE Volunteer_ID = ? AND Animal_ID = ?
+        `;
 
-                console.log('Trip data updated successfully:');
+        connection.query(query, [type, volunteerId, animalId], (error, results) => {
+            if (error) {
+                console.error('Error updating trip data:', error);
+                connection.end();
+                reject(error); // Reject the promise if an error occurs
+            } else {
+                console.log('Trip data updated successfully:', results);
+                connection.end();
+                resolve(results); // Resolve with the results of the update
             }
-        );
-    } catch (error) {
-        console.error('Error in try-catch block:', error);
-    } finally {
-        // Ensure the connection is always closed
-        connection.end();
-    }
+        });
+    });
 },
 async getTodaysTrips() {
     const connection = mysql.createConnection({
