@@ -509,7 +509,7 @@ const Functions= {
         });
     });
   },
-async updateTrip(volunteerId, animalId, type) {
+  async updateOrInsertTrip(volunteerId, animalId, type) {
     return new Promise((resolve, reject) => {
         const connection = mysql.createConnection({
             host: 'localhost',
@@ -518,23 +518,57 @@ async updateTrip(volunteerId, animalId, type) {
             database: 'database_shvavhav'
         });
 
-        const query = `
-            UPDATE Trips
-            SET \`Left\` = IFNULL(\`Left\`, NOW()), 
-                Returned = IF(\`Left\` IS NULL, NULL, IFNULL(Returned, NOW())), 
-                Type = IFNULL(Type, ?)
-            WHERE Volunteer_ID = ? AND Animal_ID = ?
+        // First, check if a trip exists with NULL Returned time
+        const checkQuery = `
+            SELECT * FROM Trips 
+            WHERE Volunteer_ID = ? AND Animal_ID = ? AND Returned IS NULL
         `;
 
-        connection.query(query, [type, volunteerId, animalId], (error, results) => {
-            if (error) {
-                console.error('Error updating trip data:', error);
+        connection.query(checkQuery, [volunteerId, animalId], (checkError, checkResults) => {
+            if (checkError) {
+                console.error('Error checking trip data:', checkError);
                 connection.end();
-                reject(error); // Reject the promise if an error occurs
+                reject(checkError);
+                return;
+            }
+
+            if (checkResults.length > 0) {
+                // Trip exists, update it
+                const updateQuery = `
+                    UPDATE Trips
+                    SET \`Left\` = IFNULL(\`Left\`, NOW()), 
+                        Returned = IF(\`Left\` IS NULL, NULL, IFNULL(Returned, NOW())), 
+                        Type = IFNULL(Type, ?)
+                    WHERE Volunteer_ID = ? AND Animal_ID = ?
+                `;
+                connection.query(updateQuery, [type, volunteerId, animalId], (updateError, updateResults) => {
+                    if (updateError) {
+                        console.error('Error updating trip data:', updateError);
+                        connection.end();
+                        reject(updateError);
+                    } else {
+                        console.log('Trip data updated successfully:', updateResults);
+                        connection.end();
+                        resolve(updateResults);
+                    }
+                });
             } else {
-                console.log('Trip data updated successfully:', results);
-                connection.end();
-                resolve(results); // Resolve with the results of the update
+                // No such trip exists, insert a new trip
+                const insertQuery = `
+                    INSERT INTO Trips (Volunteer_ID, Animal_ID, \`Left\`, Type)
+                    VALUES (?, ?, NOW(), ?)
+                `;
+                connection.query(insertQuery, [volunteerId, animalId, type], (insertError, insertResults) => {
+                    if (insertError) {
+                        console.error('Error inserting trip data:', insertError);
+                        connection.end();
+                        reject(insertError);
+                    } else {
+                        console.log('Trip data inserted successfully:', insertResults);
+                        connection.end();
+                        resolve(insertResults);
+                    }
+                });
             }
         });
     });

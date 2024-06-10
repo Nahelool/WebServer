@@ -100,7 +100,7 @@
     };
 
     try {
-        const response = await fetch(serverAdress+"login", requestOptions);
+        const response = await fetch(serverAddress+"login", requestOptions);
         if (response.status!=200) {
             alert("Error code " + response.status);
         }else{
@@ -111,7 +111,7 @@
         sessionStorage.color = data.color;
         sessionStorage.age = data.age;
         sessionStorage.phoneNumber = data.phoneNumber
-        location.href = 'pages/profile';
+        location.href = '/profile';
         }
     } catch (error) {
         console.error('Error:', error);

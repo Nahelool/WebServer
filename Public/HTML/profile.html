@@ -238,13 +238,13 @@
         let day = currentDate.getDate().toString().padStart(2, '0');
         let = timesArray = []
         if (td.innerText == '9:30-11:00') {
-          timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 09:30:00` }));
+          timesArray.push(JSON.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 09:30:00` }));
         }
         else if (td.innerText == '11:00-12:30') {
-          timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 11:00:00` }));
+          timesArray.push(JSON.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 11:00:00` }));
         }
         else if (td.innerText == '12:30-14:00') {
-          timesArray.push(json.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 12:30:00` }));
+          timesArray.push(JSON.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 12:30:00` }));
         }
       };
     });
@@ -270,8 +270,8 @@
       body: JSON.stringify({color: sessionStorage.color}) // Stringify the JSON data
     }).then(res => res.json())
       .then(data => {
-        sessionStorage.dogs = data
-        location.href = 'pages/profileTasks'
+        sessionStorage.dogs = JSON.stringify(data)
+        location.href = 'profileTasks'
       })
   }
 

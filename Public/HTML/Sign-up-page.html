@@ -21,8 +21,8 @@
         <input type="text" id="phone">
     </div>
     <div class="question-div" id="insert-gmail">
-        <p>:כתובת מייל</p>
-        <input type="text" id="gmail">
+        <p>:גיל</p>
+        <input type="text" id="age">
     </div>
     <div class="question-div" id="insert-password">
         <p>:סיסמה</p>
@@ -43,7 +43,7 @@
         var phone = document.getElementById("phone").value;
         var age = document.getElementById("age").value;
         var password = document.getElementById("password").value;
-        var placeholder = new { key: "value"};
+        // var placeholder = new { key: "value"};
         var newVoulenteerData = {
              name: name,
              id: id, 
@@ -59,18 +59,16 @@
         },
         body: JSON.stringify(newVoulenteerData) // Stringify the JSON data
     }; 
-    fetch(serverAdress+'/signup', requestOptions)
+    fetch(serverAddress+'signup', requestOptions)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+
+             response.json();
         })
         .then(data => {
             // Handle the response data if needed
             console.log(data);
             // Redirect to '/index' after successful request
-            location.href = 'pages/index';
+            location.href = 'index';
         })
         .catch(error => {
             // Handle errors

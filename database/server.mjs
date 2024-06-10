@@ -6,7 +6,7 @@ import Functions from "./database.mjs"; // Import your database function
 import { readFileSync } from "fs";
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
@@ -99,7 +99,7 @@ app.post("/login", async (req, res) => {
 app.get("/allTrips", async (req, res)  => {
   try {
     // Call the database function to get all trips
-    const trips = await Functions.getTodayTrips();
+    const trips = await Functions.getTodaysTrips();
 
     // Respond with the retrieved trips data as JSON
     res.json(trips);
@@ -113,8 +113,7 @@ app.get("/allTrips", async (req, res)  => {
 app.post("/signup", async (req, res) => {
   try {
     // Extract user details from the request body
-    const body = JSON.parse(req.body)
-    const { name, id, phone, age, password } = body;
+    const { id, name, phone, age, password } = req.body;
 
     console.log(
       "Data Arrived! Volunteers Name is " + name + " and age is " + age
@@ -128,7 +127,7 @@ app.post("/signup", async (req, res) => {
       }
 
       // Call the database function to sign up the user
-      Functions.VolSignup(name, age, id, phone, password)
+      Functions.VolSignup(id, name, age, phone, password)
         .then(() => {
           // Release the connection back to the pool
           connection.release();
@@ -154,8 +153,8 @@ app.post("/signup", async (req, res) => {
 app.post('/volSchedInsert', async (req, res) => {
   try {
     // Extract the array of schedules from the request 
-    const body = JSON.parse(req.body)
-    const schedules = body;
+    const schedules = req.body;
+    console.log(schedules)
 
     // Validate that schedules is an array
     if (!Array.isArray(schedules)) {
@@ -165,8 +164,8 @@ app.post('/volSchedInsert', async (req, res) => {
     // Loop through each schedule and insert it into the database
     for (const schedule of schedules) {
       // Extract id and time from the schedule
-      scheduleParse = JSON.parse(schedule)
-      const { id, time } = scheduleParse;
+      const scheduleParse = JSON.parse(schedule)
+      const {id, time} = scheduleParse;
 
       // Call the database function to insert schedule
       await Functions.SchedInsert(id, time);
@@ -184,7 +183,7 @@ app.post('/volSchedInsert', async (req, res) => {
 app.get('/weekSched', async (req, res) => {
   try {
     // Call the database function to get week schedule
-    const weekSchedule = await Functions.getSchedule('Week');
+    const weekSchedule = await Functions.getSchedule('week');
 
     // Respond with the week schedule array
     res.send(weekSchedule);
@@ -198,12 +197,10 @@ app.get('/weekSched', async (req, res) => {
 app.post('/dogsByColor', async (req, res) => {
   try {
     // Extract the color from the request body
-    const body = JSON.parse(req.body)
-    const { color } = body;
+    const { color } = req.body;
 
     // Call the database function to find animals by color
     const animals = await Functions.findAnimalsByColor(color);
-
     // Respond with the output of the function
     res.json(animals);
   } catch (error) {
@@ -216,8 +213,7 @@ app.post('/dogsByColor', async (req, res) => {
 app.post('/dogInfo', async (req, res) => {
   try {
     // Extract the animal ID from the request body
-    const body = JSON.parse(req.body)
-    const { id } = body;
+    const { id }  = req.body;
 
     // Call the database function to retrieve animal info by ID
     const animalInfo = await Functions.AnimInfo(id);
@@ -234,12 +230,11 @@ app.post('/dogInfo', async (req, res) => {
 app.post('/dogData', async (req, res) => {
   try {
     // Extract the animal ID from the request body
-    const body = JSON.parse(req.body)
-    const {chipNum,countryCode,idCode} = body;
+    const idCode = req.body.idCode;
     const id = (parseInt(idCode))%100
 
     // Call the database function to insert a dogs trip
-    Functions.updateTrip(215575234,id,'Normal');
+    Functions.updateOrInsertTrip(215575234,id,'Normal');
 
     // Respond with the output of the function
     res.status(200);

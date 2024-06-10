@@ -57,11 +57,13 @@
 </div> 
     <div id="dogInfoText">
         <p id="dogName">שם</p>
+        <p>  |  </p>
         <p id="dogAge">גיל</p>
+        <p>  |  </p>
         <p id="dogColor">צבע</p>
     </div>
 </div>
-<button id="submitButton">הזן</button>
+<button id="submitButton" onclick="getDogInfo()">הזן</button>
 </div>
 <div class="dog-info-cont">
 
@@ -90,27 +92,36 @@ function openLoginBox(){
 }
 async function getDogInfo() {
     const dogID = document.getElementById("dogID");
-    const dogIdJson = Object.fromEntries(dogID.entries());
 
     const requestOptions = {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({id: dogID}) // Stringify the JSON data
+        body: JSON.stringify({id: dogID.value}) // Stringify the JSON data
     };
 
     try {
-        const response = await fetch(serverAdress+"dogInfo", requestOptions);
+        const response = await fetch(serverAddress+"dogInfo", requestOptions);
         if (response.status!=200) {
             alert("Error code " + response.status);
         }else{
 
         const data = await response.json();
-        sessionStorage.dogName = data.dogName;
-        sessionStorage.dogAge = data.dogAge;
-        sessionStorage.dogColor = data.dogColor;
-        buttonPressed = true; 
+        sessionStorage.dogName = data.Animal_Name;
+        sessionStorage.dogAge = data.Age;
+        sessionStorage.dogColor = data.Color;
+        const buttonPressed = true;
+        const dogName = document.getElementById("dogName");
+        const dogAge = document.getElementById("dogAge");
+        const dogColor = document.getElementById("dogColor")
+
+        if(buttonPressed){
+            dogName.innerHTML = sessionStorage.dogName
+            dogAge.innerHTML = sessionStorage.dogAge
+            dogColor.innerHTML = sessionStorage.dogColor
+        }
+
         }
         
     }
