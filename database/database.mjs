@@ -65,7 +65,7 @@ const Functions= {
           volunteer_Name: nameValue,
           Color: 'Green',
           Age: ageValue,
-          Volunteer_Phone: parseInt(phoneValue, 10),
+          Volunteer_Phone: phoneValue,
           Volunteer_Pass: passValue,
       };
 

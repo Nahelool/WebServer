@@ -114,6 +114,7 @@ app.post("/signup", async (req, res) => {
   try {
     // Extract user details from the request body
     const { id, name, phone, age, password } = req.body;
+    console.log(phone)
 
     console.log(
       "Data Arrived! Volunteers Name is " + name + " and age is " + age

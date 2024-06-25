@@ -57,10 +57,8 @@
             <th>רביעי</th>
             <th>חמישי</th>
             <th>שישי</th>
-            <th>שבת</th>
           </tr>
           <tr id="column1" class="hour-column">
-            <td>9:30-11:00</td>
             <td>9:30-11:00</td>
             <td>9:30-11:00</td>
             <td>9:30-11:00</td>
@@ -75,11 +73,9 @@
             <td>11:00-12:30</td>
             <td>11:00-12:30</td>
             <td>11:00-12:30</td>
-            <td>11:00-12:30</td>
 
           </tr>
           <tr id="column3" class="hour-column">
-            <td>12:30-14:00</td>
             <td>12:30-14:00</td>
             <td>12:30-14:00</td>
             <td>12:30-14:00</td>
@@ -197,36 +193,43 @@
   if (schedule.length > 0) {
     var selectHours = schedule[0].querySelectorAll("td");
   }
+  let j = 0
   selectHours.forEach(function (td) {
+    let day = getDayNumber()
+    if ((j%6)<day){
+      td.style.backgroundColor = "grey";
+    }
     td.addEventListener("click", function () {
-      td.style.color = "white";
-      td.style.backgroundColor = "green";
+      if (td.style.backgroundColor != "grey"){
+        td.style.color = "white";
+        td.style.backgroundColor = "green";
+      }
     })
+    j++
   })
+  function getDayNumber() {
+    let currentDate = new Date();
+    let dayOfWeek = currentDate.getDay();
+    return dayOfWeek;
+  }
   function checkMarkedHours() {
     var i = 0;
     var temp = 0
+    let timesArray = []
     selectHours.forEach(function (td) {
-      i++;
       if (td.style.backgroundColor == "green") {
         temp = i;
-        temp = temp % 7 - 1;
-        console.log(`${td.innerText}`, $('.days-row th:eq(' + temp + ')').text());
-        console.log(temp);
-        function getDayNumber() {
-          let currentDate = new Date();
-          let dayOfWeek = currentDate.getDay();
-          return dayOfWeek;
-        }
+        temp = temp % 6 ;
+
         currentDay = getDayNumber();
         if (currentDay > temp) {
-          sum = 7 - (currentDay - temp);
+          sum = currentDay - temp;
         }
         else if (currentDay < temp) {
-          sum = 7 + (temp - currentDay);
+          sum = temp - currentDay;
         }
         else {
-          sum = 7;
+          sum = 0;
         }
         let currentDate = new Date();
         currentDate.getDate();
@@ -235,7 +238,6 @@
         let year = currentDate.getFullYear();
         let month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
         let day = currentDate.getDate().toString().padStart(2, '0');
-        let = timesArray = []
         if (td.innerText == '9:30-11:00') {
           timesArray.push(JSON.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 09:30:00` }));
         }
@@ -245,9 +247,9 @@
         else if (td.innerText == '12:30-14:00') {
           timesArray.push(JSON.stringify({ id: sessionStorage.Volunteer_ID, time: `${year}-${month}-${day} 12:30:00` }));
         }
+        i++;
       };
     });
-
     const requestOptions = {
       method: 'POST',
       headers: {

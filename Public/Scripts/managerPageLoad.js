@@ -15,11 +15,12 @@ window.onload = async () =>{
             let arrivalTime = new Date(voulenteer[1])
             let day = arrivalTime.getDay()
             if(day == i){
-                dayArray.push(voulenteer_ID)
-                dayArray.push("|")
-                dayArray.push(voulenteer[1].slice(11,16))
+                tds[i].innerHTML += `${voulenteer_ID} יגיע בשעה ${voulenteer[1].slice(11,16)}`
+                tds[i].innerHTML += `<div style="display: block"></div>`
+                // dayArray.push(voulenteer_ID)
+                // dayArray.push("יגיע בשעה")
+                // dayArray.push(voulenteer[1].slice(11,16))
             } 
-            tds[i].innerHTML = dayArray;
     
     });
     }
@@ -42,7 +43,7 @@ window.onload = async () =>{
       div.querySelector(".dog-name").textContent = Animal_ID
       div.querySelector(".dog-walks-start").textContent = leaveTime.slice(11,19)
       div.querySelector(".dog-walks-end").textContent = arrivalTime.slice(11,19)
-      div.querySelector(".dog-walks-total").textContent = `${(new Date(arrivalTime) - new Date(leaveTime))/60000} דקות`
+      div.querySelector(".dog-walks-total").textContent = `${Math.floor((new Date(arrivalTime) - new Date(leaveTime))/60000)} דקות`
       document.querySelector(".dog-walks-cont").appendChild(div)
   });
 
