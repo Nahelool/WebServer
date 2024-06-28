@@ -111,26 +111,13 @@
         sessionStorage.color = data.color;
         sessionStorage.age = data.age;
         sessionStorage.phoneNumber = data.phoneNumber
-        location.href = '/profile';
+        location.href = 'profile';
         }
     } catch (error) {
         console.error('Error:', error);
         // Handle error
     }
 });
-
-    users = ["215575234", "215813114", "214886798", "209670017"];
-
-    user.addEventListener("blur", function () {
-      var username = user.value;
-      if (users.includes(username)) {
-           user.style = "color: #64c714; border-bottom: 2px solid #64c714;";
-        userLabel.style = "color: #64c714;";
-      } else if(username!=="") {
-        user.style = "color: #eb3f3f; border-bottom: 2px solid #eb3f3f;";
-        userLabel.style = "color: #eb3f3f;";
-      }
-    });
 
     user.addEventListener("focus", function () {
       user.style = "color: #FFF;";

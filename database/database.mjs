@@ -65,7 +65,7 @@ const Functions= {
           volunteer_Name: nameValue,
           Color: 'Green',
           Age: ageValue,
-          Volunteer_Phone: parseInt(phoneValue, 10),
+          Volunteer_Phone: phoneValue,
           Volunteer_Pass: passValue,
       };
 
@@ -574,35 +574,42 @@ const Functions= {
     });
 },
 async getTodaysTrips() {
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '', // Empty for null password
-        database: 'database_shvavhav'
-    });
+  return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+          host: 'localhost',
+          user: 'root',
+          password: '',
+          database: 'database_shvavhav'
+      });
 
-    // Get today's date in YYYY-MM-DD format
-    const today = new Date().toISOString().slice(0, 10);
+      connection.connect(error => {
+          if (error) {
+              console.error('Error connecting to the database:', error);
+              reject(error);
+              return;
+          }
 
-    const query = `
-        SELECT Volunteer_ID, Animal_ID, Returned
-        FROM Trips
-        WHERE DATE(Left) = ?
-    `;
+          const today = new Date().toISOString().slice(0, 10);
 
-    return new Promise((resolve, reject) => {
-        connection.query(query, [today], (error, results) => {
-            if (error) {
-                console.error('Error fetching trips:', error);
-                connection.end();
-                reject(error);
-            } else {
-                console.log('Today\'s trips:', results);
-                connection.end();
-                resolve(results);
-            }
-        });
-    });
-  }
+          const query = `
+              SELECT Volunteer_ID, Animal_ID, \`Left\`, Returned
+              FROM Trips
+              WHERE DATE(\`Left\`) = ? AND \`Returned\` IS NOT NULL
+          `;
+
+          connection.query(query, [today], (error, results) => {
+              if (error) {
+                  console.error('Error fetching trips:', error);
+                  connection.end();
+                  reject(error);
+              } else {
+                  console.log('Today\'s trips:', results);
+                  connection.end();
+                  resolve(results);
+              }
+          });
+      });
+  });
+}
 }
 export default Functions; //exports all of the functions as the default import of the file

@@ -12,5 +12,6 @@ const connection = mysql.createConnection({
 //VolSignup(id,name,age,phone,password)
 //VolInfo(69696969)
 //Functions.AnimInfo(3) 
-Functions.updateOrInsertTrip(215575234,39,);
+//Functions.updateOrInsertTrip(215575234,39,);
+Functions.getTodaysTrips();
 connection.end();

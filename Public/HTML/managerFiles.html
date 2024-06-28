@@ -20,12 +20,12 @@
             <th>שישי</th>
         </tr>
         <tr class="days-plan">
-            <td class="voulenteerList">רשימת מתנדבים</td>
-            <td class="voulenteerList">רשימת מתנדבים</td>
-            <td class="voulenteerList">רשימת מתנדבים</td>
-            <td class="voulenteerList">רשימת מתנדבים</td>
-            <td class="voulenteerList">רשימת מתנדבים</td>
-            <td class="voulenteerList">רשימת מתנדבים</td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
+            <td class="voulenteerList"><b>רשימת מתנדבים</b><br></td>
         </tr>
         </tr>
     </table>
@@ -108,6 +108,9 @@ async function getDogInfo() {
         }else{
 
         const data = await response.json();
+        if (data == null){
+            alert("Dog Not Found!")
+        }
         sessionStorage.dogName = data.Animal_Name;
         sessionStorage.dogAge = data.Age;
         sessionStorage.dogColor = data.Color;

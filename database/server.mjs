@@ -114,6 +114,7 @@ app.post("/signup", async (req, res) => {
   try {
     // Extract user details from the request body
     const { id, name, phone, age, password } = req.body;
+    console.log(phone)
 
     console.log(
       "Data Arrived! Volunteers Name is " + name + " and age is " + age
@@ -232,12 +233,12 @@ app.post('/dogData', async (req, res) => {
     // Extract the animal ID from the request body
     const idCode = req.body.idCode;
     const id = (parseInt(idCode))%100
+    // Respond with the output of the function
+    res.send(200);
 
-    // Call the database function to insert a dogs trip
+    // // Call the database function to insert a dogs trip
     Functions.updateOrInsertTrip(215575234,id,'Normal');
 
-    // Respond with the output of the function
-    res.status(200);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal server error' });
